@@ -1,0 +1,252 @@
+pageType: cover
+background:
+  type: solid
+  color: '#FAFCF8'
+elements:
+- elementId: e1
+  elementType: image
+  bounds:
+  - 0
+  - 0
+  - 960
+  - 540
+  src: media/template-background.png
+  fit:
+    mode: cover
+- elementId: e2
+  elementType: shape
+  bounds:
+  - 793
+  - 27
+  - 133
+  - 35
+  shapeName: roundRect
+  fill:
+    type: solid
+    color: '#EDF7EF'
+  adjustments:
+  - 16000
+  border:
+    style: solid
+    width: 0.9
+    color: '#D2E8D8'
+- elementId: e3
+  elementType: text
+  bounds:
+  - 803
+  - 29
+  - 113
+  - 30
+  content:
+    text: 概念演示
+    fontFamily: Reading Text SC
+    fontSize: 14
+    bold: true
+    color: '#164B3B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e4
+  elementType: shape
+  bounds:
+  - 35
+  - 65
+  - 433
+  - 397
+  shapeName: roundRect
+  fill:
+    type: solid
+    color: '#FCFFF8'
+  adjustments:
+  - 16000
+- elementId: e5
+  elementType: image
+  bounds:
+  - 448
+  - 91
+  - 480
+  - 382
+  src: media/product-cutout.png
+  fit:
+    mode: contain
+- elementId: e6
+  elementType: text
+  bounds:
+  - 57
+  - 91
+  - 369
+  - 109
+  content:
+    text: 绿芽
+    fontFamily: Reading Text SC
+    fontSize: 81
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e7
+  elementType: text
+  bounds:
+  - 61
+  - 211
+  - 380
+  - 104
+  content:
+    text: '桌面植物
+
+      养护提醒系统'
+    fontFamily: Reading Text SC
+    fontSize: 33
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e8
+  elementType: text
+  bounds:
+  - 62
+  - 328
+  - 373
+  - 40
+  content:
+    text: 看见植物状态，记住每一次照料。
+    fontFamily: Reading Text SC
+    fontSize: 16.4
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e9
+  elementType: shape
+  bounds:
+  - 58
+  - 397
+  - 115
+  - 44
+  shapeName: roundRect
+  fill:
+    type: solid
+    color: '#EDF7EF'
+  adjustments:
+  - 16000
+  border:
+    style: solid
+    width: 0.9
+    color: '#D4E8D8'
+- elementId: e10
+  elementType: text
+  bounds:
+  - 62
+  - 402
+  - 107
+  - 31
+  content:
+    text: 状态查看
+    fontFamily: Reading Text SC
+    fontSize: 15
+    bold: true
+    color: '#164B3B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e11
+  elementType: shape
+  bounds:
+  - 185
+  - 397
+  - 115
+  - 44
+  shapeName: roundRect
+  fill:
+    type: solid
+    color: '#EDF7EF'
+  adjustments:
+  - 16000
+  border:
+    style: solid
+    width: 0.9
+    color: '#D4E8D8'
+- elementId: e12
+  elementType: text
+  bounds:
+  - 189
+  - 402
+  - 107
+  - 31
+  content:
+    text: 养护提醒
+    fontFamily: Reading Text SC
+    fontSize: 15
+    bold: true
+    color: '#FF816B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e13
+  elementType: shape
+  bounds:
+  - 312
+  - 397
+  - 115
+  - 44
+  shapeName: roundRect
+  fill:
+    type: solid
+    color: '#EDF7EF'
+  adjustments:
+  - 16000
+  border:
+    style: solid
+    width: 0.9
+    color: '#D4E8D8'
+- elementId: e14
+  elementType: text
+  bounds:
+  - 316
+  - 402
+  - 107
+  - 31
+  content:
+    text: 记录管理
+    fontFamily: Reading Text SC
+    fontSize: 15
+    bold: true
+    color: '#164B3B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e15
+  elementType: text
+  bounds:
+  - 51
+  - 492
+  - 866
+  - 26
+  content:
+    text: 虚构主题 · 自生成配图 · 用于展示PPT重建方法
+    fontFamily: Reading Text SC
+    fontSize: 11.5
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true

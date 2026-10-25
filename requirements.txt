@@ -1,0 +1,3 @@
+Pillow>=10,<14
+python-pptx>=1.0,<2
+PyYAML>=6,<7

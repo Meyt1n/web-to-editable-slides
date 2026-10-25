@@ -1,0 +1,4 @@
+interface:
+  display_name: "参考图转可编辑PPT"
+  short_description: "从网页版大纲和逐页生图到统一模板、实物优化、可编辑PPT与实开验证"
+  default_prompt: "使用 $web-to-editable-slides，按参考图及关联对话重建可编辑PPT，允许使用imagegen优化素材。"

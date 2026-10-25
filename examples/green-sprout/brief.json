@@ -1,0 +1,43 @@
+{
+  "project": "绿芽——桌面植物养护提醒系统",
+  "purpose": "演示由网页版参考图重建原生可编辑PPT的流程；主题完全虚构",
+  "style": {
+    "ratio": "16:9",
+    "colors": ["#164B3B", "#FF816B", "#EDF7EF"],
+    "description": "暖白窗边、清新浅绿、珊瑚橙点缀、圆角卡片、柔和产品视觉"
+  },
+  "imagegen_allowed": true,
+  "asset_priority": ["有授权的实物照片", "真实界面", "基于实物优化", "概念配图"],
+  "conversations": [
+    {"role": "公开示例的大纲与提示词", "location": "examples/green-sprout/prompts.md", "visibility": "public-synthetic"}
+  ],
+  "slides": [
+    {
+      "id": 1,
+      "title": "绿芽：桌面植物养护提醒系统",
+      "reference": "assets/reference-cover.png",
+      "key_points": ["看见植物状态，记住每一次照料", "状态查看、养护提醒、记录管理"],
+      "assets": ["assets/template-background.png", "assets/product-cutout.png"],
+      "status": "concept",
+      "notes": "标题与三张功能卡片为原生对象；主体图为自生成概念图"
+    },
+    {
+      "id": 2,
+      "title": "从植物状态到养护提醒",
+      "reference": "assets/reference-process.png",
+      "key_points": ["采集状态 → 整理信息 → 形成提醒 → 记录照料", "流程为示意，不提供虚构实测指标"],
+      "assets": ["assets/template-background.png", "assets/product-cutout.png"],
+      "status": "concept",
+      "notes": "四张流程卡片、编号和说明全部原生重建，保留原参考图的视觉关系"
+    },
+    {
+      "id": 3,
+      "title": "养护服务与交互设计",
+      "reference": "沿用前两页共性新增章节页",
+      "key_points": ["查看状态", "收到提醒", "记录照料"],
+      "assets": ["assets/template-background.png", "assets/product-cutout.png"],
+      "status": "concept",
+      "notes": "演示在同一母版上新增章节页，正文和大编号均可编辑"
+    }
+  ]
+}

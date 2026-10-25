@@ -1,0 +1,47 @@
+{
+  "slides": [
+    {
+      "index": 1,
+      "part": "ppt/slides/slide1.xml",
+      "editable_text_boxes": 8,
+      "shapes": 13,
+      "pictures": 2,
+      "tables": 0,
+      "valid_root_fade": true
+    },
+    {
+      "index": 2,
+      "part": "ppt/slides/slide2.xml",
+      "editable_text_boxes": 23,
+      "shapes": 32,
+      "pictures": 2,
+      "tables": 0,
+      "valid_root_fade": true
+    },
+    {
+      "index": 3,
+      "part": "ppt/slides/slide3.xml",
+      "editable_text_boxes": 8,
+      "shapes": 10,
+      "pictures": 2,
+      "tables": 0,
+      "valid_root_fade": true
+    }
+  ],
+  "fonts": [
+    {
+      "part": "ppt/fonts/font1.fntdata",
+      "bytes": 5805303,
+      "format": "EOT",
+      "recognized_header": true
+    }
+  ],
+  "external_relationships": [],
+  "errors": [],
+  "warnings": [],
+  "font_families": [
+    "Reading Text SC"
+  ],
+  "ok": true,
+  "scope": "Structure only; visual layout and cross-application playback require rendering"
+}
