@@ -1,0 +1,380 @@
+pageType: content
+background:
+  type: solid
+  color: '#FAFCF8'
+elements:
+- elementId: e1
+  elementType: shape
+  bounds:
+  - 0
+  - 0
+  - 960
+  - 540
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#F8FBF6'
+- elementId: e2
+  elementType: text
+  bounds:
+  - 42
+  - 492
+  - 790
+  - 27
+  content:
+    text: 03 / 沿相同维度对比方案
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e3
+  elementType: text
+  bounds:
+  - 828
+  - 492
+  - 90
+  - 27
+  content:
+    text: 概念演示
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e4
+  elementType: text
+  bounds:
+  - 43
+  - 37
+  - 855
+  - 69
+  content:
+    text: 从凭记忆，到有记录
+    fontFamily: Reading Text SC
+    fontSize: 35
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e5
+  elementType: shape
+  bounds:
+  - 43
+  - 132
+  - 394
+  - 318
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#EDF7EF'
+- elementId: e6
+  elementType: shape
+  bounds:
+  - 520
+  - 132
+  - 397
+  - 318
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#164B3B'
+- elementId: e7
+  elementType: text
+  bounds:
+  - 68
+  - 152
+  - 341
+  - 45
+  content:
+    text: 情境假设
+    fontFamily: Reading Text SC
+    fontSize: 25
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e8
+  elementType: text
+  bounds:
+  - 548
+  - 152
+  - 342
+  - 45
+  content:
+    text: 概念方案
+    fontFamily: Reading Text SC
+    fontSize: 25
+    bold: true
+    color: '#FFFFFF'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e9
+  elementType: text
+  bounds:
+  - 68
+  - 230
+  - 49
+  - 36
+  content:
+    text: '01'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#75A07D'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e10
+  elementType: text
+  bounds:
+  - 126
+  - 230
+  - 281
+  - 39
+  content:
+    text: 想起时才查看
+    fontFamily: Reading Text SC
+    fontSize: 20
+    bold: false
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e11
+  elementType: text
+  bounds:
+  - 548
+  - 230
+  - 49
+  - 36
+  content:
+    text: '01'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#AFCFB8'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e12
+  elementType: text
+  bounds:
+  - 606
+  - 230
+  - 278
+  - 39
+  content:
+    text: 状态集中查看
+    fontFamily: Reading Text SC
+    fontSize: 20
+    bold: false
+    color: '#FFFFFF'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e13
+  elementType: text
+  bounds:
+  - 68
+  - 294
+  - 49
+  - 36
+  content:
+    text: '02'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#75A07D'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e14
+  elementType: text
+  bounds:
+  - 126
+  - 294
+  - 281
+  - 39
+  content:
+    text: 不记得上次照料
+    fontFamily: Reading Text SC
+    fontSize: 20
+    bold: false
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e15
+  elementType: text
+  bounds:
+  - 548
+  - 294
+  - 49
+  - 36
+  content:
+    text: '02'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#AFCFB8'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e16
+  elementType: text
+  bounds:
+  - 606
+  - 294
+  - 278
+  - 39
+  content:
+    text: 提醒后再处理
+    fontFamily: Reading Text SC
+    fontSize: 20
+    bold: false
+    color: '#FFFFFF'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e17
+  elementType: text
+  bounds:
+  - 68
+  - 358
+  - 49
+  - 36
+  content:
+    text: '03'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#75A07D'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e18
+  elementType: text
+  bounds:
+  - 126
+  - 358
+  - 281
+  - 39
+  content:
+    text: 信息分散在各处
+    fontFamily: Reading Text SC
+    fontSize: 20
+    bold: false
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e19
+  elementType: text
+  bounds:
+  - 548
+  - 358
+  - 49
+  - 36
+  content:
+    text: '03'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#AFCFB8'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e20
+  elementType: text
+  bounds:
+  - 606
+  - 358
+  - 278
+  - 39
+  content:
+    text: 记录便于回看
+    fontFamily: Reading Text SC
+    fontSize: 20
+    bold: false
+    color: '#FFFFFF'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e21
+  elementType: text
+  bounds:
+  - 455
+  - 269
+  - 45
+  - 51
+  content:
+    text: →
+    fontFamily: Reading Text SC
+    fontSize: 30
+    bold: false
+    color: '#FF816B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e22
+  elementType: text
+  bounds:
+  - 47
+  - 454
+  - 855
+  - 32
+  content:
+    text: 沿相同维度比较：查看、提醒、记录
+    fontFamily: Reading Text SC
+    fontSize: 13.8
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true

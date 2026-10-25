@@ -1,0 +1,12 @@
+{
+  "errors": [],
+  "suggestions": [],
+  "summary": {
+    "mode": "explore",
+    "pages": 8,
+    "declared_layouts": 8,
+    "distinct_layouts": 8
+  },
+  "scope": "Declared plan only; does not inspect actual typography, layout or images",
+  "ok": true
+}

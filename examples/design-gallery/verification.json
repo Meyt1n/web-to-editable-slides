@@ -1,0 +1,113 @@
+{
+  "slides": [
+    {
+      "index": 1,
+      "part": "ppt/slides/slide1.xml",
+      "editable_text_boxes": 7,
+      "shapes": 8,
+      "pictures": 1,
+      "tables": 0,
+      "valid_root_fade": true
+    },
+    {
+      "index": 2,
+      "part": "ppt/slides/slide2.xml",
+      "editable_text_boxes": 13,
+      "shapes": 14,
+      "pictures": 1,
+      "tables": 0,
+      "valid_root_fade": true
+    },
+    {
+      "index": 3,
+      "part": "ppt/slides/slide3.xml",
+      "editable_text_boxes": 19,
+      "shapes": 22,
+      "pictures": 0,
+      "tables": 0,
+      "valid_root_fade": true
+    },
+    {
+      "index": 4,
+      "part": "ppt/slides/slide4.xml",
+      "editable_text_boxes": 17,
+      "shapes": 22,
+      "pictures": 0,
+      "tables": 0,
+      "valid_root_fade": true
+    },
+    {
+      "index": 5,
+      "part": "ppt/slides/slide5.xml",
+      "editable_text_boxes": 16,
+      "shapes": 23,
+      "pictures": 1,
+      "tables": 0,
+      "valid_root_fade": true
+    },
+    {
+      "index": 6,
+      "part": "ppt/slides/slide6.xml",
+      "editable_text_boxes": 10,
+      "shapes": 11,
+      "pictures": 1,
+      "tables": 0,
+      "valid_root_fade": true
+    },
+    {
+      "index": 7,
+      "part": "ppt/slides/slide7.xml",
+      "editable_text_boxes": 7,
+      "shapes": 8,
+      "pictures": 0,
+      "tables": 0,
+      "valid_root_fade": true
+    },
+    {
+      "index": 8,
+      "part": "ppt/slides/slide8.xml",
+      "editable_text_boxes": 13,
+      "shapes": 17,
+      "pictures": 1,
+      "tables": 0,
+      "valid_root_fade": true
+    }
+  ],
+  "fonts": [
+    {
+      "part": "ppt/fonts/font1.fntdata",
+      "bytes": 5805303,
+      "format": "EOT",
+      "recognized_header": true
+    },
+    {
+      "part": "ppt/fonts/font2.fntdata",
+      "bytes": 999449,
+      "format": "EOT",
+      "recognized_header": true
+    },
+    {
+      "part": "ppt/fonts/font3.fntdata",
+      "bytes": 44540,
+      "format": "EOT",
+      "recognized_header": true
+    },
+    {
+      "part": "ppt/fonts/font4.fntdata",
+      "bytes": 3267775,
+      "format": "EOT",
+      "recognized_header": true
+    }
+  ],
+  "external_relationships": [],
+  "errors": [],
+  "warnings": [],
+  "font_families": [
+    "Reading Text SC",
+    "ZCOOL KuaiLe",
+    "Barlow Condensed",
+    "ZCOOL XiaoWei"
+  ],
+  "ok": true,
+  "scope": "Structure only; visual layout and cross-application playback require rendering"
+}

@@ -1,0 +1,292 @@
+pageType: content
+background:
+  type: solid
+  color: '#FAFCF8'
+elements:
+- elementId: e1
+  elementType: shape
+  bounds:
+  - 0
+  - 0
+  - 960
+  - 540
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#F2F7EC'
+- elementId: e2
+  elementType: text
+  bounds:
+  - 42
+  - 492
+  - 790
+  - 27
+  content:
+    text: 02 / 开放分栏与信息层级
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e3
+  elementType: text
+  bounds:
+  - 828
+  - 492
+  - 90
+  - 27
+  content:
+    text: 概念演示
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e4
+  elementType: text
+  bounds:
+  - 44
+  - 35
+  - 430
+  - 32
+  content:
+    text: FORM / FUNCTION / CARE
+    fontFamily: Barlow Condensed
+    fontSize: 15
+    bold: false
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e5
+  elementType: image
+  bounds:
+  - 22
+  - 120
+  - 421
+  - 336
+  src: media/product-cutout.png
+  fit:
+    mode: contain
+- elementId: e6
+  elementType: text
+  bounds:
+  - 473
+  - 66
+  - 434
+  - 106
+  content:
+    text: '从植物状态
+
+      到一次照料'
+    fontFamily: ZCOOL XiaoWei
+    fontSize: 38
+    bold: false
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e7
+  elementType: text
+  bounds:
+  - 474
+  - 210
+  - 48
+  - 39
+  content:
+    text: '01'
+    fontFamily: Barlow Condensed
+    fontSize: 32
+    bold: false
+    color: '#75A07D'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e8
+  elementType: text
+  bounds:
+  - 538
+  - 210
+  - 355
+  - 35
+  content:
+    text: 知道状态
+    fontFamily: Reading Text SC
+    fontSize: 23
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e9
+  elementType: text
+  bounds:
+  - 538
+  - 246
+  - 355
+  - 32
+  content:
+    text: 让需要关注的信息集中呈现。
+    fontFamily: Reading Text SC
+    fontSize: 15.5
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e10
+  elementType: line
+  bounds:
+  - 537
+  - 285
+  - 365
+  - 0.1
+  viewBox:
+  - 365
+  - 0.1
+  points: 0,0 365,0.1
+  border:
+    style: solid
+    width: 0.8
+    color: '#D7E3D3'
+- elementId: e11
+  elementType: text
+  bounds:
+  - 474
+  - 294
+  - 48
+  - 39
+  content:
+    text: '02'
+    fontFamily: Barlow Condensed
+    fontSize: 32
+    bold: false
+    color: '#FF816B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e12
+  elementType: text
+  bounds:
+  - 538
+  - 294
+  - 355
+  - 35
+  content:
+    text: 收到提醒
+    fontFamily: Reading Text SC
+    fontSize: 23
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e13
+  elementType: text
+  bounds:
+  - 538
+  - 330
+  - 355
+  - 32
+  content:
+    text: 把下一次照料变成明确提示。
+    fontFamily: Reading Text SC
+    fontSize: 15.5
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e14
+  elementType: line
+  bounds:
+  - 537
+  - 369
+  - 365
+  - 0.1
+  viewBox:
+  - 365
+  - 0.1
+  points: 0,0 365,0.1
+  border:
+    style: solid
+    width: 0.8
+    color: '#D7E3D3'
+- elementId: e15
+  elementType: text
+  bounds:
+  - 474
+  - 378
+  - 48
+  - 39
+  content:
+    text: '03'
+    fontFamily: Barlow Condensed
+    fontSize: 32
+    bold: false
+    color: '#75A07D'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e16
+  elementType: text
+  bounds:
+  - 538
+  - 378
+  - 355
+  - 35
+  content:
+    text: 留下记录
+    fontFamily: Reading Text SC
+    fontSize: 23
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e17
+  elementType: text
+  bounds:
+  - 538
+  - 414
+  - 355
+  - 32
+  content:
+    text: 让之前的养护过程便于回看。
+    fontFamily: Reading Text SC
+    fontSize: 15.5
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true

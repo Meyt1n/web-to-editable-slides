@@ -1,0 +1,255 @@
+pageType: content
+background:
+  type: solid
+  color: '#FAFCF8'
+elements:
+- elementId: e1
+  elementType: shape
+  bounds:
+  - 0
+  - 0
+  - 960
+  - 540
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#F8FBF6'
+- elementId: e2
+  elementType: text
+  bounds:
+  - 42
+  - 492
+  - 790
+  - 27
+  content:
+    text: 06 / 大主体与局部引线
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e3
+  elementType: text
+  bounds:
+  - 828
+  - 492
+  - 90
+  - 27
+  content:
+    text: 概念演示
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e4
+  elementType: text
+  bounds:
+  - 42
+  - 35
+  - 866
+  - 68
+  content:
+    text: 把主体放大，让细节说话
+    fontFamily: ZCOOL XiaoWei
+    fontSize: 34
+    bold: false
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e5
+  elementType: line
+  bounds:
+  - 228
+  - 203
+  - 262
+  - 55
+  viewBox:
+  - 262
+  - 55
+  points: 0,0 262,55
+  border:
+    style: solid
+    width: 1.3
+    color: '#86AD8F'
+- elementId: e6
+  elementType: line
+  bounds:
+  - 647
+  - 230
+  - 83
+  - 85
+  viewBox:
+  - 83
+  - 85
+  points: 0,85 83,0
+  border:
+    style: solid
+    width: 1.3
+    color: '#86AD8F'
+- elementId: e7
+  elementType: line
+  bounds:
+  - 466
+  - 397
+  - 1
+  - 45
+  viewBox:
+  - 1
+  - 45
+  points: 0,0 1,45
+  border:
+    style: solid
+    width: 1.3
+    color: '#86AD8F'
+- elementId: e8
+  elementType: image
+  bounds:
+  - 248
+  - 99
+  - 470
+  - 354
+  src: media/product-cutout.png
+  fit:
+    mode: contain
+- elementId: e9
+  elementType: text
+  bounds:
+  - 45
+  - 143
+  - 89
+  - 50
+  content:
+    text: '01'
+    fontFamily: Barlow Condensed
+    fontSize: 38
+    bold: false
+    color: '#7DA785'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e10
+  elementType: text
+  bounds:
+  - 45
+  - 196
+  - 204
+  - 40
+  content:
+    text: 状态入口
+    fontFamily: Reading Text SC
+    fontSize: 23
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e11
+  elementType: text
+  bounds:
+  - 45
+  - 241
+  - 208
+  - 66
+  content:
+    text: '白色传感器概念造型
+
+      用于说明采集入口'
+    fontFamily: Reading Text SC
+    fontSize: 16
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e12
+  elementType: text
+  bounds:
+  - 737
+  - 144
+  - 120
+  - 50
+  content:
+    text: '02'
+    fontFamily: Barlow Condensed
+    fontSize: 38
+    bold: false
+    color: '#FF816B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e13
+  elementType: text
+  bounds:
+  - 737
+  - 198
+  - 181
+  - 40
+  content:
+    text: 手机端
+    fontFamily: Reading Text SC
+    fontSize: 23
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e14
+  elementType: text
+  bounds:
+  - 737
+  - 244
+  - 181
+  - 65
+  content:
+    text: '以占位界面表达
+
+      提醒与记录功能'
+    fontFamily: Reading Text SC
+    fontSize: 16
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e15
+  elementType: text
+  bounds:
+  - 319
+  - 447
+  - 342
+  - 32
+  content:
+    text: 植物与花盆：养护对象
+    fontFamily: Reading Text SC
+    fontSize: 17
+    bold: false
+    color: '#164B3B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true

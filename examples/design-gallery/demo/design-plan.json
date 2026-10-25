@@ -1,0 +1,111 @@
+{
+  "project": "绿芽｜字体与版式选型图册",
+  "purpose": "比较排版表达，不要求正式稿混用全部方案",
+  "design": {
+    "mode": "explore",
+    "font_profiles": {
+      "clean": {
+        "heading": "Reading Text SC",
+        "body": "Reading Text SC",
+        "numeric": "Barlow Condensed"
+      },
+      "editorial": {
+        "heading": "ZCOOL XiaoWei",
+        "body": "Reading Text SC",
+        "numeric": "Barlow Condensed"
+      },
+      "friendly": {
+        "heading": "ZCOOL KuaiLe",
+        "body": "Reading Text SC",
+        "numeric": "Barlow Condensed"
+      }
+    },
+    "constants": [
+      "绿色主题",
+      "清晰正文",
+      "概念素材"
+    ]
+  },
+  "slides": [
+    {
+      "id": 1,
+      "title": "场景出血与宋体标题",
+      "layout": "full-bleed",
+      "font_profile": "editorial",
+      "density": "low",
+      "color_mode": "light",
+      "focal_point": "作品名称与完整环境主图",
+      "status": "concept"
+    },
+    {
+      "id": 2,
+      "title": "开放分栏与信息层级",
+      "layout": "editorial-split",
+      "font_profile": "editorial",
+      "density": "medium",
+      "color_mode": "light",
+      "focal_point": "产品主体与三层文字说明",
+      "status": "concept"
+    },
+    {
+      "id": 3,
+      "title": "沿相同维度对比方案",
+      "layout": "comparison",
+      "font_profile": "clean",
+      "density": "medium",
+      "color_mode": "mixed",
+      "focal_point": "查看、提醒和记录的对应关系",
+      "status": "concept"
+    },
+    {
+      "id": 4,
+      "title": "四步路径替代等宽卡片",
+      "layout": "timeline",
+      "font_profile": "clean",
+      "density": "medium",
+      "color_mode": "light",
+      "focal_point": "动作的先后关系",
+      "status": "concept"
+    },
+    {
+      "id": 5,
+      "title": "分层架构说明协作",
+      "layout": "layered-architecture",
+      "font_profile": "clean",
+      "density": "high",
+      "color_mode": "light",
+      "focal_point": "交互、服务与概念采集端的关系",
+      "status": "concept"
+    },
+    {
+      "id": 6,
+      "title": "大主体与局部引线",
+      "layout": "annotated-product",
+      "font_profile": "editorial",
+      "density": "medium",
+      "color_mode": "light",
+      "focal_point": "主体部件与信息入口",
+      "status": "concept"
+    },
+    {
+      "id": 7,
+      "title": "童趣字体与深底留白",
+      "layout": "statement-chapter",
+      "font_profile": "friendly",
+      "density": "low",
+      "color_mode": "dark",
+      "focal_point": "一句简短的体验目标",
+      "status": "concept"
+    },
+    {
+      "id": 8,
+      "title": "错位路线与后续设想",
+      "layout": "roadmap",
+      "font_profile": "editorial",
+      "density": "medium",
+      "color_mode": "light",
+      "focal_point": "分阶段的后续方向",
+      "status": "concept"
+    }
+  ]
+}

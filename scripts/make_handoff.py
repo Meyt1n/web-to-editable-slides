@@ -32,6 +32,17 @@ def validate(brief: dict) -> dict:
                 raise ValueError(f'{key} must be a list of strings')
     if 'imagegen_allowed' in brief and type(brief['imagegen_allowed']) is not bool:
         raise ValueError('imagegen_allowed must be true or false')
+    design=brief.get('design',{})
+    if not isinstance(design,dict):
+        raise ValueError('design must be an object')
+    if design.get('mode','enhance') not in ['fidelity','enhance','explore']:
+        raise ValueError('Unknown design mode')
+    profiles=design.get('font_profiles',{})
+    if not isinstance(profiles,dict) or any(not isinstance(v,dict) for v in profiles.values()):
+        raise ValueError('font_profiles must map profile names to role objects')
+    for profile in profiles.values():
+        if any(not isinstance(value,str) or not value.strip() for value in profile.values()):
+            raise ValueError('Font role values must be non-empty strings')
     return brief
 
 
@@ -44,6 +55,14 @@ def render(brief: dict) -> str:
              f'风格：{style.get("description", "沿用参考图")}',
              f'主色：{", ".join(style.get("colors", []))}',
              f'imagegen使用意向：{brief.get("imagegen_allowed", "未说明")}（仍以宿主能力与会话权限为准）', '']
+    if brief.get('design'):
+        design=brief['design']
+        lines += ['## 设计约定','',f'模式：{design.get("mode","enhance")}']
+        for name,roles in design.get('font_profiles',{}).items():
+            lines += [f'- 字体方案 {name}：'+ '；'.join(f'{role}={family}' for role,family in roles.items())]
+        if design.get('constants'):
+            lines += ['- 保持：'+'、'.join(design['constants'])]
+        lines += ['']
     if brief.get('asset_priority'):
         lines += ['素材优先顺序：' + ' → '.join(brief['asset_priority']), '']
     if brief.get('conversations'):
@@ -55,13 +74,17 @@ def render(brief: dict) -> str:
         lines += [f'## {slide["id"]:02} {slide["title"]}', '',
                   f'参考：{slide.get("reference", "未提供")}',
                   f'事实状态：{slide.get("status", "unspecified")}', '']
+        for field,label in [('layout','布局'),('font_profile','字体方案'),('density','阅读密度'),
+                            ('color_mode','明暗'),('focal_point','视觉重点'),('visual','素材用途')]:
+            if slide.get(field):lines += [f'{label}：{slide[field]}']
+        if any(slide.get(field) for field in ['layout','font_profile','focal_point']):lines += ['']
         lines += ['- ' + point for point in slide.get('key_points', [])]
         if slide.get('assets'):
             lines += ['', '素材位置：'] + ['- ' + asset for asset in slide['assets']]
         if slide.get('notes'):
             lines += ['', '制作说明：' + slide['notes']]
         lines += ['']
-    return '\n'.join(lines)
+    return '\n'.join(lines).rstrip()+'\n'
 
 
 def main() -> int:

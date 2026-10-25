@@ -12,7 +12,7 @@ import yaml
 from PIL import Image
 from pptx import Presentation
 from pptx.dml.color import RGBColor
-from pptx.enum.shapes import MSO_SHAPE
+from pptx.enum.shapes import MSO_SHAPE, MSO_CONNECTOR
 from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 from pptx.oxml.xmlchemy import OxmlElement
 from pptx.util import Pt
@@ -30,24 +30,25 @@ class Page:
         self.elements.append(dict(elementId=f'e{len(self.elements)+1}', elementType=kind,
                                   bounds=list(bounds), **kwargs))
 
-    def shape(self, x, y, w, h, fill='#FFFFFF', circle=False, border=None):
-        node = self.slide.shapes.add_shape(MSO_SHAPE.OVAL if circle else MSO_SHAPE.ROUNDED_RECTANGLE,
+    def shape(self, x, y, w, h, fill='#FFFFFF', circle=False, border=None, rounded=True):
+        node = self.slide.shapes.add_shape(MSO_SHAPE.OVAL if circle else
+                                           (MSO_SHAPE.ROUNDED_RECTANGLE if rounded else MSO_SHAPE.RECTANGLE),
                                            Pt(x), Pt(y), Pt(w), Pt(h))
-        if not circle:
+        if not circle and rounded:
             node.adjustments[0] = .16
         node.fill.solid(); node.fill.fore_color.rgb = RGBColor.from_string(fill[1:])
         if border:
             node.line.color.rgb = RGBColor.from_string(border[1:]); node.line.width = Pt(.9)
         else:
             node.line.fill.background()
-        kwargs = dict(shapeName='ellipse' if circle else 'roundRect', fill=dict(type='solid', color=fill))
-        if not circle:
+        kwargs = dict(shapeName='ellipse' if circle else ('roundRect' if rounded else 'rect'), fill=dict(type='solid', color=fill))
+        if not circle and rounded:
             kwargs['adjustments'] = [16000]
         if border:
             kwargs['border'] = dict(style='solid', width=.9, color=border)
         self.record('shape', [x, y, w, h], **kwargs)
 
-    def text(self, text, x, y, w, h, size=20, color=GREEN, bold=False, center=False):
+    def text(self, text, x, y, w, h, size=20, color=GREEN, bold=False, center=False, family=FONT):
         box = self.slide.shapes.add_textbox(Pt(x), Pt(y), Pt(w), Pt(h))
         frame = box.text_frame; frame.clear(); frame.word_wrap = True
         frame.margin_left = frame.margin_right = frame.margin_top = frame.margin_bottom = 0
@@ -57,13 +58,21 @@ class Page:
             paragraph.alignment = PP_ALIGN.CENTER if center else PP_ALIGN.LEFT
             paragraph.line_spacing = 1.15; paragraph.space_after = Pt(0)
             run = paragraph.add_run(); run.text = line
-            run.font.name = FONT; run.font.size = Pt(size); run.font.bold = bold
+            run.font.name = family; run.font.size = Pt(size); run.font.bold = bold
             run.font.color.rgb = RGBColor.from_string(color[1:])
             rpr = run._r.get_or_add_rPr()
-            ea = OxmlElement('a:ea'); ea.set('typeface', FONT); rpr.append(ea)
-        self.record('text', [x,y,w,h], content=dict(text=text, fontFamily=FONT, fontSize=size,
+            ea = OxmlElement('a:ea'); ea.set('typeface', family); rpr.append(ea)
+        self.record('text', [x,y,w,h], content=dict(text=text, fontFamily=family, fontSize=size,
                     bold=bold, color=color, align=['center' if center else 'left','middle'],
                     lineHeight=1.15, wrap=True))
+
+    def line(self, x1, y1, x2, y2, color=GREEN, width=1.2):
+        node=self.slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT,Pt(x1),Pt(y1),Pt(x2),Pt(y2))
+        node.line.color.rgb=RGBColor.from_string(color[1:]);node.line.width=Pt(width)
+        w,h=max(abs(x2-x1),.1),max(abs(y2-y1),.1)
+        self.record('line',[min(x1,x2),min(y1,y2),w,h],viewBox=[w,h],
+                    points=f'{0 if x2>=x1 else w},{0 if y2>=y1 else h} {w if x2>=x1 else 0},{h if y2>=y1 else 0}',
+                    border=dict(style='solid',width=width,color=color))
 
     def image(self, name, x, y, w, h, media, cover=False):
         with Image.open(media/name) as source:
@@ -86,6 +95,38 @@ class Page:
         transition.append(OxmlElement('p:fade'))
         self.slide._element.insert_element_before(transition,'p:timing','p:extLst')
         return dict(pageType=self.kind,background=dict(type='solid',color='#FAFCF8'),elements=self.elements)
+
+
+def write_project(prs, specs, output, basename, font_files, title, body_font=FONT):
+    """Write shared native and PPTD representations; font files are relative to output."""
+    paths=[]
+    for i,spec in enumerate(specs,1):
+        rel=f'pages/{i:02}.page';paths.append(rel)
+        (output/rel).write_text(yaml.safe_dump(spec,allow_unicode=True,sort_keys=False),encoding='utf-8')
+    custom=[]
+    for family,relative in font_files.items():
+        font_b64=base64.b64encode((output/relative).read_bytes()).decode()
+        css=f'@font-face{{font-family:"{family}";font-style:normal;font-weight:400;src:url(data:font/ttf;base64,{font_b64})format("truetype");}}'
+        custom.append(dict(family=family,src='data:text/css;base64,'+base64.b64encode(css.encode()).decode()))
+    manifest=dict(version='v2',title=title,size=[960,540],customFonts=custom,pages=paths)
+    (output/(basename+'.pptd')).write_text(yaml.safe_dump(manifest,allow_unicode=True,sort_keys=False,width=180),encoding='utf-8')
+    result=output/(basename+'.pptx');prs.save(result)
+    themed=output/'.theme-fonts.pptx'
+    with zipfile.ZipFile(result) as source, zipfile.ZipFile(themed,'w',zipfile.ZIP_DEFLATED) as target:
+        for name in source.namelist():
+            data=source.read(name)
+            if name.startswith('ppt/theme/') and name.endswith('.xml'):
+                root=ET.fromstring(data)
+                for node in root.iter():
+                    if node.tag.split('}')[-1] in ['latin','ea','cs','font'] and 'typeface' in node.attrib:
+                        node.set('typeface',body_font)
+                data=ET.tostring(root,encoding='utf-8',xml_declaration=True)
+            elif name=='ppt/presentation.xml':
+                root=ET.fromstring(data);root.set('saveSubsetFonts','0')
+                data=ET.tostring(root,encoding='utf-8',xml_declaration=True)
+            target.writestr(name,data)
+    themed.replace(result)
+    return result
 
 
 def build(output: Path, assets: Path | None = None, force: bool = False) -> Path:
@@ -152,35 +193,7 @@ def build(output: Path, assets: Path | None = None, force: bool = False) -> Path
     p.text('可复用章节页示例',51,491,866,26,12,MUTED)
     specs.append(p.finish())
 
-    paths=[]
-    for i,spec in enumerate(specs,1):
-        rel=f'pages/{i:02}.page';paths.append(rel)
-        (output/rel).write_text(yaml.safe_dump(spec,allow_unicode=True,sort_keys=False),encoding='utf-8')
-    font_b64=base64.b64encode((media/'demo-font.ttf').read_bytes()).decode()
-    css=f'@font-face{{font-family:"{FONT}";font-style:normal;font-weight:400;src:url(data:font/ttf;base64,{font_b64})format("truetype");}}'
-    manifest=dict(version='v2',title='绿芽｜虚构概念演示',size=[960,540],
-                  customFonts=[dict(family=FONT,src='data:text/css;base64,'+base64.b64encode(css.encode()).decode())],
-                  pages=paths)
-    (output/'green-sprout.pptd').write_text(yaml.safe_dump(manifest,allow_unicode=True,sort_keys=False,width=180),encoding='utf-8')
-    result=output/'green-sprout.pptx';prs.save(result)
-    # Replace template theme defaults too, so Office does not embed unrelated fonts.
-    themed=output/'.theme-fonts.pptx'
-    with zipfile.ZipFile(result) as source, zipfile.ZipFile(themed,'w',zipfile.ZIP_DEFLATED) as target:
-        for name in source.namelist():
-            data=source.read(name)
-            if name.startswith('ppt/theme/') and name.endswith('.xml'):
-                root=ET.fromstring(data)
-                for node in root.iter():
-                    if node.tag.split('}')[-1] in ['latin','ea','cs','font'] and 'typeface' in node.attrib:
-                        node.set('typeface',FONT)
-                data=ET.tostring(root,encoding='utf-8',xml_declaration=True)
-            elif name=='ppt/presentation.xml':
-                root=ET.fromstring(data)
-                root.set('saveSubsetFonts','0')
-                data=ET.tostring(root,encoding='utf-8',xml_declaration=True)
-            target.writestr(name,data)
-    themed.replace(result)
-    return result
+    return write_project(prs,specs,output,'green-sprout',{FONT:'media/demo-font.ttf'},'绿芽｜虚构概念演示')
 
 
 def main() -> int:

@@ -1,0 +1,45 @@
+{
+  "fonts": [
+    {
+      "family": "ZCOOL XiaoWei",
+      "file": "ZCOOLXiaoWei-Regular.ttf",
+      "license": "SIL OFL 1.1",
+      "license_file": "zcoolxiaowei-OFL.txt",
+      "source": "https://github.com/google/fonts/blob/e7db6ca603fd4862010383ff17ffd6cc4ffac1c0/ofl/zcoolxiaowei/ZCOOLXiaoWei-Regular.ttf",
+      "source_commit": "e7db6ca603fd4862010383ff17ffd6cc4ffac1c0",
+      "source_blob": "2d8731a231f2e6625b32d96b87f84852e24f9d82",
+      "sha256": "a42b620140f493db42f741351dfbf343c0936d58588ee8004b8b2a218d997ff1",
+      "roles": [
+        "heading"
+      ]
+    },
+    {
+      "family": "ZCOOL KuaiLe",
+      "file": "ZCOOLKuaiLe-Regular.ttf",
+      "license": "SIL OFL 1.1",
+      "license_file": "zcoolkuaile-OFL.txt",
+      "source": "https://github.com/google/fonts/blob/e7db6ca603fd4862010383ff17ffd6cc4ffac1c0/ofl/zcoolkuaile/ZCOOLKuaiLe-Regular.ttf",
+      "source_commit": "e7db6ca603fd4862010383ff17ffd6cc4ffac1c0",
+      "source_blob": "3cf6cd927ee910d46875de173efdaac4330e84ac",
+      "sha256": "812a6fc1fe54b6d73a419245c32dfeba8aa33104d5be90d1cf6af082007cb71d",
+      "roles": [
+        "heading",
+        "accent"
+      ]
+    },
+    {
+      "family": "Barlow Condensed",
+      "file": "BarlowCondensed-Regular.ttf",
+      "license": "SIL OFL 1.1",
+      "license_file": "barlowcondensed-OFL.txt",
+      "source": "https://github.com/google/fonts/blob/e7db6ca603fd4862010383ff17ffd6cc4ffac1c0/ofl/barlowcondensed/BarlowCondensed-Regular.ttf",
+      "source_commit": "e7db6ca603fd4862010383ff17ffd6cc4ffac1c0",
+      "source_blob": "ecbe0cc84118decc6a16216ad53d83d39888b175",
+      "sha256": "583cec5da3b84bc4dc7c9c72e2a565c94d34e431518b19d7e250b7830ad5f996",
+      "roles": [
+        "numeric",
+        "latin"
+      ]
+    }
+  ]
+}

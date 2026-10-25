@@ -4,6 +4,8 @@
 
 这是一个中文优先的开源 Skill，记录从作品资料、网页版大纲和逐页生图，到实物素材优化、统一母版、可编辑PPT及实开检查的完整方法。
 
+现在也支持在原风格内优化字体搭配、表达方式与页面节奏：先按内容选结构，再做同一套设计语言中的变化。
+
 ![绿芽：完全虚构的示例主题](assets/reference-cover.png)
 
 ## 这套流程解决什么
@@ -59,6 +61,25 @@ git clone https://github.com/Meyt1n/web-to-editable-slides.git ~/.codex/skills/w
 
 关联对话不支持访问时，粘贴大纲和逐页提示词或提供导出的文字。不要为了让模型读取而公开私人聊天。
 
+## 字体与排版优化
+
+新增三组字体方案、14种按内容选择的布局，以及可运行的8页原生版式图册。标题、正文、数字、少量点缀分别设定角色；正文保持清晰，通过宋黑搭配、亲和短标题、字重、留白、分栏和图文比例丰富表现。
+
+![八种布局与字体选型](examples/design-gallery/preview.jpg)
+
+- [字体与视觉规则](references/design-system.md)：在忠实复刻、同风格优化和方向探索之间选择。
+- [版式库](references/layout-library.md)：大图、开放分栏、对比、时间线、架构、主体标注、证据、矩阵、路线等。
+- [8页可编辑图册](examples/design-gallery/demo/design-gallery.pptx) · [完整源工程](examples/design-gallery/demo/design-gallery.pptd)
+- [设计计划字段与检查](references/design-plan.md)：提示无必要的连续重复和过多字体，不自动改变用户模板。
+
+图册展示不同选型，正式稿应选定适合主题的一组字体与规则，避免逐页随机换风格。图册的字体来自OFL项目，附完整许可与来源记录；数字字体只处理它支持的字符。
+
+```text
+使用 $web-to-editable-slides，在原风格内优化字体和排版。
+给标题、正文和数字明确分工，按每页重点切换图文、对比、流程、架构或章节留白。
+改善无必要的连续卡片重复，不改作品事实，不为丰富版式编造数据。
+```
+
 ## 可直接运行的示例
 
 示例主题为**绿芽——桌面植物养护提醒系统**，全部为imagegen生成的虚构概念素材，不含真实用户项目、硬件实拍、APP截图、身份信息和私人对话。
@@ -77,6 +98,8 @@ python scripts/inventory_images.py assets --output-dir output/inventory
 python scripts/make_handoff.py examples/green-sprout/brief.json --output output/handoff.md
 python scripts/build_demo.py --output-dir output/green-sprout
 python scripts/check_pptx.py output/green-sprout/green-sprout.pptx --require-fade --output output/pptx-report.json
+python scripts/build_gallery.py --output-dir output/design-gallery
+python scripts/review_design_plan.py output/design-gallery/design-plan.json --output output/design-review.json
 python -m unittest discover -s tests -v
 ```
 
@@ -91,9 +114,12 @@ python -m unittest discover -s tests -v
 | `references/handoff-schema.md` | 页码、素材和事实状态的交接规范 |
 | `references/tools.md` | 关联对话、imagegen、素材检索、导出和验证能力说明 |
 | `references/verification.md` | 原生可编辑性、字体、切换和实开检查 |
+| `references/design-system.md`、`layout-library.md` | 字体角色、视觉变化与按内容选版式 |
+| `references/design-plan.md` | 设计计划字段和建议式检查 |
 | `scripts/` | 图片清点、交接表、示例构建与PPTX检查脚本 |
 | `assets/` | 全新生成的植物主题参考图、无字母版、主体图和OFL字体 |
 | `examples/green-sprout/` | 一套不含私人素材的输入、提示词与实际输出 |
+| `examples/design-gallery/` | 8种原生布局、三组字体方案及可复现工程 |
 
 ## imagegen与其他依赖
 

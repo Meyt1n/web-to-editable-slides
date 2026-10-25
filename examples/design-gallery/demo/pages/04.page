@@ -1,0 +1,441 @@
+pageType: content
+background:
+  type: solid
+  color: '#FAFCF8'
+elements:
+- elementId: e1
+  elementType: shape
+  bounds:
+  - 0
+  - 0
+  - 960
+  - 540
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#FFFFFF'
+- elementId: e2
+  elementType: text
+  bounds:
+  - 42
+  - 492
+  - 790
+  - 27
+  content:
+    text: 04 / 四步路径替代等宽卡片
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e3
+  elementType: text
+  bounds:
+  - 828
+  - 492
+  - 90
+  - 27
+  content:
+    text: 概念演示
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e4
+  elementType: text
+  bounds:
+  - 44
+  - 35
+  - 860
+  - 68
+  content:
+    text: 用路径，讲清一次照料
+    fontFamily: Reading Text SC
+    fontSize: 34
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e5
+  elementType: text
+  bounds:
+  - 47
+  - 112
+  - 710
+  - 29
+  content:
+    text: PROCESS / FOUR STEPS
+    fontFamily: Barlow Condensed
+    fontSize: 14
+    bold: false
+    color: '#78A080'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e6
+  elementType: line
+  bounds:
+  - 118
+  - 282
+  - 724
+  - 0.1
+  viewBox:
+  - 724
+  - 0.1
+  points: 0,0 724,0.1
+  border:
+    style: solid
+    width: 2.5
+    color: '#A8CBB1'
+- elementId: e7
+  elementType: shape
+  bounds:
+  - 94.0
+  - 258
+  - 48
+  - 48
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#164B3B'
+- elementId: e8
+  elementType: text
+  bounds:
+  - 96.0
+  - 261
+  - 44
+  - 40
+  content:
+    text: '01'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#FFFFFF'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e9
+  elementType: text
+  bounds:
+  - 18.0
+  - 172
+  - 200
+  - 39
+  content:
+    text: 采集状态
+    fontFamily: Reading Text SC
+    fontSize: 23
+    bold: true
+    color: '#164B3B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e10
+  elementType: text
+  bounds:
+  - 12.0
+  - 216
+  - 212
+  - 47
+  content:
+    text: 记录当前植物状态
+    fontFamily: Reading Text SC
+    fontSize: 15.3
+    bold: false
+    color: '#52655E'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e11
+  elementType: line
+  bounds:
+  - 118.0
+  - 245
+  - 0.1
+  - 8
+  viewBox:
+  - 0.1
+  - 8
+  points: 0,0 0.1,8
+  border:
+    style: solid
+    width: 1
+    color: '#A8CBB1'
+- elementId: e12
+  elementType: shape
+  bounds:
+  - 335.33333333333337
+  - 258
+  - 48
+  - 48
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#164B3B'
+- elementId: e13
+  elementType: text
+  bounds:
+  - 337.33333333333337
+  - 261
+  - 44
+  - 40
+  content:
+    text: '02'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#FFFFFF'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e14
+  elementType: text
+  bounds:
+  - 259.33333333333337
+  - 339
+  - 200
+  - 39
+  content:
+    text: 整理信息
+    fontFamily: Reading Text SC
+    fontSize: 23
+    bold: true
+    color: '#164B3B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e15
+  elementType: text
+  bounds:
+  - 253.33333333333337
+  - 383
+  - 212
+  - 47
+  content:
+    text: 把资料组织成可查看内容
+    fontFamily: Reading Text SC
+    fontSize: 15.3
+    bold: false
+    color: '#52655E'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e16
+  elementType: line
+  bounds:
+  - 359.33333333333337
+  - 319
+  - 0.1
+  - 14
+  viewBox:
+  - 0.1
+  - 14
+  points: 0,0 0.1,14
+  border:
+    style: solid
+    width: 1
+    color: '#A8CBB1'
+- elementId: e17
+  elementType: shape
+  bounds:
+  - 576.6666666666667
+  - 258
+  - 48
+  - 48
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#FF816B'
+- elementId: e18
+  elementType: text
+  bounds:
+  - 578.6666666666667
+  - 261
+  - 44
+  - 40
+  content:
+    text: '03'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#FFFFFF'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e19
+  elementType: text
+  bounds:
+  - 500.66666666666674
+  - 172
+  - 200
+  - 39
+  content:
+    text: 形成提醒
+    fontFamily: Reading Text SC
+    fontSize: 23
+    bold: true
+    color: '#164B3B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e20
+  elementType: text
+  bounds:
+  - 494.66666666666674
+  - 216
+  - 212
+  - 47
+  content:
+    text: 提示下一次需要关注的事
+    fontFamily: Reading Text SC
+    fontSize: 15.3
+    bold: false
+    color: '#52655E'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e21
+  elementType: line
+  bounds:
+  - 600.6666666666667
+  - 245
+  - 0.1
+  - 8
+  viewBox:
+  - 0.1
+  - 8
+  points: 0,0 0.1,8
+  border:
+    style: solid
+    width: 1
+    color: '#A8CBB1'
+- elementId: e22
+  elementType: shape
+  bounds:
+  - 818.0
+  - 258
+  - 48
+  - 48
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#164B3B'
+- elementId: e23
+  elementType: text
+  bounds:
+  - 820.0
+  - 261
+  - 44
+  - 40
+  content:
+    text: '04'
+    fontFamily: Barlow Condensed
+    fontSize: 24
+    bold: false
+    color: '#FFFFFF'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e24
+  elementType: text
+  bounds:
+  - 742.0
+  - 339
+  - 200
+  - 39
+  content:
+    text: 记录照料
+    fontFamily: Reading Text SC
+    fontSize: 23
+    bold: true
+    color: '#164B3B'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e25
+  elementType: text
+  bounds:
+  - 736.0
+  - 383
+  - 212
+  - 47
+  content:
+    text: 把这次操作留在记录中
+    fontFamily: Reading Text SC
+    fontSize: 15.3
+    bold: false
+    color: '#52655E'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e26
+  elementType: line
+  bounds:
+  - 842.0
+  - 319
+  - 0.1
+  - 14
+  viewBox:
+  - 0.1
+  - 14
+  points: 0,0 0.1,14
+  border:
+    style: solid
+    width: 1
+    color: '#A8CBB1'
+- elementId: e27
+  elementType: text
+  bounds:
+  - 48
+  - 447
+  - 864
+  - 31
+  content:
+    text: 流程示意，不包含实测数据
+    fontFamily: Reading Text SC
+    fontSize: 13.7
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true

@@ -1,0 +1,157 @@
+pageType: chapter
+background:
+  type: solid
+  color: '#FAFCF8'
+elements:
+- elementId: e1
+  elementType: shape
+  bounds:
+  - 0
+  - 0
+  - 960
+  - 540
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#164B3B'
+- elementId: e2
+  elementType: text
+  bounds:
+  - 42
+  - 492
+  - 790
+  - 27
+  content:
+    text: 07 / 童趣字体与深底留白
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#C8DFCF'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e3
+  elementType: text
+  bounds:
+  - 828
+  - 492
+  - 90
+  - 27
+  content:
+    text: 概念演示
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#C8DFCF'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e4
+  elementType: text
+  bounds:
+  - 682
+  - 32
+  - 236
+  - 198
+  content:
+    text: '03'
+    fontFamily: Barlow Condensed
+    fontSize: 160
+    bold: false
+    color: '#2D624E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e5
+  elementType: text
+  bounds:
+  - 63
+  - 48
+  - 588
+  - 38
+  content:
+    text: CARE EXPERIENCE
+    fontFamily: Barlow Condensed
+    fontSize: 17
+    bold: false
+    color: '#B9D8C2'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e6
+  elementType: text
+  bounds:
+  - 63
+  - 171
+  - 829
+  - 80
+  content:
+    text: 每一次照料
+    fontFamily: ZCOOL KuaiLe
+    fontSize: 53
+    bold: false
+    color: '#FFFFFF'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e7
+  elementType: text
+  bounds:
+  - 63
+  - 259
+  - 829
+  - 80
+  content:
+    text: 都值得被记住
+    fontFamily: ZCOOL KuaiLe
+    fontSize: 53
+    bold: false
+    color: '#FFB39E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e8
+  elementType: line
+  bounds:
+  - 66
+  - 371
+  - 267
+  - 0.1
+  viewBox:
+  - 267
+  - 0.1
+  points: 0,0 267,0.1
+  border:
+    style: solid
+    width: 1.3
+    color: '#7FAD8A'
+- elementId: e9
+  elementType: text
+  bounds:
+  - 66
+  - 391
+  - 816
+  - 45
+  content:
+    text: 用短句、留白与字体气质，完成章节转场。
+    fontFamily: Reading Text SC
+    fontSize: 19
+    bold: false
+    color: '#D1E4D6'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true

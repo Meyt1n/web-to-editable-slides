@@ -1,0 +1,355 @@
+pageType: content
+background:
+  type: solid
+  color: '#FAFCF8'
+elements:
+- elementId: e1
+  elementType: shape
+  bounds:
+  - 0
+  - 0
+  - 960
+  - 540
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#EFF5E9'
+- elementId: e2
+  elementType: text
+  bounds:
+  - 42
+  - 492
+  - 790
+  - 27
+  content:
+    text: 08 / 错位路线与后续设想
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e3
+  elementType: text
+  bounds:
+  - 828
+  - 492
+  - 90
+  - 27
+  content:
+    text: 概念演示
+    fontFamily: Reading Text SC
+    fontSize: 11.2
+    bold: false
+    color: '#52655E'
+    align:
+    - center
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e4
+  elementType: text
+  bounds:
+  - 43
+  - 59
+  - 259
+  - 116
+  content:
+    text: '接下来
+
+      让体验更完整'
+    fontFamily: ZCOOL XiaoWei
+    fontSize: 34
+    bold: false
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e5
+  elementType: text
+  bounds:
+  - 45
+  - 204
+  - 248
+  - 34
+  content:
+    text: 后续设想
+    fontFamily: Reading Text SC
+    fontSize: 16
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e6
+  elementType: image
+  bounds:
+  - 21
+  - 283
+  - 260
+  - 180
+  src: media/product-cutout.png
+  fit:
+    mode: contain
+- elementId: e7
+  elementType: line
+  bounds:
+  - 319
+  - 135
+  - 0.1
+  - 322
+  viewBox:
+  - 0.1
+  - 322
+  points: 0,0 0.1,322
+  border:
+    style: solid
+    width: 2
+    color: '#92B79B'
+- elementId: e8
+  elementType: shape
+  bounds:
+  - 312
+  - 148
+  - 14
+  - 14
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#8AB393'
+- elementId: e9
+  elementType: line
+  bounds:
+  - 329
+  - 155
+  - 13
+  - 0.1
+  viewBox:
+  - 13
+  - 0.1
+  points: 0,0 13,0.1
+  border:
+    style: solid
+    width: 1
+    color: '#92B79B'
+- elementId: e10
+  elementType: text
+  bounds:
+  - 354
+  - 127
+  - 65
+  - 67
+  content:
+    text: '01'
+    fontFamily: Barlow Condensed
+    fontSize: 49
+    bold: false
+    color: '#729B7C'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e11
+  elementType: text
+  bounds:
+  - 433
+  - 132
+  - 365
+  - 40
+  content:
+    text: 先建立记录
+    fontFamily: Reading Text SC
+    fontSize: 24
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e12
+  elementType: text
+  bounds:
+  - 434
+  - 178
+  - 356
+  - 33
+  content:
+    text: 让信息有清楚的查看入口。
+    fontFamily: Reading Text SC
+    fontSize: 15.6
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e13
+  elementType: shape
+  bounds:
+  - 312
+  - 264
+  - 14
+  - 14
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#FF816B'
+- elementId: e14
+  elementType: line
+  bounds:
+  - 329
+  - 271
+  - 63
+  - 0.1
+  viewBox:
+  - 63
+  - 0.1
+  points: 0,0 63,0.1
+  border:
+    style: solid
+    width: 1
+    color: '#92B79B'
+- elementId: e15
+  elementType: text
+  bounds:
+  - 404
+  - 243
+  - 65
+  - 67
+  content:
+    text: '02'
+    fontFamily: Barlow Condensed
+    fontSize: 49
+    bold: false
+    color: '#FF816B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e16
+  elementType: text
+  bounds:
+  - 483
+  - 248
+  - 365
+  - 40
+  content:
+    text: 再优化提醒
+    fontFamily: Reading Text SC
+    fontSize: 24
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e17
+  elementType: text
+  bounds:
+  - 484
+  - 294
+  - 356
+  - 33
+  content:
+    text: 探索更适合使用过程的提示。
+    fontFamily: Reading Text SC
+    fontSize: 15.6
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e18
+  elementType: shape
+  bounds:
+  - 312
+  - 380
+  - 14
+  - 14
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#8AB393'
+- elementId: e19
+  elementType: line
+  bounds:
+  - 329
+  - 387
+  - 113
+  - 0.1
+  viewBox:
+  - 113
+  - 0.1
+  points: 0,0 113,0.1
+  border:
+    style: solid
+    width: 1
+    color: '#92B79B'
+- elementId: e20
+  elementType: text
+  bounds:
+  - 454
+  - 359
+  - 65
+  - 67
+  content:
+    text: '03'
+    fontFamily: Barlow Condensed
+    fontSize: 49
+    bold: false
+    color: '#729B7C'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e21
+  elementType: text
+  bounds:
+  - 533
+  - 364
+  - 365
+  - 40
+  content:
+    text: 再完善体验
+    fontFamily: Reading Text SC
+    fontSize: 24
+    bold: true
+    color: '#164B3B'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
+- elementId: e22
+  elementType: text
+  bounds:
+  - 534
+  - 410
+  - 356
+  - 33
+  content:
+    text: 结合反馈继续调整交互细节。
+    fontFamily: Reading Text SC
+    fontSize: 15.6
+    bold: false
+    color: '#52655E'
+    align:
+    - left
+    - middle
+    lineHeight: 1.15
+    wrap: true
