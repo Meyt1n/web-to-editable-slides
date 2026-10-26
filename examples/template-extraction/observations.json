@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "id": "green-sprout-reference",
+  "version": "1.0.0",
+  "title": "从绿芽封面与流程参考图提取的模板",
+  "canvas": [960, 540],
+  "references": [
+    {
+      "id": "cover",
+      "file": "assets/reference-cover.png",
+      "role": "封面代表图",
+      "observation": "深绿手写感大标题、暖白窗边与浅木桌面、右侧产品主体、少量珊瑚橙强调，功能标签使用浅色圆角卡片。"
+    },
+    {
+      "id": "process",
+      "file": "assets/reference-process.png",
+      "role": "流程正文代表图",
+      "observation": "沿用暖白与浅绿，左侧产品、右侧四步竖向卡片，步骤大编号、清楚的短标题和少量连接箭头。"
+    }
+  ],
+  "palette": {
+    "primary": "#164B3B",
+    "accent": "#FF816B",
+    "body": "#52655E",
+    "pale": "#EDF7EF",
+    "paper": "#FCFFF8",
+    "card_border": "#D9EADB",
+    "chip_border": "#D4E8D8",
+    "soft_primary": "#77A580",
+    "icon_fill": "#DDEEDD",
+    "arrow": "#75A77C",
+    "white": "#FFFFFF"
+  },
+  "typography": {
+    "display": {"family": "ZCOOL KuaiLe", "size": 81, "bold": false},
+    "heading": {"family": "Reading Text SC", "size": 31, "bold": true},
+    "body": {"family": "Reading Text SC", "size": 16.4, "bold": false},
+    "label": {"family": "Reading Text SC", "size": 15, "bold": true},
+    "numeric": {"family": "Reading Text SC", "size": 38, "bold": true}
+  },
+  "grid": {"margins": [32, 40, 32, 40], "gap": 16, "corner_radius": 14},
+  "resources": {
+    "background": "assets/template-background.png",
+    "fonts": {
+      "Reading Text SC": {"file": "assets/demo-font.ttf", "license_file": "assets/font-OFL.txt"},
+      "ZCOOL KuaiLe": {"file": "assets/fonts/ZCOOLKuaiLe-Regular.ttf", "license_file": "assets/fonts/zcoolkuaile-OFL.txt"}
+    }
+  },
+  "components": {
+    "card": {"fill": "paper", "border": "card_border", "radius": 14},
+    "concept_tag": {"box": [793, 27, 133, 35], "text": [803, 29, 113, 30], "fill": "pale", "radius": 16},
+    "process_card": {
+      "number": [15, 15, 118, 60],
+      "icon": [41, 91, 66, 66],
+      "icon_text": [46, 106, 56, 34],
+      "title": [6, 178, 136, 40],
+      "detail": [9, 224, 130, 32],
+      "arrow": [148, 117, 12, 35]
+    },
+    "footer": {"box": [51, 492, 866, 26], "size": 11.5}
+  },
+  "layouts": {
+    "hero-split": {
+      "description": "由封面抽象出的左文右图骨架；页内主题图为可替换内容",
+      "slots": {
+        "panel": [35, 65, 433, 397], "hero": [448, 91, 480, 382],
+        "title": [57, 91, 369, 109], "subtitle": [61, 211, 380, 104],
+        "body": [62, 328, 373, 40],
+        "features": [[58, 397, 115, 44], [185, 397, 115, 44], [312, 397, 115, 44]]
+      }
+    },
+    "process-columns": {
+      "description": "由流程代表图抽象出的主体与四步流程卡片",
+      "slots": {
+        "heading": [37, 39, 713, 65], "hero": [12, 164, 259, 272],
+        "cards": [[285, 155, 148, 272], [443, 155, 148, 272], [601, 155, 148, 272], [759, 155, 148, 272]],
+        "conclusion": [280, 450, 630, 39], "note": [604, 501, 309, 24]
+      }
+    },
+    "statement-chapter": {
+      "description": "按相同字体、圆角、留白与图文关系派生的章节页，不声称来自一张未提供的参考图",
+      "slots": {
+        "panel": [36, 82, 478, 382], "number": [59, 100, 205, 105],
+        "title": [61, 220, 425, 107], "body": [62, 343, 421, 40],
+        "features": [[64, 408, 141, 30], [209, 408, 141, 30], [354, 408, 141, 30]],
+        "hero": [513, 111, 423, 349]
+      }
+    }
+  },
+  "adaptations": [
+    "参考图的精确字体不可确认，按观测气质选用ZCOOL KuaiLe作封面短标题、Reading Text SC作正文，属于可编辑近似。",
+    "颜色与布局是基于代表图整理的近似规范，不是自动或像素级提取结果。",
+    "半透明卡片近似为原生浅色填充与描边，以便编辑与跨软件导出。",
+    "背景复用已为同一虚构主题生成的无字素材；不把含字参考图作为背景。"
+  ],
+  "variation_rules": [
+    "保持配色、字体角色和图片处理稳定；可在相同网格下增加左右镜像或新的正文变体。",
+    "标题、编号、说明、流程和卡片使用原生对象，产品主体按页面内容独立替换。",
+    "正式页面绑定模板ID与版本；新增页型先扩展模板，必要偏离记录原因。"
+  ]
+}

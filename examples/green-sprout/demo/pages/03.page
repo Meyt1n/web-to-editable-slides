@@ -10,7 +10,7 @@ elements:
   - 0
   - 960
   - 540
-  src: media/template-background.png
+  src: media/background.png
   fit:
     mode: cover
 - elementId: e2
@@ -25,11 +25,11 @@ elements:
     type: solid
     color: '#EDF7EF'
   adjustments:
-  - 16000
+  - 45714
   border:
     style: solid
     width: 0.9
-    color: '#D2E8D8'
+    color: '#D9EADB'
 - elementId: e3
   elementType: text
   bounds:
@@ -60,7 +60,11 @@ elements:
     type: solid
     color: '#FCFFF8'
   adjustments:
-  - 16000
+  - 3665
+  border:
+    style: solid
+    width: 0.9
+    color: '#D9EADB'
 - elementId: e5
   elementType: text
   bounds:
@@ -185,13 +189,13 @@ elements:
   elementType: text
   bounds:
   - 51
-  - 491
+  - 492
   - 866
   - 26
   content:
     text: 可复用章节页示例
     fontFamily: Reading Text SC
-    fontSize: 12
+    fontSize: 11.5
     bold: false
     color: '#52655E'
     align:

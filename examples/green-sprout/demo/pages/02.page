@@ -10,7 +10,7 @@ elements:
   - 0
   - 960
   - 540
-  src: media/template-background.png
+  src: media/background.png
   fit:
     mode: cover
 - elementId: e2
@@ -25,11 +25,11 @@ elements:
     type: solid
     color: '#EDF7EF'
   adjustments:
-  - 16000
+  - 45714
   border:
     style: solid
     width: 0.9
-    color: '#D2E8D8'
+    color: '#D9EADB'
 - elementId: e3
   elementType: text
   bounds:
@@ -88,7 +88,7 @@ elements:
     type: solid
     color: '#FCFFF8'
   adjustments:
-  - 16000
+  - 9459
   border:
     style: solid
     width: 0.9
@@ -206,7 +206,7 @@ elements:
     type: solid
     color: '#FCFFF8'
   adjustments:
-  - 16000
+  - 9459
   border:
     style: solid
     width: 0.9
@@ -324,7 +324,7 @@ elements:
     type: solid
     color: '#FCFFF8'
   adjustments:
-  - 16000
+  - 9459
   border:
     style: solid
     width: 0.9
@@ -442,7 +442,7 @@ elements:
     type: solid
     color: '#FCFFF8'
   adjustments:
-  - 16000
+  - 9459
   border:
     style: solid
     width: 0.9

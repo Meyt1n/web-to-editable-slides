@@ -1,0 +1,16 @@
+{
+  "errors": [],
+  "suggestions": [],
+  "summary": {
+    "mode": "fidelity",
+    "pages": 3,
+    "declared_layouts": 3,
+    "distinct_layouts": 3,
+    "template": {
+      "id": "green-sprout-reference",
+      "version": "1.0.0"
+    }
+  },
+  "scope": "Declared plan only; does not inspect actual typography, layout or images",
+  "ok": true
+}

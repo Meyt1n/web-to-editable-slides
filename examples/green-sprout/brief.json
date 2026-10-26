@@ -7,7 +7,18 @@
     "description": "暖白窗边、清新浅绿、珊瑚橙点缀、圆角卡片、柔和产品视觉"
   },
   "imagegen_allowed": true,
-  "asset_priority": ["有授权的实物照片", "真实界面", "基于实物优化", "概念配图"],
+  "design": {
+    "mode": "fidelity",
+    "template": {
+      "id": "green-sprout-reference",
+      "version": "1.0.0",
+      "file": "../template-extraction/template/template.json"
+    },
+    "font_profiles": {
+      "from-template": {"heading": "Reading Text SC", "body": "Reading Text SC", "display": "ZCOOL KuaiLe"}
+    }
+  },
+  "asset_priority": ["查找有授权的本地图片", "展示图按需基于本地图用imagegen优化", "参考图片局部复刻", "缺图时新生成概念配图；成果证据保留原图"],
   "conversations": [
     {"role": "公开示例的大纲与提示词", "location": "examples/green-sprout/prompts.md", "visibility": "public-synthetic"}
   ],
@@ -15,7 +26,13 @@
     {
       "id": 1,
       "title": "绿芽：桌面植物养护提醒系统",
+      "layout": "hero-split",
+      "font_profile": "from-template",
       "reference": "assets/reference-cover.png",
+      "reference_prompt": "examples/green-sprout/prompts.md 的封面参考段；这是等价复现提示词，不是原始调用日志",
+      "layout_constraints": ["左侧标题和说明，右侧独立植物与手机主体", "左下保留三项功能；右上保留概念演示标记"],
+      "typography_constraints": ["深绿亲和短标题，正文用清晰黑体；具体字体为有许可的近似", "保留标题、副标题、说明三个层级，不把长句等比例放大"],
+      "image_plan": ["复用公开本地概念图 assets/product-cutout.png；该图曾以参考封面为imagegen输入生成", "背景复用同主题无字图；不重复生图，不把展示图写成实拍成果"],
       "key_points": ["看见植物状态，记住每一次照料", "状态查看、养护提醒、记录管理"],
       "assets": ["assets/template-background.png", "assets/product-cutout.png"],
       "status": "concept",
@@ -24,7 +41,13 @@
     {
       "id": 2,
       "title": "从植物状态到养护提醒",
+      "layout": "process-columns",
+      "font_profile": "from-template",
       "reference": "assets/reference-process.png",
+      "reference_prompt": "examples/green-sprout/prompts.md 的流程参考段；等价复现提示词",
+      "layout_constraints": ["左侧主体，右侧四张竖向卡片并列", "保留01到04和从左到右的阅读顺序，结论放底部"],
+      "typography_constraints": ["深绿标题、浅绿编号、珊瑚橙局部强调；正文层级清楚"],
+      "image_plan": ["复用与封面相同的本地独立主体和无字背景；卡片、文字、箭头原生制作"],
       "key_points": ["采集状态 → 整理信息 → 形成提醒 → 记录照料", "流程为示意，不提供虚构实测指标"],
       "assets": ["assets/template-background.png", "assets/product-cutout.png"],
       "status": "concept",
@@ -33,6 +56,8 @@
     {
       "id": 3,
       "title": "养护服务与交互设计",
+      "layout": "statement-chapter",
+      "font_profile": "from-template",
       "reference": "沿用前两页共性新增章节页",
       "key_points": ["查看状态", "收到提醒", "记录照料"],
       "assets": ["assets/template-background.png", "assets/product-cutout.png"],

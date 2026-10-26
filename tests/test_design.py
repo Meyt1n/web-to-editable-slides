@@ -15,7 +15,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from build_gallery import build, PROFILES, FONT, SERIF, PLAY, NUMERIC
 from check_pptx import inspect, NS
-from make_handoff import render
+from make_handoff import render, validate
 from review_design_plan import review
 
 
@@ -51,6 +51,25 @@ class DesignPlanTests(unittest.TestCase):
         text=render(brief)
         for expected in [SERIF,'hero-split','editorial','Product','enhance']:
             self.assertIn(expected,text)
+
+    def test_per_page_reference_prompt_and_constraints_survive_handoff(self):
+        brief={'project':'Test','slides':[{'id':1,'title':'Process',
+               'reference':'references/02.png','reference_prompt':'prompts.md: Process; equivalent reconstruction',
+               'layout_constraints':['Left subject, four columns on right','Preserve left-to-right arrows'],
+               'typography_constraints':['Heavy green heading, two text levels'],
+               'image_plan':['media/plant.png -> imagegen background cleanup; preserve sensor shape']}]}
+        result=render(brief)
+        for field in ['reference_prompt','layout_constraints','typography_constraints','image_plan']:
+            values=brief['slides'][0][field]
+            for value in values if isinstance(values,list) else [values]:
+                self.assertIn(value,result)
+        self.assertLess(result.index('references/02.png'),result.index('Left subject'))
+
+    def test_reference_constraints_reject_ambiguous_field_types(self):
+        for field,value in [('reference_prompt',{}),('layout_constraints','three columns'),
+                            ('typography_constraints',[23]),('image_plan',{'image':'unknown'})]:
+            brief={'project':'Test','slides':[{'id':1,'title':'A',field:value}]}
+            with self.assertRaises(ValueError):validate(brief)
 
 
 class GalleryTests(unittest.TestCase):

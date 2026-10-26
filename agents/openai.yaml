@@ -1,4 +1,4 @@
 interface:
   display_name: "参考图转可编辑PPT"
-  short_description: "参考图重建可编辑PPT，支持字体搭配、丰富版式、实物素材与imagegen"
-  default_prompt: "使用 $web-to-editable-slides，结合参考图与关联对话重建可编辑PPT，在已确认风格内规划字体角色和多样版式，按需使用imagegen优化素材。"
+  short_description: "结合参考图与提示词提取模板、保留逐页排版字体，优先用本地图和imagegen优化素材"
+  default_prompt: "使用 $web-to-editable-slides，结合参考图与原提示词提取模板，保留各页排版和字体关系，优先用本地图作为imagegen优化输入，逐页对照渲染后交付可编辑PPT。"

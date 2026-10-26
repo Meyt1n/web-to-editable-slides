@@ -10,6 +10,7 @@
 | `../../assets/product-cutout.png` | 基于同一虚构主题新生成的透明产品素材 |
 | `brief.json`、`handoff.md` | 页码、风格、素材和事实状态的交接 |
 | `prompts.md` | 可复制的等价生成提示词 |
+| `../template-extraction/template/` | 从参考图提取的字体、配色、组件和页型模板 |
 | `demo/` | 3页PPTX、PPTD、pages与media完整工程 |
 | `preview.jpg` | 实际PPTX渲染后的总览 |
 | `verification.json` | 发布前PPTX结构检查 |
@@ -21,10 +22,13 @@
 ```bash
 python -m pip install -r requirements.txt
 python scripts/make_handoff.py examples/green-sprout/brief.json --output output/handoff.md
-python scripts/build_demo.py --output-dir output/green-sprout
+python scripts/build_demo.py --template examples/template-extraction/template/template.json --output-dir output/green-sprout
+python scripts/review_design_plan.py output/green-sprout/design-plan.json --require-template
 python scripts/check_pptx.py output/green-sprout/green-sprout.pptx --require-fade
 ```
 
-源码构建版本不嵌字体：可以安装`assets/demo-font.ttf`，或选择本机支持中文的替代字体并重新渲染；不安装也可查看PPTD的内置字体预览。Windows上另可用`embed_fonts_windows.ps1`请求PowerPoint嵌字，结果仍须检查。
+源码构建版本不嵌字体：可安装`assets/demo-font.ttf`与`assets/fonts/ZCOOLKuaiLe-Regular.ttf`，或在模板里选择许可合适且支持中文的本机字体并重新渲染；不安装也可查看PPTD的内置字体预览。Windows上另可用`embed_fonts_windows.ps1`请求PowerPoint嵌字，结果仍须检查。
+
+当前生成器先读取提取后的模板包，再从布局槽位、字体角色、颜色和组件参数制作三页；项目中保留模板快照和`design-plan.json`。不传`--template`时默认使用仓库内同一套模板。它仍是固定内容的示例，不自动理解任意参考图或任意模板。
 
 仓库交付版的实际检查结果见`verification.json`和`validation.md`。它不是已经实现的植物硬件或APP，更不是性能、养护效果或用户试验的证明。

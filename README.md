@@ -6,6 +6,8 @@
 
 现在也支持在原风格内优化字体搭配、表达方式与页面节奏：先按内容选结构，再做同一套设计语言中的变化。
 
+已有逐页参考时默认保留原页排版：结合对应提示词还原标题、图文比例、分栏、流程与字体层级。展示图片先查本地素材，需要时交给imagegen优化；本地缺图时，再复刻参考页里的授权图片局部。
+
 ![绿芽：完全虚构的示例主题](assets/reference-cover.png)
 
 ## 这套流程解决什么
@@ -23,13 +25,46 @@ flowchart LR
     C --> D[确认风格与逐页提示词]
     D --> E[网页版逐页生成参考图]
     E --> F[按顺序上传图片与关联对话]
-    F --> G[模型提取设计系统]
-    G --> H[实物优先 · imagegen补充素材]
-    H --> I[原生对象重建PPT]
-    I --> J[预览 · 实开 · 字体与结构检查]
+    F --> G[从提示图提取模板参数与组件]
+    G --> H[落成模板包与无字母版]
+    H --> I[先做代表页并对照检查]
+    I --> J[按同一模板逐页设计]
+    J --> K[预览 · 实开 · 模板与结构检查]
 ```
 
 已有大纲或参考图时从对应步骤开始。模型可以是你使用的6.1 Sol，也可以是具备看图、写文件和相关工具能力的其他模型；仓库不把某个型号设为硬性依赖。
+
+## 先提取模板，再制作页面
+
+新增正式的模板提取环节：从代表提示图中归纳配色、字体角色、网格和组件，整理成带ID与版本的模板包，先验证一张代表页，再让后续页面从同一模板派生。
+
+模板包含参数、页型骨架、原生组件、必要背景与来源记录；它不只是一张底图。后续可改变图文比例与布局，同时沿用共同规则。
+
+- [模板提取步骤](references/template-extraction.md)
+- [从两张参考图到模板包的完整示例](examples/template-extraction/README.md)
+- [实际模板规范](examples/template-extraction/template/TEMPLATE.md)
+- [实际模板JSON](examples/template-extraction/template/template.json)
+
+```text
+使用 $web-to-editable-slides，先从这些提示图里提取一套模板。
+把字体、配色、网格、组件和页型落成模板包，先检查一个代表页。
+后面的页面按这套模板设计，不逐页重新猜风格；需要变化时使用模板变体。
+```
+
+## 保留每页排版，结合原提示词还原
+
+模板统一共性，每页仍保留自己的骨架。重建前将参考图与该页提示词配对；重建后将实际渲染与参考图并排检查，核对标题位置、图文占比、列数、卡片数量、阅读顺序、字重、断行和留白。需要重新编排时，以用户明确允许的范围为准。
+
+- [完整版首轮任务书与逐页提示词](references/prompts.md#1-最开始发给网页版的完整任务书)：从作品事实、附件、汇报目标到字体和排版要求。
+- [参考图还原与图片处理](references/reference-fidelity.md)：本地图优化、参考图片局部复刻、精确UI与实拍证据的使用。
+- [交接表新增字段](references/design-plan.md#逐页参考排版与图片计划)：记录该页提示词、布局约束、字体约束和图片处理计划。
+
+```text
+保留每页参考图的排版，并结合原提示词的字体和布局要求重建。
+先找本地图，合适的直接用，需要改善时作为imagegen输入优化。
+本地缺图时，对参考页中的授权照片或插画局部用imagegen复刻成独立素材。
+每页导图后与原页并排核对，再给我可编辑文件。
+```
 
 ## 使用
 
@@ -95,8 +130,11 @@ git clone https://github.com/Meyt1n/web-to-editable-slides.git ~/.codex/skills/w
 ```bash
 python -m pip install -r requirements.txt
 python scripts/inventory_images.py assets --output-dir output/inventory
+python scripts/template_pack.py prepare examples/template-extraction/observations.json --source-dir . --output-dir output/template
+python scripts/template_pack.py check output/template/template.json
 python scripts/make_handoff.py examples/green-sprout/brief.json --output output/handoff.md
-python scripts/build_demo.py --output-dir output/green-sprout
+python scripts/build_demo.py --template output/template/template.json --output-dir output/green-sprout
+python scripts/review_design_plan.py output/green-sprout/design-plan.json --require-template
 python scripts/check_pptx.py output/green-sprout/green-sprout.pptx --require-fade --output output/pptx-report.json
 python scripts/build_gallery.py --output-dir output/design-gallery
 python scripts/review_design_plan.py output/design-gallery/design-plan.json --output output/design-review.json
@@ -116,10 +154,13 @@ python -m unittest discover -s tests -v
 | `references/verification.md` | 原生可编辑性、字体、切换和实开检查 |
 | `references/design-system.md`、`layout-library.md` | 字体角色、视觉变化与按内容选版式 |
 | `references/design-plan.md` | 设计计划字段和建议式检查 |
+| `references/template-extraction.md` | 提示图分析、模板包、代表页核对与后续模板复用 |
+| `references/reference-fidelity.md` | 逐页图与提示词配对、保留排版字体、本地图优先与imagegen局部复刻 |
 | `scripts/` | 图片清点、交接表、示例构建与PPTX检查脚本 |
 | `assets/` | 全新生成的植物主题参考图、无字母版、主体图和OFL字体 |
 | `examples/green-sprout/` | 一套不含私人素材的输入、提示词与实际输出 |
 | `examples/design-gallery/` | 8种原生布局、三组字体方案及可复现工程 |
+| `examples/template-extraction/` | 来源观测、可读取模板与按模板生成的例子 |
 
 ## imagegen与其他依赖
 

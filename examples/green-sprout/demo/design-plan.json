@@ -1,0 +1,50 @@
+{
+  "project": "绿芽｜根据参考图模板制作的示例",
+  "style": {
+    "colors": [
+      "#164B3B",
+      "#FF816B",
+      "#EDF7EF"
+    ]
+  },
+  "design": {
+    "mode": "fidelity",
+    "template": {
+      "id": "green-sprout-reference",
+      "version": "1.0.0",
+      "file": "template/template.json"
+    },
+    "font_profiles": {
+      "from-template": {
+        "display": "ZCOOL KuaiLe",
+        "heading": "Reading Text SC",
+        "body": "Reading Text SC",
+        "label": "Reading Text SC",
+        "numeric": "Reading Text SC"
+      }
+    }
+  },
+  "slides": [
+    {
+      "id": 1,
+      "title": "作品概述",
+      "layout": "hero-split",
+      "font_profile": "from-template",
+      "status": "concept"
+    },
+    {
+      "id": 2,
+      "title": "四步流程",
+      "layout": "process-columns",
+      "font_profile": "from-template",
+      "status": "concept"
+    },
+    {
+      "id": 3,
+      "title": "章节页",
+      "layout": "statement-chapter",
+      "font_profile": "from-template",
+      "status": "concept"
+    }
+  ]
+}
