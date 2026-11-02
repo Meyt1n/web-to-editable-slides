@@ -5,6 +5,9 @@ from pathlib import Path
 import sys
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
+from types import SimpleNamespace
+import subprocess
 from zipfile import ZipFile
 
 from PIL import Image
@@ -38,6 +41,18 @@ class AutomationTests(unittest.TestCase):
         result=diagnose(sys.executable)
         self.assertTrue(result['ready']);self.assertEqual(result['selected']['missing'],[])
         self.assertGreaterEqual(result['selected']['version'],[3,10])
+
+    def test_codex_runtime_probe_failure_falls_back_to_active_workspace_venv(self):
+        with TemporaryDirectory() as tmp:
+            workspace=Path(tmp);venv=workspace/'.venv/Scripts/python.exe';venv.parent.mkdir(parents=True);venv.write_text('test fixture')
+            bundled=workspace/'codex-python.exe';bundled.write_text('test fixture')
+            def probe(args,**kwargs):
+                executable=Path(args[0])
+                if executable==bundled:raise subprocess.TimeoutExpired(args,20)
+                return SimpleNamespace(returncode=0,stdout=json.dumps(dict(executable=str(executable),version=[3,12,0],missing=[])))
+            with patch('doctor.subprocess.run',side_effect=probe):result=diagnose(bundled,workspace)
+            self.assertTrue(result['ready']);self.assertEqual(Path(result['selected']['executable']),venv)
+            self.assertEqual(result['candidates'][0]['reason'],'probe_timeout')
 
     def test_packaged_project_resumes_after_text_eol_normalization(self):
         import shutil

@@ -14,7 +14,7 @@
   "imagegen_allowed": true,
   "asset_priority": ["真实照片", "真实界面", "基于实物优化", "概念配图"],
   "conversations": [
-    {"role": "大纲", "location": "本地导出的文字或宿主可访问的关联对话", "visibility": "private"}
+    {"role": "大纲", "location": "本地导出的文字或Codex可访问的关联对话", "visibility": "private"}
   ],
   "slides": [
     {

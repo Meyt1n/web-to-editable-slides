@@ -1,12 +1,12 @@
 # Web to Editable Slides
 
-**说清主题，由智能体自己设计提示词、调用imagegen、看参考图，再生成可编辑PPT。**
+**在Codex里说清主题，由Codex自己设计提示词、调用内置imagegen、看参考图，再生成可编辑PPT。**
 
-这是一个中文优先的开源Skill。默认在有视觉理解与内置imagegen的宿主内执行完整制作流程：必要时集中询问需求，自己规划、逐页生图、看图提取模板、原生重建、导图修复并交付。使用者不必先去网页版生图或手动整理模板。
+这是一个面向Codex、中文优先的开源Skill，默认在Codex本地桌面应用中使用。当前Codex直接负责视觉理解、按需提问、规划、逐页生图、模板提取、原生重建和导图验收；使用者给出主题与资料即可，不必先去网页版生图、另选视觉模型或准备API Key。
 
-仓库自带通用`native_renderer.py`，从模型整理的场景直接生成PPTX与自包含PPTD，支持文字、形状、自由曲线、图片、简单原生表格和柱形/折线/散点图，不要求额外PPTD/WASM后端。`auto_deck.py`保存提示词、生图尝试、依赖哈希和验收记录，支持中断续跑。**图像理解与imagegen调用由宿主智能体执行；仅运行一个本地脚本仍不是任意图片的一键识别转换引擎。**
+仓库自带通用`native_renderer.py`，从Codex整理的场景直接生成PPTX与自包含PPTD，支持文字、形状、自由曲线、图片、简单原生表格和柱形/折线/散点图，不要求额外PPTD/WASM后端。`auto_deck.py`保存提示词、生图尝试、依赖哈希和验收记录，支持中断续跑。Codex读取任务的下一步动作并继续执行，脚本不单独调用模型或图像API。
 
-[自动执行说明](references/automation.md) · [原生后端能力与边界](references/native-scene.md) · [完整自动试跑](examples/auto-workshop/README.md)
+[Codex执行约定](references/codex.md) · [自动执行说明](references/automation.md) · [原生后端能力与边界](references/native-scene.md) · [完整自动试跑](examples/auto-workshop/README.md)
 
 现在也支持在原风格内优化字体搭配、表达方式与页面节奏：先按内容选结构，再做同一套设计语言中的变化。
 
@@ -18,7 +18,7 @@
 
 ## 这套流程解决什么
 
-逐页参考图能快速确定视觉方向，但整页PNG放入PowerPoint后，标题、正文、卡片和流程仍然无法分别编辑。本技能让同一个智能体完成生图与重建：生成图作为它自己的设计依据，以原生文字、形状、流程、表格和独立图片构建幻灯片。
+逐页参考图能快速确定视觉方向，但整页PNG放入PowerPoint后，标题、正文、卡片和流程仍然无法分别编辑。本技能让当前Codex完成生图与重建：生成图作为它自己的设计依据，以原生文字、形状、流程、表格和独立图片构建幻灯片。
 
 它不声称一键无损转换，也不保证像素级复刻。图片中的复杂插画保留为素材，内容与布局则尽量重建为可编辑对象。
 
@@ -27,9 +27,9 @@
 ```mermaid
 flowchart LR
     A[主题与资料] --> B[按需询问 · 自主规划]
-    B --> C[模型编写逐页提示词]
-    C --> D[模型调用imagegen]
-    D --> E[模型自己看图与纠偏]
+    B --> C[Codex编写逐页提示词]
+    C --> D[Codex调用内置imagegen]
+    D --> E[Codex自己看图与纠偏]
     E --> F[提取模板 · 分离独立素材]
     F --> G[通用场景 · 仓库原生导出]
     G --> H[实际导图 · 对照修复]
@@ -38,7 +38,7 @@ flowchart LR
     H -->|需要修复| G
 ```
 
-已有大纲或参考图时从对应步骤开始。宿主需要提供视觉理解、文件操作和所选图像工具；仓库不绑定某个模型。复杂插画内部仍可能是位图，输出明确列出这些边界；不宣传所有笔画完全可编辑或所有播放器无差异。
+已有大纲或参考图时从对应步骤开始。设计与读图使用当前Codex模型，生图使用当前会话内置imagegen，不要求用户另配模型服务。复杂插画内部仍可能是位图，输出明确列出这些边界；不宣传所有笔画完全可编辑或所有播放器无差异。
 
 ## 先提取模板，再制作页面
 
@@ -74,7 +74,7 @@ flowchart LR
 
 ## 使用
 
-把仓库作为一个技能目录安装。可在支持的Codex环境调用已有安装器：
+在Codex中调用已有安装器，将仓库根目录作为Skill安装：
 
 ```text
 $skill-installer 从 https://github.com/Meyt1n/web-to-editable-slides 安装这个技能，技能位于仓库根目录。
@@ -83,10 +83,10 @@ $skill-installer 从 https://github.com/Meyt1n/web-to-editable-slides 安装这�
 或手动克隆到用户技能目录（不要覆盖已有目录）：
 
 ```bash
-git clone https://github.com/Meyt1n/web-to-editable-slides.git ~/.codex/skills/web-to-editable-slides
+git clone https://github.com/Meyt1n/web-to-editable-slides.git ~/.agents/skills/web-to-editable-slides
 ```
 
-若宿主使用其他技能搜索目录，把该文件夹放到对应位置即可。技能由 `SKILL.md` 描述；安装与发现规则以 [OpenAI官方技能文档](https://learn.chatgpt.com/docs/build-skills) 和你的宿主为准。
+已有安装保留原位置，避免建立同名副本；Codex的本地技能目录与发现规则见[OpenAI官方Skills文档](https://learn.chatgpt.com/docs/build-skills)。Skill读取脚本和素材，实际任务、`.venv`及`output/`放在当前Codex工作区。
 
 默认只需描述主题，例如：
 
@@ -165,23 +165,25 @@ python -m unittest discover -s tests -v
 | `SKILL.md` | 给模型加载的核心工作流 |
 | `references/prompts.md` | 资料、大纲、风格、逐页生图、移交和修订提示词 |
 | `references/handoff-schema.md` | 页码、素材和事实状态的交接规范 |
+| `references/codex.md`、`automation.md` | Codex内置工具、运行时、工作区与自动执行约定 |
 | `references/tools.md` | 关联对话、imagegen、素材检索、导出和验证能力说明 |
 | `references/verification.md` | 原生可编辑性、字体、切换和实开检查 |
 | `references/design-system.md`、`layout-library.md` | 字体角色、视觉变化与按内容选版式 |
 | `references/design-plan.md` | 设计计划字段和建议式检查 |
 | `references/template-extraction.md` | 提示图分析、模板包、代表页核对与后续模板复用 |
 | `references/reference-fidelity.md` | 逐页图与提示词配对、保留排版字体、本地图优先与imagegen局部复刻 |
-| `scripts/` | 图片清点、交接表、示例构建与PPTX检查脚本 |
-| `assets/` | 全新生成的植物主题参考图、无字母版、主体图和OFL字体 |
+| `scripts/` | Codex环境预检、自动任务、通用原生导出、图片清点与PPTX检查 |
+| `assets/` | 原创参考图、分层背景、独立配图与OFL字体库 |
 | `examples/green-sprout/` | 一套不含私人素材的输入、提示词与实际输出 |
 | `examples/design-gallery/` | 8种原生布局、三组字体方案及可复现工程 |
 | `examples/template-extraction/` | 来源观测、可读取模板与按模板生成的例子 |
+| `examples/auto-workshop/` | Codex自动设计、生图、纠偏、重建、验收及离线重放的实测 |
 
-## imagegen与其他依赖
+## Codex内置工具与本地依赖
 
-本技能不会开通imagegen，也不会自动获取付费API权限。使用宿主已提供的图像工具和已安装技能。内置工具可用时无需为了本仓库另写API调用；缺少工具时仍可生成大纲、提示词与PPT布局，并说明未生成的素材。
+默认由当前Codex模型看图并调用内置imagegen，按当前工具文档执行，不另建图像API服务或索取API Key。实际工具错误按当前Codex会话定位，保留已完成进度继续恢复。
 
-完整版生产曾用到PPTD、本地WASM导出、浏览器预览、PowerPoint COM、字体子集、图片清点与OOXML检查。本仓库**没有复制这些第三方技能或其运行时**，工具映射及可替代做法写在 [工具说明](references/tools.md)。
+桌面版先取得Codex提供的运行时，再由doctor选择依赖完整的解释器。Python依赖与任务放在用户活跃工作区；默认原生导出使用本仓库代码，PowerPoint等本机播放器用于实际导图验收。历史PPTD/WASM后端保留为可选实现，工具分工见[工具说明](references/tools.md)。
 
 ## 开源范围
 

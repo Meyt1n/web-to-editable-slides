@@ -1,8 +1,8 @@
 # 仓库自带原生后端
 
-`native_renderer.py`使用requirements中的python-pptx、FontTools和Pillow，把模型看图后写出的通用场景导出为PPTX与自包含PPTD。无需外部WASM导出器、浏览器编辑器或Node。输入不是任意图片的自动OCR结果；视觉分析和设计由运行Skill的智能体完成。
+`native_renderer.py`使用requirements中的python-pptx、FontTools和Pillow，把当前Codex看图后写出的通用场景导出为PPTX与自包含PPTD。无需外部WASM导出器、浏览器编辑器或Node。输入不是任意图片的自动OCR结果；视觉分析和设计由当前Codex模型直接完成。
 
-先用`python scripts/doctor.py`选择Python 3.10+且依赖完整的解释器，后续始终使用返回的路径；不要混用系统Python与已有虚拟环境。
+按[Codex执行约定](codex.md)取得运行时并用`doctor.py --workspace <活跃工作区> --python <Codex返回的Python>`选择Python 3.10+且依赖完整的解释器，后续使用该路径与Skill脚本绝对路径；不要混用系统Python与已有虚拟环境。产物写入工作区，不写入Skill安装目录。
 
 ```powershell
 python scripts/native_renderer.py task/scene.json --output-dir output/deck-01
