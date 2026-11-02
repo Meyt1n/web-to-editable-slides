@@ -1,0 +1,45 @@
+{
+  "tool": "built-in image_gen",
+  "reference_calls": [
+    {
+      "slide": 1,
+      "prompt": "../prompts.json: slides[0].prompt",
+      "file": "references/01-cover.png",
+      "style_reference": null,
+      "sha256": "dda113e46cf8101c68495229b97784f97f0a789e50e381fd203c5c38376ed217"
+    },
+    {
+      "slide": 2,
+      "prompt": "../prompts.json: slides[1].prompt",
+      "file": "references/02-zones.png",
+      "style_reference": "references/01-cover.png",
+      "sha256": "9e6362233ec36a82bab908b17cda06d39edc7d507ada26ec79b7acf0e3c21166"
+    },
+    {
+      "slide": 3,
+      "prompt": "../prompts.json: slides[2].prompt",
+      "file": "references/03-journey.png",
+      "style_reference": "references/01-cover.png",
+      "sha256": "b65f9451e4f11f3b9f3ed6779239f04ef3ea6369bcdb7c0c1224cdfd0eb3769e"
+    },
+    {
+      "slide": 4,
+      "prompt": "../prompts.json: slides[3].prompt",
+      "file": "references/04-program.png",
+      "style_reference": "references/01-cover.png",
+      "sha256": "a80e5f18663cf6b7c3edf124e4ac9c4d34fd4f4137c9f965b56de5302c7829dd"
+    },
+    {
+      "slide": 5,
+      "prompt": "../prompts.json: slides[4].prompt",
+      "file": "references/05-pilot.png",
+      "style_reference": "references/01-cover.png",
+      "sha256": "d8ccf82fc931dc0753a405d7ff0460484e826b2ca4fb03b97373f0a64734e314"
+    }
+  ],
+  "asset": {
+    "prompt": "../asset-prompt.txt",
+    "file": "media/reading-room.png",
+    "role": "recreated standalone concept photo"
+  }
+}

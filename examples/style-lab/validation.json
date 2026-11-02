@@ -1,0 +1,118 @@
+{
+  "example": "字体、背景与讲解节奏",
+  "date": "2026-11-02",
+  "reference_use": "方法学习；用户原PPT的图片、原文与拆包输出未收入示例",
+  "source_build": "python examples/style-lab/build.py --output-dir output/my-style-lab",
+  "slides": 5,
+  "font_families": [
+    "ZCOOL KuaiLe",
+    "Barlow Condensed",
+    "Long Cang",
+    "Ma Shan Zheng",
+    "Noto Sans SC",
+    "ZCOOL XiaoWei"
+  ],
+  "render": {
+    "renderer": "Microsoft PowerPoint",
+    "version": "16.0",
+    "size": [
+      1600,
+      900
+    ],
+    "supplied_font_files": 6,
+    "overflow_candidates": 0
+  },
+  "structure": {
+    "errors": [],
+    "root_fades": 5,
+    "missing_animation_targets": 0,
+    "slide_animations": [
+      {
+        "present": true,
+        "effects": {
+          "wipe(down)": 1
+        },
+        "triggers": {
+          "afterEffect": 1
+        },
+        "duration_ms": [
+          1100
+        ],
+        "missing_targets": []
+      },
+      {
+        "present": true,
+        "effects": {
+          "fade": 9,
+          "wipe(right)": 4
+        },
+        "triggers": {
+          "afterEffect": 1,
+          "clickEffect": 4,
+          "withEffect": 8
+        },
+        "duration_ms": [
+          500,
+          600
+        ],
+        "missing_targets": []
+      },
+      {
+        "present": false,
+        "effects": {},
+        "triggers": {},
+        "duration_ms": [],
+        "missing_targets": []
+      },
+      {
+        "present": true,
+        "effects": {
+          "wipe(right)": 2,
+          "fade": 2
+        },
+        "triggers": {
+          "clickEffect": 2,
+          "withEffect": 2
+        },
+        "duration_ms": [
+          500,
+          600
+        ],
+        "missing_targets": []
+      },
+      {
+        "present": false,
+        "effects": {},
+        "triggers": {},
+        "duration_ms": [],
+        "missing_targets": []
+      }
+    ]
+  },
+  "visual_review": "五页最终PowerPoint导图已看图检查；深绿正文页降低氛围密度，浅纸背景保持正文可读，字体角色与留白符合小样目标",
+  "video_review": "PowerPoint 720p/12fps MP4已导出并抽帧检查，封面擦入、第二页四组知识点与第四页问答两次揭示有效；非现场点击停顿验证",
+  "font_binary_limit": [
+    "Embedded font binary is unverified: ppt/fonts/font1.fntdata; EOT compressed payload cannot be verified by this checker",
+    "Embedded font binary is unverified: ppt/fonts/font2.fntdata; EOT compressed payload cannot be verified by this checker",
+    "Embedded font binary is unverified: ppt/fonts/font3.fntdata; EOT compressed payload cannot be verified by this checker",
+    "Embedded font binary is unverified: ppt/fonts/font4.fntdata; EOT compressed payload cannot be verified by this checker",
+    "Embedded font binary is unverified: ppt/fonts/font5.fntdata; EOT compressed payload cannot be verified by this checker",
+    "Embedded font binary is unverified: ppt/fonts/font6.fntdata; EOT compressed payload cannot be verified by this checker"
+  ],
+  "automated_tests": {
+    "passed": 62,
+    "command": "python -X utf8 -m unittest discover -s tests -v"
+  },
+  "compatibility_scope": "本机Microsoft PowerPoint实开与播放预览；不保证其他机器与播放器字形一致",
+  "independent_forward_test": {
+    "scenario": "浅色宣纸古诗讲解，书法标题、正文可编辑，题目与答案分次出现",
+    "result": "字体准备通过；浅纸风格保留；两次点击组与目标匹配；未导出播放",
+    "status": "no_unresolved_skill_blocker"
+  },
+  "background_catalog": "../../assets/backgrounds/catalog.json",
+  "background_assets": [
+    "ink-atmosphere",
+    "ink-content",
+    "warm-paper"
+  ]
+}

@@ -30,34 +30,48 @@ def validate_template(data:dict,root:Path|None=None)->dict:
     if not isinstance(canvas,list) or len(canvas)!=2 or any(type(n) not in [int,float] or not math.isfinite(n) or n<=0 for n in canvas):
         raise ValueError('Template canvas must contain two positive dimensions')
     palette=data.get('palette',{})
-    if not palette or any(not isinstance(c,str) or not re.fullmatch(r'#[0-9a-fA-F]{6}',c) for c in palette.values()):
+    if not isinstance(palette,dict) or not palette or any(not isinstance(k,str) or not k.strip() or
+            not isinstance(c,str) or not re.fullmatch(r'#[0-9a-fA-F]{6}',c) for k,c in palette.items()):
         raise ValueError('Template palette must use named HEX6 colors')
-    fonts=data.get('resources',{}).get('fonts',{})
+    resources=data.get('resources',{})
+    if not isinstance(resources,dict):
+        raise ValueError('Template resources must be an object')
+    fonts=resources.get('fonts',{})
     typography=data.get('typography',{})
-    if not isinstance(fonts,dict) or not typography:
+    if not isinstance(fonts,dict) or not fonts or not isinstance(typography,dict) or not typography:
         raise ValueError('Template requires font resources and typography roles')
     for role,settings in typography.items():
-        if not isinstance(settings,dict) or settings.get('family') not in fonts:
+        if not isinstance(settings,dict) or not isinstance(settings.get('family'),str) or settings['family'] not in fonts:
             raise ValueError(f'Font role {role} must name a declared resource')
-        if type(settings.get('size')) not in [int,float] or settings['size']<=0:
-            raise ValueError(f'Font role {role} requires a positive size')
+        if type(settings.get('size')) not in [int,float] or not math.isfinite(settings['size']) or settings['size']<=0:
+            raise ValueError(f'Font role {role} requires a finite positive size')
     paths=[]
-    background=data.get('resources',{}).get('background')
-    if background:paths.append(background)
-    for settings in fonts.values():
-        if settings.get('system_font') is True:continue
+    background=resources.get('background')
+    if background is not None:paths.append(background)
+    for family,settings in fonts.items():
+        if not isinstance(family,str) or not family.strip() or not isinstance(settings,dict):
+            raise ValueError('Font resources must map non-empty family names to objects')
+        if 'system_font' in settings and type(settings['system_font']) is not bool:
+            raise ValueError(f'Font {family}: system_font must be true or false')
+        if settings.get('system_font') is True:
+            if 'file' in settings or 'license_file' in settings:
+                raise ValueError(f'Font {family}: system fonts cannot also declare redistributed files')
+            continue
         if not settings.get('file') or not settings.get('license_file'):
             raise ValueError('Redistributed fonts require both file and license_file')
         paths.extend([settings['file'],settings['license_file']])
     references=data.get('references',[])
-    if not references or any(not isinstance(r,dict) or not r.get('id') or not r.get('file') for r in references):
+    if not isinstance(references,list) or not references or any(not isinstance(r,dict) or
+            not isinstance(r.get('id'),str) or not r['id'].strip() or not r.get('file') for r in references):
         raise ValueError('A reference-derived template must identify its source images')
+    if len({r['id'] for r in references})!=len(references):
+        raise ValueError('Template reference ids must be unique')
     paths.extend(r['file'] for r in references)
     layouts=data.get('layouts',{})
-    if not layouts or not data.get('components'):
+    if not isinstance(layouts,dict) or not layouts or not isinstance(data.get('components'),dict) or not data['components']:
         raise ValueError('Template requires layout skeletons and component styles')
     for name,layout in layouts.items():
-        if not isinstance(layout,dict) or not layout.get('slots'):
+        if not isinstance(layout,dict) or not isinstance(layout.get('slots'),dict) or not layout['slots']:
             raise ValueError(f'Layout {name} requires slots')
         for slot,value in layout['slots'].items():
             boxes=value if isinstance(value,list) and value and isinstance(value[0],list) else [value]
@@ -67,6 +81,9 @@ def validate_template(data:dict,root:Path|None=None)->dict:
                 x,y,w,h=box
                 if min(x,y)<0 or min(w,h)<=0 or x+w>canvas[0]+.1 or y+h>canvas[1]+.1:
                     raise ValueError(f'Slot {name}.{slot} is outside the canvas')
+    for field in ['adaptations','variation_rules']:
+        if field in data and (not isinstance(data[field],list) or not all(isinstance(v,str) for v in data[field])):
+            raise ValueError(f'Template {field} must be a list of strings')
     for relative in paths:
         path=inside(root or Path.cwd(),relative)
         if root is not None and not path.is_file():
@@ -108,6 +125,14 @@ def prepare(observations:Path,source_dir:Path,output:Path,force:bool=False)->Pat
         raise ValueError('Output is not empty; choose a new directory or --force')
     data=copy.deepcopy(json.loads(observations.read_text('utf-8-sig')))
     validate_template(data,source_dir)
+    sources=[r['file'] for r in data['references']]
+    if data['resources'].get('background'):
+        sources.append(data['resources']['background'])
+    for settings in data['resources']['fonts'].values():
+        if not settings.get('system_font'):
+            sources.extend([settings['file'],settings['license_file']])
+    if any(inside(source_dir,relative).is_relative_to(output) for relative in sources):
+        raise ValueError('Output must not contain source resources, even with --force')
     for index,reference in enumerate(data['references'],1):
         origin=inside(source_dir,reference['file'])
         relative=f'references/{index:02}{origin.suffix.lower()}'
@@ -121,8 +146,9 @@ def prepare(observations:Path,source_dir:Path,output:Path,force:bool=False)->Pat
         shutil.copy2(origin,output/relative);data['resources']['background']=relative
     for index,settings in enumerate(data['resources']['fonts'].values(),1):
         if settings.get('system_font') is True:continue
-        for field,suffix in [('file','.ttf'),('license_file','-OFL.txt')]:
+        for field in ['file','license_file']:
             origin=inside(source_dir,settings[field])
+            suffix=origin.suffix.lower() if field=='file' else '-license'+origin.suffix.lower()
             relative=f'media/fonts/font-{index}'+suffix
             (output/relative).parent.mkdir(parents=True,exist_ok=True)
             shutil.copy2(origin,output/relative);settings[field]=relative

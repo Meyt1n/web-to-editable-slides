@@ -1,0 +1,335 @@
+{
+  "schema_version": "1.0",
+  "id": "shiguang-editorial",
+  "version": "1.0.2",
+  "title": "拾光书屋 · 从五张实际参考图提取",
+  "canvas": [
+    960,
+    540
+  ],
+  "palette": {
+    "ink": "#233F35",
+    "paper": "#F5F1E8",
+    "sage": "#9AAB98",
+    "terracotta": "#BD694B",
+    "pale": "#DEE3D6",
+    "beige": "#E9DECC",
+    "line": "#BCC4B5",
+    "white": "#FFFFFF"
+  },
+  "resources": {
+    "fonts": {
+      "Noto Sans SC": {
+        "file": "media/body.ttf",
+        "license_file": "media/NotoSans-OFL.txt"
+      },
+      "Noto Serif SC": {
+        "file": "media/heading.ttf",
+        "license_file": "media/NotoSerif-OFL.txt"
+      }
+    }
+  },
+  "typography": {
+    "display": {
+      "family": "Noto Serif SC",
+      "size": 93,
+      "bold": true
+    },
+    "heading": {
+      "family": "Noto Serif SC",
+      "size": 46,
+      "bold": true
+    },
+    "body": {
+      "family": "Noto Sans SC",
+      "size": 16
+    },
+    "label": {
+      "family": "Noto Sans SC",
+      "size": 11
+    },
+    "number": {
+      "family": "Noto Serif SC",
+      "size": 34
+    }
+  },
+  "grid": {
+    "margin": 58,
+    "baseline": 6,
+    "stroke": 0.8
+  },
+  "components": {
+    "rule": {
+      "color": "line",
+      "width": 0.8
+    },
+    "accent_rule": {
+      "color": "terracotta",
+      "width": 3
+    },
+    "footer": {
+      "size": 10
+    },
+    "node": {
+      "diameter": 64
+    }
+  },
+  "references": [
+    {
+      "id": "01-cover",
+      "file": "references/01-cover.png",
+      "role": "封面与字体气质",
+      "observation": "已查看实际生成图；几何为模型估计，文字按原提示词定稿。"
+    },
+    {
+      "id": "02-zones",
+      "file": "references/02-zones.png",
+      "role": "独特页型",
+      "observation": "已查看实际生成图；几何为模型估计，文字按原提示词定稿。"
+    },
+    {
+      "id": "03-journey",
+      "file": "references/03-journey.png",
+      "role": "独特页型",
+      "observation": "已查看实际生成图；几何为模型估计，文字按原提示词定稿。"
+    },
+    {
+      "id": "04-program",
+      "file": "references/04-program.png",
+      "role": "独特页型",
+      "observation": "已查看实际生成图；几何为模型估计，文字按原提示词定稿。"
+    },
+    {
+      "id": "05-pilot",
+      "file": "references/05-pilot.png",
+      "role": "独特页型",
+      "observation": "已查看实际生成图；几何为模型估计，文字按原提示词定稿。"
+    }
+  ],
+  "layouts": {
+    "editorial-cover": {
+      "description": "左39%文字，右侧照片出血；实际生成图不同于提示词48%分界",
+      "slots": {
+        "eyebrow": [
+          64,
+          53,
+          280,
+          18
+        ],
+        "title": [
+          62,
+          110,
+          260,
+          193
+        ],
+        "accent": [
+          64,
+          326,
+          78,
+          4
+        ],
+        "subtitle": [
+          64,
+          352,
+          303,
+          39
+        ],
+        "body": [
+          64,
+          404,
+          270,
+          45
+        ],
+        "photo": [
+          377,
+          41,
+          583,
+          458
+        ],
+        "footer": [
+          64,
+          487,
+          290,
+          20
+        ],
+        "title_lines": [
+          [
+            62,
+            92,
+            260,
+            120
+          ],
+          [
+            62,
+            211,
+            260,
+            120
+          ]
+        ]
+      }
+    },
+    "zoning-plan": {
+      "description": "左侧三区平面关系图、右侧三组说明",
+      "slots": {
+        "eyebrow": [
+          58,
+          34,
+          600,
+          20
+        ],
+        "title": [
+          58,
+          67,
+          844,
+          61
+        ],
+        "plan": [
+          58,
+          154,
+          586,
+          307
+        ],
+        "notes": [
+          695,
+          157,
+          210,
+          318
+        ],
+        "footer": [
+          58,
+          496,
+          845,
+          18
+        ]
+      }
+    },
+    "service-journey": {
+      "description": "四节点横向流程，第三步陶土橙；底部结论",
+      "slots": {
+        "eyebrow": [
+          58,
+          52,
+          800,
+          20
+        ],
+        "title": [
+          58,
+          100,
+          844,
+          63
+        ],
+        "subtitle": [
+          58,
+          173,
+          820,
+          32
+        ],
+        "timeline": [
+          133,
+          236,
+          695,
+          64
+        ],
+        "conclusion": [
+          58,
+          437,
+          800,
+          42
+        ],
+        "footer": [
+          58,
+          500,
+          845,
+          18
+        ]
+      }
+    },
+    "weekly-table": {
+      "description": "四列表格与三条活动记录；完整原生表格",
+      "slots": {
+        "eyebrow": [
+          62,
+          43,
+          800,
+          20
+        ],
+        "title": [
+          62,
+          86,
+          844,
+          69
+        ],
+        "table": [
+          62,
+          184,
+          836,
+          244
+        ],
+        "note": [
+          62,
+          458,
+          836,
+          24
+        ],
+        "footer": [
+          62,
+          499,
+          836,
+          20
+        ]
+      }
+    },
+    "pilot-close": {
+      "description": "左侧两行标题与三步小时间线，右侧近方形照片",
+      "slots": {
+        "eyebrow": [
+          48,
+          50,
+          420,
+          20
+        ],
+        "title": [
+          48,
+          111,
+          428,
+          144
+        ],
+        "timeline": [
+          92,
+          291,
+          327,
+          20
+        ],
+        "next_step": [
+          48,
+          427,
+          425,
+          35
+        ],
+        "photo": [
+          505,
+          60,
+          426,
+          426
+        ],
+        "footer": [
+          48,
+          500,
+          885,
+          18
+        ]
+      }
+    }
+  },
+  "adaptations": [
+    "参考图的纸张纹理近似为平色；不把整页参考图当最终背景。",
+    "位图无法可靠确定字体家族，使用OFL的Noto Serif SC与Noto Sans SC近似，并检验断行。",
+    "空间照片通过imagegen按封面局部重新生成，视角与裁切存在必要近似；不作为实景证据。",
+    "平面图中的小型植物与家具细节用可编辑几何简化，保留分区、入口、桌椅及阅读关系。",
+    "实开发现两行大标题的字体边界高于文本框；改用两个原生文字框保留断行，避免兼容性溢出。"
+  ],
+  "variation_rules": [
+    "每页沿用选定参考图的独特骨架，不因统一模板强制使用相同比例。",
+    "所有事实状态为concept或planned，不加入性能、成本或实际人流数据。"
+  ]
+}

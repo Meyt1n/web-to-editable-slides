@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "ink-atmosphere",
+      "file": "ink-atmosphere.png",
+      "recipe": "ink-culture",
+      "page_roles": [
+        "cover",
+        "chapter"
+      ],
+      "safe_zone": [
+        56,
+        58,
+        680,
+        350
+      ],
+      "canvas": [
+        960,
+        540
+      ],
+      "pixels": [
+        1672,
+        941
+      ],
+      "sha256": "deb59f3ed9fd9edd0b2da96f30d86cca599190e7ef5df6de9efc6bd94b1d1add",
+      "prompt_file": "ink-atmosphere-prompt.txt",
+      "source": "built-in imagegen; original prompt; no reference images supplied",
+      "license": "Generated concept asset; provided under repository MIT to the extent licensable; no exclusivity claim",
+      "notes": "封面氛围较丰富，正文较多时改用ink-content"
+    },
+    {
+      "id": "ink-content",
+      "file": "ink-content.png",
+      "recipe": "ink-culture",
+      "page_roles": [
+        "content",
+        "question-answer"
+      ],
+      "safe_zone": [
+        56,
+        58,
+        760,
+        380
+      ],
+      "canvas": [
+        960,
+        540
+      ],
+      "pixels": [
+        1672,
+        941
+      ],
+      "sha256": "c6999d23c28abb8d883fb7425f906198525955dd8443c3e6987f7456244434d5",
+      "prompt_file": "ink-content-prompt.txt",
+      "source": "built-in imagegen; original prompt; no reference images supplied",
+      "license": "Generated concept asset; provided under repository MIT to the extent licensable; no exclusivity claim",
+      "notes": "深绿正文底图，山水与松枝退到下方及右缘"
+    },
+    {
+      "id": "warm-paper",
+      "file": "warm-paper.png",
+      "recipe": "warm-paper",
+      "page_roles": [
+        "content",
+        "question-answer",
+        "quote"
+      ],
+      "safe_zone": [
+        56,
+        50,
+        740,
+        385
+      ],
+      "canvas": [
+        960,
+        540
+      ],
+      "pixels": [
+        1672,
+        941
+      ],
+      "sha256": "8d1ebd5238014d4b99a7c8cb90b99f8cd5895769b15afbef369d3b27d2679b53",
+      "prompt_file": "warm-paper-prompt.txt",
+      "source": "built-in imagegen; original prompt; no reference images supplied",
+      "license": "Generated concept asset; provided under repository MIT to the extent licensable; no exclusivity claim",
+      "notes": "浅纸暖底，使用深色正文，避开右缘芦苇和底部山水"
+    }
+  ]
+}

@@ -12,6 +12,10 @@
 | ZCOOL XiaoWei | https://github.com/google/fonts/tree/main/ofl/zcoolxiaowei | 图册中的中文衬线标题 | SIL OFL 1.1，许可随`assets/fonts/`交付 |
 | ZCOOL KuaiLe | https://github.com/google/fonts/tree/main/ofl/zcoolkuaile | 图册中的亲和短标题 | SIL OFL 1.1，许可随`assets/fonts/`交付 |
 | Barlow Condensed | https://github.com/google/fonts/tree/main/ofl/barlowcondensed | 图册中的数字与短英文 | SIL OFL 1.1，许可随`assets/fonts/`交付，不用于中文 |
+| Noto Sans SC、Noto Serif SC | Google Fonts CSS文本子集，来源记录见`examples/reading-room/input/media/font-sources.json` | 拾光书屋示例字形 | SIL OFL 1.1；两份完整许可随该目录交付，字体不适用MIT |
+| Ma Shan Zheng、Long Cang、Noto Sans SC完整变量字体 | Google Fonts固定提交，详见`assets/fonts/catalog.json` | 多字体角色与新主题正文 | SIL OFL 1.1，完整许可随`assets/fonts/`提供，不适用MIT |
+| 原创无字背景：封面水墨、正文水墨、浅色宣纸 | 内置imagegen按独立提示词生成，逐图来源与哈希见`assets/backgrounds/catalog.json` | 按页型选择的背景分层小样 | 在可许可的权利范围内按仓库MIT提供，不表示独占权；未将用户参考PPT图片用于生成或公开分发 |
+| 拾光书屋5张参考页与独立空间配图 | 宿主内置imagegen生成 | 虚构空间提案与逐页还原试跑 | 同其他自生成概念示例，不是建成场地或运营成果 |
 
 字体原始项目：https://github.com/adobe-fonts/source-han-sans 。示例使用的字体已做子集和名称调整，原始版权及OFL信息保留。OFL字体可与本仓库共同分发，但不能改为本仓库的MIT许可。
 

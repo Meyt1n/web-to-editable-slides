@@ -40,12 +40,12 @@
 | `planned` | 尚未完成的后续设想 |
 | `unspecified` | 信息不足，不能自行改为“已完成” |
 
-`reference`和`assets`是交接记录中的位置，不在生成交接表时复制或验证文件，也不默认授予访问权限。实际制作时逐一解析到用户授权的目录；缺图先用已有资料推进，不虚构替代实物。
+`reference`和`assets`是交接记录中的位置，不在生成交接表时复制或验证文件，也不默认授予访问权限。制作前明确素材根目录，再逐一解析到用户授权的目录；本仓库示例的这些路径相对仓库根目录，不能按生成后的Markdown位置猜测。缺图先用已有资料推进，不虚构替代实物。
 
 `conversations[].visibility`仅记录可见范围，不能控制实际文件权限。私有对话的定位信息只保存在私有工作区；公开示例应使用合成内容，不能只删掉`private`标记后发布。
 
 需要字体与布局优化时，可选增加`design`和每页的`layout/font_profile/density/focal_point`等字段，见[设计计划](design-plan.md)。这些字段会进入交接文档，原有表格不受影响。
 
-正式制作时，先按[模板提取流程](template-extraction.md)保存模板包，再用`design.template`记录模板的`id`、`version`与相对交接表的`file`路径。每页的`layout`引用该模板中的页型；新增变体先补入模板，必要的局部偏离用`template_override.reason`说明原因。
+正式制作时，先按[模板提取流程](template-extraction.md)保存模板包，再用`design.template`记录模板的`id`、`version`与相对原始交接JSON所在目录的`file`路径。Markdown交接文档只展示该记录，输出到其他目录不会改变路径基准；将原始JSON与模板一起移交，或明确保留原始JSON位置。每页的`layout`引用该模板中的页型；新增变体先补入模板，必要的局部偏离用`template_override.reason`说明原因。
 
 每页可用`reference_prompt`关联原提示词，并用`layout_constraints`、`typography_constraints`和`image_plan`三个字符串列表保存参考排版、字体层级与图片处理计划。格式与例子见[逐页字段](design-plan.md#逐页参考排版与图片计划)。这些是制作依据，不是脚本已经看图验证的结论。

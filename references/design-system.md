@@ -23,6 +23,8 @@
 
 本仓库提供的选型示例：Reading Text SC（既有OFL无衬线）、ZCOOL XiaoWei（标题）、ZCOOL KuaiLe（短标题）及Barlow Condensed（数字/短英文）。后三者的来源与许可见 [第三方说明](../THIRD_PARTY_NOTICES.md)。Barlow不承担中文；中英混排时给相应文字设置角色，避免依赖系统随机回退。
 
+现已补入完整的Ma Shan Zheng、Long Cang和Noto Sans SC字库。六款完整字体、五组搭配、按实际文案准备字体的方法见[字体库与背景动画](art-direction.md)。制作新主题优先查完整字库，旧示例子集不能作为完整正文库使用。
+
 图册演示不同选择；正式稿应选定适合主题的一套，持续使用。标题偶尔换成点缀字体须有明确目的，例如章节转场或引用，不能逐页随机选字库。
 
 ## 一套字体也可以有很多表现

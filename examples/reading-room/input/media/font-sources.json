@@ -1,0 +1,17 @@
+{
+  "body": {
+    "family": "Noto Sans SC",
+    "source": "https://fonts.google.com/noto/specimen/Noto+Sans+SC",
+    "license": "NotoSans-OFL.txt",
+    "subset": "Google Fonts text parameter; glyphs from prompts.json",
+    "sha256": "93d32abfc0e8baed8bd15e5146175fc99735989c020d65e1e6be5af3eb3fd7d4"
+  },
+  "heading": {
+    "family": "Noto Serif SC",
+    "source": "https://fonts.google.com/noto/specimen/Noto+Serif+SC",
+    "license": "NotoSerif-OFL.txt",
+    "subset": "Google Fonts text parameter; glyphs from prompts.json",
+    "weight": 400,
+    "sha256": "4d447cafcb3cc3b4214d74804c1423889475c327b03a8599d87dd80be1ab5965"
+  }
+}

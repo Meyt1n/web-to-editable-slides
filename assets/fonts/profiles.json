@@ -1,0 +1,27 @@
+{
+  "ink-culture": {
+    "roles": {"heading": "Ma Shan Zheng", "body": "Noto Sans SC", "numeric": "Barlow Condensed"},
+    "background_recipe": "ink-culture",
+    "note": "毛笔仅用于短标题、章节和关键词；正文保持黑体。"
+  },
+  "handwritten-workshop": {
+    "roles": {"heading": "Long Cang", "body": "Noto Sans SC", "numeric": "Barlow Condensed"},
+    "background_recipe": "warm-paper",
+    "note": "手写感用于短句或批注，避免长段正文。"
+  },
+  "editorial": {
+    "roles": {"heading": "ZCOOL XiaoWei", "body": "Noto Sans SC", "numeric": "Barlow Condensed"},
+    "background_recipe": "warm-paper",
+    "note": "文艺标题与清楚正文搭配。"
+  },
+  "friendly-learning": {
+    "roles": {"heading": "ZCOOL KuaiLe", "body": "Noto Sans SC", "numeric": "Barlow Condensed"},
+    "background_recipe": "warm-paper",
+    "note": "亲和短标题，不把长段文字排成装饰字。"
+  },
+  "technical": {
+    "roles": {"heading": "Noto Sans SC", "body": "Noto Sans SC", "numeric": "Barlow Condensed"},
+    "background_recipe": "quiet-tech",
+    "note": "标题通过字重和留白变化；正文用常规字重。"
+  }
+}

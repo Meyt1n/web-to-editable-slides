@@ -32,14 +32,14 @@
 }
 ```
 
-- `mode`：`fidelity`、`enhance`、`explore`。
+- `mode`：`fidelity`、`enhance`、`explore`。未显式填写时，有逐页`reference`默认`fidelity`，否则默认`enhance`；已知用户意图时应明确记录模式，`explore`须显式选择。模式名不扩大用户允许修改的范围。
 - `font_profiles`：由角色到字体家族的映射；角色一般为`heading`、`body`、`numeric`、`accent`。同家族可承担多个角色，字体名应与实际字体内名相符。
 - `layout`：优先用版式库ID，也可自定义。
 - `density`：`low`、`medium`、`high`，用于交接阅读节奏，不代表自动测得的信息量。
 - `color_mode`：`light`、`dark`、`mixed`，记录设计意图。
 - `focal_point`：一句话说明视觉重点。
 - `visual`：文字记录素材用途，如`real-photo`、`concept-scene`、`native-diagram`。
-- 若用`data-focus`，填写`data_source`，或明确`data_is_illustrative: true`并在页面注明示意。示意数据不能作为成果证据。
+- 若用`data-focus`，填写非空文本`data_source`，或明确`data_is_illustrative: true`并在页面注明示意；后者为布尔值。这两项会保留到Markdown交接文档，示意数据不能作为成果证据。
 
 运行：
 
@@ -65,7 +65,7 @@ python scripts/review_design_plan.py path/to/brief.json --output output/design-r
 }
 ```
 
-`file`相对交接JSON所在目录；也可通过`--template`显式指定模板。每页的`layout`应来自模板的`layouts`；没有字体或配色覆盖时，直接继承模板设置。
+`file`相对原始交接JSON所在目录；生成Markdown交接文档不会改变这个基准，不应改按Markdown所在目录解析。素材`reference/assets`另按交接时声明的素材根目录解析，见[交接路径说明](handoff-schema.md)。也可通过`--template`显式指定模板。每页的`layout`应来自模板的`layouts`；没有字体或配色覆盖时，直接继承模板设置。
 
 ```bash
 python scripts/review_design_plan.py output/from-template/design-plan.json --require-template

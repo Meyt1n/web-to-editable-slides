@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from make_handoff import validate
+from make_handoff import validate, design_mode
 from template_pack import load_template, validate_template
 
 
@@ -17,7 +17,7 @@ def review(brief: dict, template: dict|None = None, require_template: bool = Fal
     except ValueError as exc:
         result['errors'].append(str(exc));result['ok']=False;return result
     slides=sorted(brief['slides'],key=lambda s:s['id'])
-    design=brief.get('design',{});mode=design.get('mode','enhance')
+    design=brief.get('design',{});mode=design_mode(brief)
     profiles=design.get('font_profiles',{})
     declared=[s for s in slides if s.get('layout')]
     result['summary']={'mode':mode,'pages':len(slides),'declared_layouts':len(declared),

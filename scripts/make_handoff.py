@@ -8,6 +8,23 @@ from pathlib import Path
 STATUSES = {'verified', 'demo', 'concept', 'planned', 'unspecified'}
 
 
+def design_mode(brief: dict) -> str:
+    """Preserve page references by default unless the user chose a mode."""
+    return brief.get('design', {}).get('mode') or (
+        'fidelity' if any(slide.get('reference') for slide in brief['slides']) else 'enhance')
+
+
+def _text(value, field: str, allow_empty: bool = False) -> None:
+    if not isinstance(value, str) or (not allow_empty and not value.strip()):
+        requirement = 'a string' if allow_empty else 'a non-empty string'
+        raise ValueError(f'{field} must be {requirement}')
+
+
+def _texts(value, field: str) -> None:
+    if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+        raise ValueError(f'{field} must be a list of strings')
+
+
 def validate(brief: dict) -> dict:
     if not isinstance(brief, dict) or not isinstance(brief.get('project'), str) or not brief['project'].strip():
         raise ValueError('project must be a non-empty string')
@@ -24,21 +41,45 @@ def validate(brief: dict) -> dict:
         ids.add(sid)
         if not isinstance(slide.get('title'), str) or not slide['title'].strip():
             raise ValueError(f'Slide {sid} requires a title')
-        if slide.get('status', 'unspecified') not in STATUSES:
+        if not isinstance(slide.get('status', 'unspecified'), str) or slide.get('status', 'unspecified') not in STATUSES:
             raise ValueError(f'Unknown status on slide {sid}')
         for key in ['key_points', 'assets', 'layout_constraints', 'typography_constraints', 'image_plan']:
-            if key in slide and (not isinstance(slide[key], list) or
-                                 not all(isinstance(v, str) for v in slide[key])):
-                raise ValueError(f'{key} must be a list of strings')
-        if 'reference_prompt' in slide and (not isinstance(slide['reference_prompt'],str) or not slide['reference_prompt'].strip()):
-            raise ValueError('reference_prompt must contain prompt text or an explicit source')
+            if key in slide:
+                _texts(slide[key], f'Slide {sid}.{key}')
+        for key in ['reference', 'reference_prompt', 'layout', 'font_profile', 'density',
+                    'color_mode', 'focal_point', 'visual', 'notes', 'data_source']:
+            if key in slide:
+                _text(slide[key], f'Slide {sid}.{key}', allow_empty=key not in ['reference_prompt', 'data_source'])
+        if 'data_is_illustrative' in slide and type(slide['data_is_illustrative']) is not bool:
+            raise ValueError(f'Slide {sid}.data_is_illustrative must be true or false')
     if 'imagegen_allowed' in brief and type(brief['imagegen_allowed']) is not bool:
         raise ValueError('imagegen_allowed must be true or false')
+    if 'purpose' in brief:
+        _text(brief['purpose'], 'purpose', allow_empty=True)
+    style = brief.get('style', {})
+    if not isinstance(style, dict):
+        raise ValueError('style must be an object')
+    for key in ['ratio', 'description']:
+        if key in style:
+            _text(style[key], f'style.{key}', allow_empty=True)
+    if 'colors' in style:
+        _texts(style['colors'], 'style.colors')
+    if 'asset_priority' in brief:
+        _texts(brief['asset_priority'], 'asset_priority')
+    if 'conversations' in brief:
+        if not isinstance(brief['conversations'], list) or any(not isinstance(c, dict) for c in brief['conversations']):
+            raise ValueError('conversations must be a list of objects')
+        for item in brief['conversations']:
+            for key in ['role', 'location', 'visibility']:
+                if key in item:
+                    _text(item[key], f'conversations.{key}', allow_empty=True)
     design=brief.get('design',{})
     if not isinstance(design,dict):
         raise ValueError('design must be an object')
     if design.get('mode','enhance') not in ['fidelity','enhance','explore']:
         raise ValueError('Unknown design mode')
+    if 'constants' in design:
+        _texts(design['constants'], 'design.constants')
     profiles=design.get('font_profiles',{})
     if not isinstance(profiles,dict) or any(not isinstance(v,dict) for v in profiles.values()):
         raise ValueError('font_profiles must map profile names to role objects')
@@ -68,9 +109,9 @@ def render(brief: dict) -> str:
              f'风格：{style.get("description", "沿用参考图")}',
              f'主色：{", ".join(style.get("colors", []))}',
              f'imagegen使用意向：{brief.get("imagegen_allowed", "未说明")}（仍以宿主能力与会话权限为准）', '']
-    if brief.get('design'):
-        design=brief['design']
-        lines += ['## 设计约定','',f'模式：{design.get("mode","enhance")}']
+    if brief.get('design') or any(slide.get('reference') for slide in brief['slides']):
+        design=brief.get('design', {})
+        lines += ['## 设计约定','',f'模式：{design_mode(brief)}']
         if design.get('template'):
             binding=design['template']
             lines += [f'- 使用模板：{binding["id"]} / {binding["version"]}',
@@ -108,6 +149,10 @@ def render(brief: dict) -> str:
             lines += ['', '素材位置：'] + ['- ' + asset for asset in slide['assets']]
         if slide.get('notes'):
             lines += ['', '制作说明：' + slide['notes']]
+        if slide.get('data_source'):
+            lines += ['', '数据来源：' + slide['data_source']]
+        if 'data_is_illustrative' in slide:
+            lines += ['', '示意数据：' + ('是（须在页面注明，不作为成果证据）' if slide['data_is_illustrative'] else '否')]
         if slide.get('template_override'):
             lines += ['', '模板变更原因：'+slide['template_override']['reason']]
         lines += ['']

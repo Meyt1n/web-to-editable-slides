@@ -1,0 +1,47 @@
+{
+  "theme": "拾光书屋｜社区共享阅读空间",
+  "fact_status": "fictional concept",
+  "image_generation": {
+    "tool": "built-in image_gen",
+    "reference_pages": 5,
+    "standalone_photo": 1
+  },
+  "editable_text_boxes": 57,
+  "editable_table_cells": 16,
+  "pictures": 2,
+  "font_parts": 2,
+  "fade_slides": 5,
+  "powerpoint_version": "16.0",
+  "overflow_candidates": 0,
+  "unit_tests": {
+    "passed": 54,
+    "environment": "Python 3.13, Windows"
+  },
+  "visual_review": [
+    {
+      "page": 1,
+      "result": "保留左侧两行标题与右侧出血照片；标题字重近似，照片为独立重生成配图，裁切有差异。"
+    },
+    {
+      "page": 2,
+      "result": "保留三区关系、入口和右侧三组说明；家具与植物装饰作原生几何简化。"
+    },
+    {
+      "page": 3,
+      "result": "四节点顺序、第三步强调、标题和结论位置保留；正文笔画与参考存在播放器字体差异。"
+    },
+    {
+      "page": 4,
+      "result": "四列三条活动记录保留；实际16个原生表格单元格，内容完整，图像不是表格背景。"
+    },
+    {
+      "page": 5,
+      "result": "两行标题、左侧三步时间线、右侧独立照片与下一步说明保留。"
+    }
+  ],
+  "limitations": [
+    "结构脚本无法解压PowerPoint写入的压缩EOT；不声称严格字体二进制验证通过。",
+    "PowerPoint实开通过不代表WPS、Keynote或所有平台字形完全相同。",
+    "浏览器与PowerPoint的正文笔画与字宽仍有差异；图片构图和部分家具装饰作了必要近似。"
+  ]
+}
