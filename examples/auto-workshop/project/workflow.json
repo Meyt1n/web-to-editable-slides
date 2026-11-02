@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "title": "修补日｜社区旧物修复工作坊",
+  "pages": [
+    {
+      "id": 1,
+      "prompt": "prompts/01.txt",
+      "attempts": [
+        {
+          "file": "references/01-v01.png",
+          "sha256": "94c103341f1876706ddd22a40c8ccf47977187c69b2ccb0cb9def0f8b51e01fa",
+          "prompt_sha256": "c87ab91d43d166ff0fd3b14f26dc7920205808ba80831c8a604928618def6cde",
+          "tool": "imagegen",
+          "recorded_at": "2026-11-02T07:10:55.841611+00:00",
+          "prompt_file": "prompts/01-v01.txt",
+          "input_images": []
+        }
+      ],
+      "reference": {
+        "file": "references/01-v01.png",
+        "sha256": "94c103341f1876706ddd22a40c8ccf47977187c69b2ccb0cb9def0f8b51e01fa",
+        "prompt_sha256": "c87ab91d43d166ff0fd3b14f26dc7920205808ba80831c8a604928618def6cde",
+        "tool": "imagegen",
+        "recorded_at": "2026-11-02T07:10:55.841611+00:00",
+        "prompt_file": "prompts/01-v01.txt",
+        "input_images": []
+      }
+    },
+    {
+      "id": 2,
+      "prompt": "prompts/02.txt",
+      "attempts": [
+        {
+          "file": "references/02-v01.png",
+          "sha256": "80c25c854c29665f4815d3b7dc4fdd6a7266b811d70482a21c0eb4cca73c4ed0",
+          "prompt_sha256": "d4680c5fe09fb14367aebc4a5106ef3ee3cf4103ad05683b6969639833d0819a",
+          "tool": "imagegen",
+          "recorded_at": "2026-11-02T07:12:13.507649+00:00",
+          "prompt_file": "prompts/02-v01.txt",
+          "input_images": [
+            {
+              "file": "references/01-v01.png",
+              "role": "style_reference",
+              "sha256": "94c103341f1876706ddd22a40c8ccf47977187c69b2ccb0cb9def0f8b51e01fa"
+            }
+          ]
+        },
+        {
+          "file": "references/02-v02.png",
+          "sha256": "7cf450abd97029095b94d76f10fd91dbe20c01cc13a3e141872bd472a804b3bf",
+          "prompt_sha256": "5b8e8e0edb76c6c1ce7dfc697a9e9fcb3d2c4fb0f49c4c4de26dab975a56e4d8",
+          "tool": "imagegen",
+          "recorded_at": "2026-11-02T07:14:49.689099+00:00",
+          "prompt_file": "prompts/02-v02.txt",
+          "input_images": []
+        }
+      ],
+      "reference": {
+        "file": "references/02-v02.png",
+        "sha256": "7cf450abd97029095b94d76f10fd91dbe20c01cc13a3e141872bd472a804b3bf",
+        "prompt_sha256": "5b8e8e0edb76c6c1ce7dfc697a9e9fcb3d2c4fb0f49c4c4de26dab975a56e4d8",
+        "tool": "imagegen",
+        "recorded_at": "2026-11-02T07:14:49.689099+00:00",
+        "prompt_file": "prompts/02-v02.txt",
+        "input_images": []
+      }
+    },
+    {
+      "id": 3,
+      "prompt": "prompts/03.txt",
+      "attempts": [
+        {
+          "file": "references/03-v01.png",
+          "sha256": "6e73779ab6133c78e8a96b95c4973b5ca231c9dd027e3492d5aeca9af60dc84e",
+          "prompt_sha256": "eedd868a5485203ca33128d2a1c6ad9b9436df48cb930ae71b948cb9e73b7b4a",
+          "tool": "imagegen",
+          "recorded_at": "2026-11-02T07:14:49.839394+00:00",
+          "prompt_file": "prompts/03-v01.txt",
+          "input_images": [
+            {
+              "file": "references/01-v01.png",
+              "role": "style_reference",
+              "sha256": "94c103341f1876706ddd22a40c8ccf47977187c69b2ccb0cb9def0f8b51e01fa"
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "file": "references/03-v01.png",
+        "sha256": "6e73779ab6133c78e8a96b95c4973b5ca231c9dd027e3492d5aeca9af60dc84e",
+        "prompt_sha256": "eedd868a5485203ca33128d2a1c6ad9b9436df48cb930ae71b948cb9e73b7b4a",
+        "tool": "imagegen",
+        "recorded_at": "2026-11-02T07:14:49.839394+00:00",
+        "prompt_file": "prompts/03-v01.txt",
+        "input_images": [
+          {
+            "file": "references/01-v01.png",
+            "role": "style_reference",
+            "sha256": "94c103341f1876706ddd22a40c8ccf47977187c69b2ccb0cb9def0f8b51e01fa"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "prompt": "prompts/04.txt",
+      "attempts": [
+        {
+          "file": "references/04-v01.png",
+          "sha256": "f5e82ad36e5ac8c0995e0a20bca33a6ffd403b31c93ebc3773f1783f8890df23",
+          "prompt_sha256": "c2f0a87e8d4fe92362f2e0d3e900ed7972474ab4c5be5dab1dee708c46496103",
+          "tool": "imagegen",
+          "recorded_at": "2026-11-02T07:14:49.997303+00:00",
+          "prompt_file": "prompts/04-v01.txt",
+          "input_images": [
+            {
+              "file": "references/01-v01.png",
+              "role": "style_reference",
+              "sha256": "94c103341f1876706ddd22a40c8ccf47977187c69b2ccb0cb9def0f8b51e01fa"
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "file": "references/04-v01.png",
+        "sha256": "f5e82ad36e5ac8c0995e0a20bca33a6ffd403b31c93ebc3773f1783f8890df23",
+        "prompt_sha256": "c2f0a87e8d4fe92362f2e0d3e900ed7972474ab4c5be5dab1dee708c46496103",
+        "tool": "imagegen",
+        "recorded_at": "2026-11-02T07:14:49.997303+00:00",
+        "prompt_file": "prompts/04-v01.txt",
+        "input_images": [
+          {
+            "file": "references/01-v01.png",
+            "role": "style_reference",
+            "sha256": "94c103341f1876706ddd22a40c8ccf47977187c69b2ccb0cb9def0f8b51e01fa"
+          }
+        ]
+      }
+    }
+  ]
+}

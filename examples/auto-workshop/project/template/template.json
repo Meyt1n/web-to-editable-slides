@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "id": "repair-day-editorial",
+  "version": "1.0",
+  "title": "修补日：暖纸编辑风",
+  "canvas": [
+    960,
+    540
+  ],
+  "palette": {
+    "background": "#F7F2E8",
+    "primary": "#2B3530",
+    "accent": "#BC6248",
+    "muted": "#72896B"
+  },
+  "typography": {
+    "heading": {
+      "family": "ZCOOL XiaoWei",
+      "size": 48
+    },
+    "body": {
+      "family": "Noto Sans SC",
+      "size": 22
+    },
+    "numeric": {
+      "family": "Barlow Condensed",
+      "size": 31
+    }
+  },
+  "resources": {
+    "fonts": {
+      "ZCOOL XiaoWei": {
+        "file": "media/fonts/font-1.ttf",
+        "license_file": "media/fonts/font-1-OFL.txt"
+      },
+      "Noto Sans SC": {
+        "file": "media/fonts/font-2.ttf",
+        "license_file": "media/fonts/font-2-OFL.txt"
+      },
+      "Barlow Condensed": {
+        "file": "media/fonts/font-3.ttf",
+        "license_file": "media/fonts/font-3-OFL.txt"
+      }
+    }
+  },
+  "references": [
+    {
+      "id": "1",
+      "file": "references/01-v01.png",
+      "role": "generated-reference",
+      "observation": "封面左文右图；暖白底，陶土橙大号标题，深炭色副标题。右侧木凳、布料、植物等拼贴为复杂插画；已用imagegen分离为透明素材。底部细横线，标题和副标题保持原生。"
+    },
+    {
+      "id": "2",
+      "file": "references/02-v02.png",
+      "role": "generated-reference",
+      "observation": "选择第二次生成结果：四个步骤横排，左到右01–04，小圆节点、细曲线连接，标题上方留白多。第一版添加了大幅插画，偏离简洁流程，已保留失败记录并重新生成。所有流程元素可原生重建，正文为可读性允许两行。"
+    },
+    {
+      "id": "3",
+      "file": "references/03-v01.png",
+      "role": "generated-reference",
+      "observation": "左上标题，动手二字为强调色；中部三列四行表格，表头绿色，时间强调橙色，条纹浅底。右上纸片与叶形简化为原生色块和路径；正文与表格均为原生对象。"
+    },
+    {
+      "id": "4",
+      "file": "references/04-v01.png",
+      "role": "generated-reference",
+      "observation": "左上大标题；左侧木桌拼贴由橙色手绘圈围绕，右侧三组准备事项，底部下一步横条。木桌材质保留独立位图，圈线与横条原生；右侧图标简化为编号圆点，说明此近似。"
+    }
+  ],
+  "layouts": {
+    "cover": {
+      "slots": {
+        "title": [
+          48,
+          105,
+          425,
+          132
+        ],
+        "hero": [
+          480,
+          28,
+          448,
+          454
+        ]
+      }
+    },
+    "process": {
+      "slots": {
+        "title": [
+          63,
+          61,
+          780,
+          83
+        ],
+        "steps": [
+          [
+            63,
+            195,
+            204,
+            224
+          ],
+          [
+            293,
+            195,
+            204,
+            224
+          ],
+          [
+            523,
+            195,
+            204,
+            224
+          ],
+          [
+            753,
+            195,
+            204,
+            224
+          ]
+        ]
+      }
+    },
+    "schedule": {
+      "slots": {
+        "title": [
+          48,
+          54,
+          530,
+          90
+        ],
+        "table": [
+          48,
+          178,
+          864,
+          270
+        ]
+      }
+    },
+    "action": {
+      "slots": {
+        "title": [
+          48,
+          40,
+          810,
+          96
+        ],
+        "hero": [
+          45,
+          178,
+          415,
+          260
+        ],
+        "actions": [
+          533,
+          155,
+          383,
+          246
+        ]
+      }
+    }
+  },
+  "components": {
+    "rule": {
+      "color": "#BC6248",
+      "width": 1
+    },
+    "connector": {
+      "color": "#72896B",
+      "width": 1.1
+    },
+    "number": {
+      "fill": "#BC6248"
+    }
+  },
+  "adaptations": [
+    "标题采用站酷小薇近似参考的粗衬线气质；不声称精确识别生图字形。",
+    "封面和桌子拼贴重新分离，局部纹理与物件位置有差异；纸背景简化为暖白底。",
+    "流程长句按阅读空间换行；收尾图标简化为原生编号。"
+  ],
+  "variation_rules": [
+    "四种页型共用字体角色、配色、标题网格与底部细线。"
+  ]
+}

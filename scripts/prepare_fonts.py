@@ -42,7 +42,9 @@ def prepare(requests: list, output: Path, catalog_path: Path = CATALOG) -> dict:
             elif 'weight' in request and request['weight']!=font['OS/2'].usWeightClass:
                 raise ValueError(f'{family}: this static font has no requested weight')
             options=subset.Options();options.name_IDs=['*'];options.name_legacy=True;options.name_languages=['*']
-            worker=subset.Subsetter(options=options);worker.populate(unicodes=chars);worker.subset(font)
+            # Keep supported spaces/tabs too, so Latin word spacing uses this font's metrics.
+            supported={ord(c) for c in text if ord(c) in font.getBestCmap()}
+            worker=subset.Subsetter(options=options);worker.populate(unicodes=supported);worker.subset(font)
             if axes:font=instantiateVariableFont(font,axes,inplace=True,optimize=True,updateFontNames=True)
             actual=font['name'].getDebugName(1)
             flags=font['OS/2'].fsType

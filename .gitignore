@@ -12,4 +12,5 @@ local-inputs/
 .DS_Store
 Thumbs.db
 ~$*
+run-local.json
 node_modules/

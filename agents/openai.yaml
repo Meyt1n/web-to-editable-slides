@@ -1,4 +1,4 @@
 interface:
-  display_name: "参考图转可编辑PPT"
-  short_description: "从参考图或PPT学习字体、分层背景与动画，提取模板并逐页重建可编辑PPT"
-  default_prompt: "使用 $web-to-editable-slides，从参考图或PPT提取模板，保留逐页排版和字体关系，按页型设计背景、按讲解安排动画；优先用授权本地图和imagegen优化素材，逐页对照渲染后交付可编辑PPT。"
+  display_name: "自动设计生成可编辑PPT"
+  short_description: "按需了解需求，自写提示词并用imagegen生图，再自己读图、重建和验收PPT"
+  default_prompt: "使用 $web-to-editable-slides，根据我的主题与资料自动制作PPT。必要时集中问少量问题；由你设计逐页提示词并调用imagegen，自己读图提取模板，用仓库原生后端重建、导图修复，交付PPTX和完整源工程，不把中间操作交给我。"

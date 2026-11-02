@@ -1,0 +1,14 @@
+Use case: productivity-visual. Create ONE complete 16:9 presentation reference slide.
+This is a design reference for later rebuilding with native editable text, shapes, tables and images.
+Shared art direction: 暖白纸色#F7F2E8、炭黑#2B3530、陶土橙#BC6248、苔绿#72896B；杂志编辑风，短中文衬线标题配清楚黑体正文，少量手绘线条；保持同样的页边距、标题基线与角落标签。版式随内容变化，避免所有内容变成圆角卡片。
+Audience: 社区组织者与志愿者. Purpose: 向社区组织者介绍一场虚构的修补工作坊方案，供讨论试办
+Slide 2: 一次修补，四个步骤
+Exact content (use these facts only; do not add claims or data):
+["观察：先看清旧物状态", "选择：确定一个可行的小目标", "动手：在志愿者指导下尝试", "分享：记录方法与下一步"]
+Page composition and imagery: 正文流程页。沿水平方向从左到右安排四个原生可重建的步骤：01观察、02选择、03动手、04分享。四组之间用细的略微手绘感连接线，标题在上方，编号陶土橙，正文炭黑。不要大面积插画，不要四张封闭卡片；用留白、圆形小节点和轻微铅笔下划线分组。每步的标题与说明需对应提供的文案。
+Typography: clear Chinese hierarchy, generous readable body text; reserve short expressive type for headings.
+Keep spelling and reading order correct. No extra logos, watermarks, fake statistics or unrelated decoration.
+One slide only. Do not draw a contact sheet, monitor frame, PowerPoint UI, page number label or 3D perspective.
+The supplied image is STYLE REFERENCE ONLY for palette, heading character and paper atmosphere. Create slide 2 with its own horizontal process composition. Do not copy the cover stool scene.
+
+Revision after visual review: Remove ALL collage illustrations, photos, realistic objects and paper cutout subjects. The bottom half must remain mostly empty with only subtle native-rebuildable linework. This is a clean diagram page, not four picture cards. Four small circle number markers, four short heading/body pairs, three thin connectors. Exact title: 一次修补，四个步骤. Use charcoal and terracotta on uniform warm ivory. All diagram elements should look simple enough to redraw with native lines and circles. No extra words.

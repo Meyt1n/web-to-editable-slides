@@ -1,0 +1,32 @@
+[
+  {
+    "file": "media/cover-collage.png",
+    "sha256": "4416787e317a32aac32aa3213e1798d228cc68130c8aafdee707cb916bf8be0a",
+    "prompt": "media/cover-asset-prompt.txt",
+    "input_images": [
+      {
+        "file": "references/01-v01.png",
+        "role": "edit_reference",
+        "sha256": "94c103341f1876706ddd22a40c8ccf47977187c69b2ccb0cb9def0f8b51e01fa"
+      }
+    ],
+    "tool": "built-in imagegen",
+    "transparent_background": true,
+    "usage": "complex illustration kept as a standalone raster asset"
+  },
+  {
+    "file": "media/table-collage.png",
+    "sha256": "7cb976e34da77c2f2505176b2d31845072fcde7b9d6cc69e07814821026fea88",
+    "prompt": "media/table-asset-prompt.txt",
+    "input_images": [
+      {
+        "file": "references/04-v01.png",
+        "role": "edit_reference",
+        "sha256": "f5e82ad36e5ac8c0995e0a20bca33a6ffd403b31c93ebc3773f1783f8890df23"
+      }
+    ],
+    "tool": "built-in imagegen",
+    "transparent_background": true,
+    "usage": "complex illustration kept as a standalone raster asset"
+  }
+]

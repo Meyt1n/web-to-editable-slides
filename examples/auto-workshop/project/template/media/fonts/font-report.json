@@ -1,0 +1,31 @@
+[
+  {
+    "requested_family": "ZCOOL XiaoWei",
+    "family": "ZCOOL XiaoWei",
+    "axes": {},
+    "characters": 47,
+    "source_sha256": "a42b620140f493db42f741351dfbf343c0936d58588ee8004b8b2a218d997ff1",
+    "file": "font-1.ttf",
+    "license_file": "font-1-OFL.txt"
+  },
+  {
+    "requested_family": "Noto Sans SC",
+    "family": "Noto Sans SC",
+    "axes": {
+      "wght": 400
+    },
+    "characters": 99,
+    "source_sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+    "file": "font-2.ttf",
+    "license_file": "font-2-OFL.txt"
+  },
+  {
+    "requested_family": "Barlow Condensed",
+    "family": "Barlow Condensed",
+    "axes": {},
+    "characters": 7,
+    "source_sha256": "583cec5da3b84bc4dc7c9c72e2a565c94d34e431518b19d7e250b7830ad5f996",
+    "file": "font-3.ttf",
+    "license_file": "font-3-OFL.txt"
+  }
+]

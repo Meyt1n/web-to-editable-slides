@@ -1,0 +1,1832 @@
+{
+  "version": 1,
+  "title": "修补日｜社区旧物修复工作坊",
+  "size": [
+    960,
+    540
+  ],
+  "template_file": "template/template.json",
+  "pages": [
+    {
+      "id": 1,
+      "pageType": "cover",
+      "layout": "cover",
+      "reference": "references/01-v01.png",
+      "background": {
+        "type": "solid",
+        "color": "#F7F2E8"
+      },
+      "elements": [
+        {
+          "elementId": "p1-1",
+          "elementType": "text",
+          "bounds": [
+            48,
+            105,
+            425,
+            132
+          ],
+          "content": {
+            "text": "修补日",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 110,
+            "color": "#BC6248",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p1-2",
+          "elementType": "text",
+          "bounds": [
+            50,
+            247,
+            447,
+            72
+          ],
+          "content": {
+            "text": "把旧物再用起来",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 49,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p1-3",
+          "elementType": "shape",
+          "bounds": [
+            248,
+            322,
+            225,
+            14
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#72896B",
+            "width": 1.6,
+            "style": "solid"
+          },
+          "path": "M0 10 C70 -4 125 11 225 4",
+          "viewBox": [
+            225,
+            14
+          ]
+        },
+        {
+          "elementId": "p1-4",
+          "elementType": "text",
+          "bounds": [
+            52,
+            356,
+            446,
+            52
+          ],
+          "content": {
+            "text": "社区旧物修复工作坊",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 27,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p1-5",
+          "elementType": "text",
+          "bounds": [
+            52,
+            413,
+            440,
+            34
+          ],
+          "content": {
+            "text": "概念方案 · 供试办讨论",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 18,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p1-6",
+          "elementType": "image",
+          "bounds": [
+            480,
+            28,
+            448,
+            454
+          ],
+          "src": "media/cover-collage.png",
+          "fit": {
+            "mode": "contain"
+          },
+          "raster_reason": "imagegen依据本页参考局部分离的复杂木纹与纸拼贴插画，作为独立图片可移动裁切，内部笔触与物件不能分别编辑"
+        },
+        {
+          "elementId": "p1-7",
+          "elementType": "shape",
+          "bounds": [
+            32,
+            506,
+            896,
+            1
+          ],
+          "shapeName": "rect",
+          "fill": {
+            "type": "solid",
+            "color": "#BC6248"
+          }
+        }
+      ],
+      "animations": []
+    },
+    {
+      "id": 2,
+      "pageType": "content",
+      "layout": "process",
+      "reference": "references/02-v02.png",
+      "background": {
+        "type": "solid",
+        "color": "#F7F2E8"
+      },
+      "elements": [
+        {
+          "elementId": "p2-1",
+          "elementType": "text",
+          "bounds": [
+            63,
+            61,
+            260,
+            83
+          ],
+          "content": {
+            "text": "一次修补，",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 48,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p2-2",
+          "elementType": "text",
+          "bounds": [
+            318,
+            61,
+            420,
+            83
+          ],
+          "content": {
+            "text": "四个步骤",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 48,
+            "color": "#BC6248",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p2-3",
+          "elementType": "shape",
+          "bounds": [
+            63,
+            146,
+            228,
+            17
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#BC6248",
+            "width": 1.8,
+            "style": "solid"
+          },
+          "path": "M0 12 C75 -3 155 8 228 4",
+          "viewBox": [
+            228,
+            17
+          ]
+        },
+        {
+          "elementId": "p2-4",
+          "elementType": "shape",
+          "bounds": [
+            63,
+            195,
+            53,
+            53
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#BC6248"
+          }
+        },
+        {
+          "elementId": "p2-5",
+          "elementType": "text",
+          "bounds": [
+            65,
+            197,
+            49,
+            49
+          ],
+          "content": {
+            "text": "01",
+            "fontFamily": "Barlow Condensed",
+            "fontSize": 31,
+            "color": "#F7F2E8",
+            "align": [
+              "center",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p2-6",
+          "elementType": "text",
+          "bounds": [
+            63,
+            257,
+            206,
+            58
+          ],
+          "content": {
+            "text": "观察",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 37,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p2-7",
+          "elementType": "shape",
+          "bounds": [
+            63,
+            316,
+            76,
+            7
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#BC6248",
+            "width": 1.2,
+            "style": "solid"
+          },
+          "path": "M0 4 C25 0 53 1 76 3",
+          "viewBox": [
+            76,
+            7
+          ]
+        },
+        {
+          "elementId": "p2-8",
+          "elementType": "text",
+          "bounds": [
+            63,
+            331,
+            204,
+            88
+          ],
+          "content": {
+            "text": "先看清旧物状态",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 21,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "top"
+            ],
+            "wrap": true,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p2-9",
+          "elementType": "shape",
+          "bounds": [
+            125,
+            215,
+            147,
+            13
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#72896B",
+            "width": 1.1,
+            "style": "solid"
+          },
+          "path": "M0 7 C50 0 101 3 147 6",
+          "viewBox": [
+            147,
+            13
+          ]
+        },
+        {
+          "elementId": "p2-10",
+          "elementType": "shape",
+          "bounds": [
+            267,
+            217,
+            9,
+            9
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#F7F2E8"
+          },
+          "border": {
+            "color": "#72896B",
+            "width": 1.2,
+            "style": "solid"
+          }
+        },
+        {
+          "elementId": "p2-11",
+          "elementType": "shape",
+          "bounds": [
+            293,
+            195,
+            53,
+            53
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#BC6248"
+          }
+        },
+        {
+          "elementId": "p2-12",
+          "elementType": "text",
+          "bounds": [
+            295,
+            197,
+            49,
+            49
+          ],
+          "content": {
+            "text": "02",
+            "fontFamily": "Barlow Condensed",
+            "fontSize": 31,
+            "color": "#F7F2E8",
+            "align": [
+              "center",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p2-13",
+          "elementType": "text",
+          "bounds": [
+            293,
+            257,
+            206,
+            58
+          ],
+          "content": {
+            "text": "选择",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 37,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p2-14",
+          "elementType": "shape",
+          "bounds": [
+            293,
+            316,
+            76,
+            7
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#BC6248",
+            "width": 1.2,
+            "style": "solid"
+          },
+          "path": "M0 4 C25 0 53 1 76 3",
+          "viewBox": [
+            76,
+            7
+          ]
+        },
+        {
+          "elementId": "p2-15",
+          "elementType": "text",
+          "bounds": [
+            293,
+            331,
+            204,
+            88
+          ],
+          "content": {
+            "text": "确定一个可行的\n小目标",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 21,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "top"
+            ],
+            "wrap": true,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p2-16",
+          "elementType": "shape",
+          "bounds": [
+            355,
+            215,
+            147,
+            13
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#72896B",
+            "width": 1.1,
+            "style": "solid"
+          },
+          "path": "M0 7 C50 0 101 3 147 6",
+          "viewBox": [
+            147,
+            13
+          ]
+        },
+        {
+          "elementId": "p2-17",
+          "elementType": "shape",
+          "bounds": [
+            497,
+            217,
+            9,
+            9
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#F7F2E8"
+          },
+          "border": {
+            "color": "#72896B",
+            "width": 1.2,
+            "style": "solid"
+          }
+        },
+        {
+          "elementId": "p2-18",
+          "elementType": "shape",
+          "bounds": [
+            523,
+            195,
+            53,
+            53
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#BC6248"
+          }
+        },
+        {
+          "elementId": "p2-19",
+          "elementType": "text",
+          "bounds": [
+            525,
+            197,
+            49,
+            49
+          ],
+          "content": {
+            "text": "03",
+            "fontFamily": "Barlow Condensed",
+            "fontSize": 31,
+            "color": "#F7F2E8",
+            "align": [
+              "center",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p2-20",
+          "elementType": "text",
+          "bounds": [
+            523,
+            257,
+            206,
+            58
+          ],
+          "content": {
+            "text": "动手",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 37,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p2-21",
+          "elementType": "shape",
+          "bounds": [
+            523,
+            316,
+            76,
+            7
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#BC6248",
+            "width": 1.2,
+            "style": "solid"
+          },
+          "path": "M0 4 C25 0 53 1 76 3",
+          "viewBox": [
+            76,
+            7
+          ]
+        },
+        {
+          "elementId": "p2-22",
+          "elementType": "text",
+          "bounds": [
+            523,
+            331,
+            204,
+            88
+          ],
+          "content": {
+            "text": "在志愿者指导下\n尝试",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 21,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "top"
+            ],
+            "wrap": true,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p2-23",
+          "elementType": "shape",
+          "bounds": [
+            585,
+            215,
+            147,
+            13
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#72896B",
+            "width": 1.1,
+            "style": "solid"
+          },
+          "path": "M0 7 C50 0 101 3 147 6",
+          "viewBox": [
+            147,
+            13
+          ]
+        },
+        {
+          "elementId": "p2-24",
+          "elementType": "shape",
+          "bounds": [
+            727,
+            217,
+            9,
+            9
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#F7F2E8"
+          },
+          "border": {
+            "color": "#72896B",
+            "width": 1.2,
+            "style": "solid"
+          }
+        },
+        {
+          "elementId": "p2-25",
+          "elementType": "shape",
+          "bounds": [
+            753,
+            195,
+            53,
+            53
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#BC6248"
+          }
+        },
+        {
+          "elementId": "p2-26",
+          "elementType": "text",
+          "bounds": [
+            755,
+            197,
+            49,
+            49
+          ],
+          "content": {
+            "text": "04",
+            "fontFamily": "Barlow Condensed",
+            "fontSize": 31,
+            "color": "#F7F2E8",
+            "align": [
+              "center",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p2-27",
+          "elementType": "text",
+          "bounds": [
+            753,
+            257,
+            206,
+            58
+          ],
+          "content": {
+            "text": "分享",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 37,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p2-28",
+          "elementType": "shape",
+          "bounds": [
+            753,
+            316,
+            76,
+            7
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#BC6248",
+            "width": 1.2,
+            "style": "solid"
+          },
+          "path": "M0 4 C25 0 53 1 76 3",
+          "viewBox": [
+            76,
+            7
+          ]
+        },
+        {
+          "elementId": "p2-29",
+          "elementType": "text",
+          "bounds": [
+            753,
+            331,
+            204,
+            88
+          ],
+          "content": {
+            "text": "记录方法与下一步",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 21,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "top"
+            ],
+            "wrap": true,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p2-30",
+          "elementType": "shape",
+          "bounds": [
+            32,
+            506,
+            896,
+            1
+          ],
+          "shapeName": "rect",
+          "fill": {
+            "type": "solid",
+            "color": "#BC6248"
+          }
+        }
+      ],
+      "animations": [
+        {
+          "elementId": "p2-4",
+          "effect": "wipe-in",
+          "trigger": "onClick",
+          "durationMs": 600,
+          "delayMs": 0,
+          "direction": "right"
+        },
+        {
+          "elementId": "p2-5",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-6",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-7",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-8",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-11",
+          "effect": "wipe-in",
+          "trigger": "onClick",
+          "durationMs": 600,
+          "delayMs": 0,
+          "direction": "right"
+        },
+        {
+          "elementId": "p2-12",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-13",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-14",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-15",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-18",
+          "effect": "wipe-in",
+          "trigger": "onClick",
+          "durationMs": 600,
+          "delayMs": 0,
+          "direction": "right"
+        },
+        {
+          "elementId": "p2-19",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-20",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-21",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-22",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-25",
+          "effect": "wipe-in",
+          "trigger": "onClick",
+          "durationMs": 600,
+          "delayMs": 0,
+          "direction": "right"
+        },
+        {
+          "elementId": "p2-26",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-27",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-28",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        },
+        {
+          "elementId": "p2-29",
+          "effect": "fade-in",
+          "trigger": "withPrevious",
+          "durationMs": 500,
+          "delayMs": 120
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "pageType": "content",
+      "layout": "schedule",
+      "reference": "references/03-v01.png",
+      "background": {
+        "type": "solid",
+        "color": "#F7F2E8"
+      },
+      "elements": [
+        {
+          "elementId": "p3-1",
+          "elementType": "text",
+          "bounds": [
+            48,
+            54,
+            338,
+            90
+          ],
+          "content": {
+            "text": "把时间留给",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 54,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p3-2",
+          "elementType": "text",
+          "bounds": [
+            389,
+            54,
+            173,
+            90
+          ],
+          "content": {
+            "text": "动手",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 60,
+            "color": "#BC6248",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p3-3",
+          "elementType": "shape",
+          "bounds": [
+            309,
+            146,
+            230,
+            13
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#72896B",
+            "width": 1.5,
+            "style": "solid"
+          },
+          "path": "M0 9 C80 0 155 4 230 7",
+          "viewBox": [
+            230,
+            13
+          ]
+        },
+        {
+          "elementId": "p3-4",
+          "elementType": "shape",
+          "bounds": [
+            679,
+            61,
+            117,
+            76
+          ],
+          "shapeName": "rect",
+          "fill": {
+            "type": "solid",
+            "color": "#D9DECE"
+          }
+        },
+        {
+          "elementId": "p3-5",
+          "elementType": "shape",
+          "bounds": [
+            789,
+            97,
+            92,
+            62
+          ],
+          "shapeName": "rect",
+          "fill": {
+            "type": "solid",
+            "color": "#E6B193"
+          }
+        },
+        {
+          "elementId": "p3-6",
+          "elementType": "shape",
+          "bounds": [
+            808,
+            48,
+            73,
+            90
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#2B3530",
+            "width": 1.1,
+            "style": "solid"
+          },
+          "path": "M5 86 C25 60 35 35 59 4 M21 65 C0 51 3 40 20 46 M35 41 C62 40 72 23 42 29",
+          "viewBox": [
+            73,
+            90
+          ]
+        },
+        {
+          "elementId": "p3-7",
+          "elementType": "table",
+          "bounds": [
+            48,
+            178,
+            864,
+            270
+          ],
+          "rows": [
+            [
+              {
+                "text": "时间",
+                "fontFamily": "Noto Sans SC",
+                "fontSize": 25,
+                "color": "#F7F2E8",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#72896B"
+                }
+              },
+              {
+                "text": "环节",
+                "fontFamily": "Noto Sans SC",
+                "fontSize": 25,
+                "color": "#F7F2E8",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#72896B"
+                }
+              },
+              {
+                "text": "参与方式",
+                "fontFamily": "Noto Sans SC",
+                "fontSize": 25,
+                "color": "#F7F2E8",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#72896B"
+                }
+              }
+            ],
+            [
+              {
+                "text": "09:30",
+                "fontFamily": "Barlow Condensed",
+                "fontSize": 35,
+                "color": "#BC6248",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#F7F2E8"
+                }
+              },
+              {
+                "text": "观察与分组",
+                "fontFamily": "ZCOOL XiaoWei",
+                "fontSize": 26,
+                "color": "#2B3530",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#F7F2E8"
+                },
+                "bold": true
+              },
+              {
+                "text": "带着一件旧物来",
+                "fontFamily": "Noto Sans SC",
+                "fontSize": 21,
+                "color": "#2B3530",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#F7F2E8"
+                }
+              }
+            ],
+            [
+              {
+                "text": "10:00",
+                "fontFamily": "Barlow Condensed",
+                "fontSize": 35,
+                "color": "#BC6248",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#F0E6D6"
+                }
+              },
+              {
+                "text": "动手与尝试",
+                "fontFamily": "ZCOOL XiaoWei",
+                "fontSize": 26,
+                "color": "#2B3530",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#F0E6D6"
+                },
+                "bold": true
+              },
+              {
+                "text": "先完成一个小目标",
+                "fontFamily": "Noto Sans SC",
+                "fontSize": 21,
+                "color": "#2B3530",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#F0E6D6"
+                }
+              }
+            ],
+            [
+              {
+                "text": "11:00",
+                "fontFamily": "Barlow Condensed",
+                "fontSize": 35,
+                "color": "#BC6248",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#F7F2E8"
+                }
+              },
+              {
+                "text": "分享与记录",
+                "fontFamily": "ZCOOL XiaoWei",
+                "fontSize": 26,
+                "color": "#2B3530",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#F7F2E8"
+                },
+                "bold": true
+              },
+              {
+                "text": "留下方法与后续计划",
+                "fontFamily": "Noto Sans SC",
+                "fontSize": 21,
+                "color": "#2B3530",
+                "align": [
+                  "center",
+                  "middle"
+                ],
+                "wrap": false,
+                "fill": {
+                  "type": "solid",
+                  "color": "#F7F2E8"
+                }
+              }
+            ]
+          ],
+          "columnWidths": [
+            0.23,
+            0.36,
+            0.41
+          ],
+          "rowHeights": [
+            0.21,
+            0.263,
+            0.263,
+            0.264
+          ]
+        },
+        {
+          "elementId": "p3-8",
+          "elementType": "text",
+          "bounds": [
+            48,
+            460,
+            850,
+            32
+          ],
+          "content": {
+            "text": "示例安排，实际时间由组织者确认",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 18,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p3-9",
+          "elementType": "shape",
+          "bounds": [
+            32,
+            506,
+            896,
+            1
+          ],
+          "shapeName": "rect",
+          "fill": {
+            "type": "solid",
+            "color": "#BC6248"
+          }
+        }
+      ],
+      "animations": []
+    },
+    {
+      "id": 4,
+      "pageType": "final",
+      "layout": "action",
+      "reference": "references/04-v01.png",
+      "background": {
+        "type": "solid",
+        "color": "#F7F2E8"
+      },
+      "elements": [
+        {
+          "elementId": "p4-1",
+          "elementType": "text",
+          "bounds": [
+            48,
+            40,
+            810,
+            96
+          ],
+          "content": {
+            "text": "从一张桌子开始",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 58,
+            "color": "#BC6248",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p4-2",
+          "elementType": "shape",
+          "bounds": [
+            317,
+            138,
+            244,
+            17
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#72896B",
+            "width": 1.7,
+            "style": "solid"
+          },
+          "path": "M0 12 C70 -6 135 4 244 5",
+          "viewBox": [
+            244,
+            17
+          ]
+        },
+        {
+          "elementId": "p4-3",
+          "elementType": "image",
+          "bounds": [
+            45,
+            178,
+            415,
+            260
+          ],
+          "src": "media/table-collage.png",
+          "fit": {
+            "mode": "contain"
+          },
+          "raster_reason": "imagegen依据本页参考局部分离的复杂木纹与纸拼贴插画，作为独立图片可移动裁切，内部笔触与物件不能分别编辑"
+        },
+        {
+          "elementId": "p4-4",
+          "elementType": "shape",
+          "bounds": [
+            41,
+            165,
+            422,
+            282
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "none"
+          },
+          "border": {
+            "color": "#BC6248",
+            "width": 2.3,
+            "style": "solid"
+          },
+          "path": "M10 170 C-2 105 54 12 202 5 C338 -8 421 90 409 182 C398 266 261 289 127 269 C33 257 6 213 10 170",
+          "viewBox": [
+            422,
+            282
+          ]
+        },
+        {
+          "elementId": "p4-5",
+          "elementType": "shape",
+          "bounds": [
+            533,
+            155,
+            57,
+            57
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#72896B"
+          }
+        },
+        {
+          "elementId": "p4-6",
+          "elementType": "text",
+          "bounds": [
+            536,
+            158,
+            51,
+            51
+          ],
+          "content": {
+            "text": "01",
+            "fontFamily": "Barlow Condensed",
+            "fontSize": 25,
+            "color": "#F7F2E8",
+            "align": [
+              "center",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p4-7",
+          "elementType": "text",
+          "bounds": [
+            626,
+            152,
+            288,
+            39
+          ],
+          "content": {
+            "text": "场地",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 25,
+            "color": "#BC6248",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p4-8",
+          "elementType": "text",
+          "bounds": [
+            626,
+            189,
+            290,
+            40
+          ],
+          "content": {
+            "text": "一张稳定的工作桌",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 21,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p4-9",
+          "elementType": "shape",
+          "bounds": [
+            598,
+            226,
+            315,
+            0.8
+          ],
+          "shapeName": "rect",
+          "fill": {
+            "type": "solid",
+            "color": "#72896B"
+          }
+        },
+        {
+          "elementId": "p4-10",
+          "elementType": "shape",
+          "bounds": [
+            533,
+            243,
+            57,
+            57
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#72896B"
+          }
+        },
+        {
+          "elementId": "p4-11",
+          "elementType": "text",
+          "bounds": [
+            536,
+            246,
+            51,
+            51
+          ],
+          "content": {
+            "text": "02",
+            "fontFamily": "Barlow Condensed",
+            "fontSize": 25,
+            "color": "#F7F2E8",
+            "align": [
+              "center",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p4-12",
+          "elementType": "text",
+          "bounds": [
+            626,
+            240,
+            288,
+            39
+          ],
+          "content": {
+            "text": "人员",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 25,
+            "color": "#BC6248",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p4-13",
+          "elementType": "text",
+          "bounds": [
+            626,
+            277,
+            290,
+            40
+          ],
+          "content": {
+            "text": "明确主持人与志愿者分工",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 21,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p4-14",
+          "elementType": "shape",
+          "bounds": [
+            598,
+            314,
+            315,
+            0.8
+          ],
+          "shapeName": "rect",
+          "fill": {
+            "type": "solid",
+            "color": "#72896B"
+          }
+        },
+        {
+          "elementId": "p4-15",
+          "elementType": "shape",
+          "bounds": [
+            533,
+            331,
+            57,
+            57
+          ],
+          "shapeName": "ellipse",
+          "fill": {
+            "type": "solid",
+            "color": "#72896B"
+          }
+        },
+        {
+          "elementId": "p4-16",
+          "elementType": "text",
+          "bounds": [
+            536,
+            334,
+            51,
+            51
+          ],
+          "content": {
+            "text": "03",
+            "fontFamily": "Barlow Condensed",
+            "fontSize": 25,
+            "color": "#F7F2E8",
+            "align": [
+              "center",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p4-17",
+          "elementType": "text",
+          "bounds": [
+            626,
+            328,
+            288,
+            39
+          ],
+          "content": {
+            "text": "物料",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 25,
+            "color": "#BC6248",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p4-18",
+          "elementType": "text",
+          "bounds": [
+            626,
+            365,
+            290,
+            40
+          ],
+          "content": {
+            "text": "按活动项目准备工具",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 21,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p4-19",
+          "elementType": "shape",
+          "bounds": [
+            422,
+            423,
+            494,
+            53
+          ],
+          "shapeName": "custom",
+          "fill": {
+            "type": "solid",
+            "color": "#F0D4C0"
+          },
+          "path": "M3 4 L472 0 L494 8 L488 45 L468 53 L0 48 Z",
+          "viewBox": [
+            494,
+            53
+          ]
+        },
+        {
+          "elementId": "p4-20",
+          "elementType": "text",
+          "bounds": [
+            438,
+            426,
+            120,
+            45
+          ],
+          "content": {
+            "text": "下一步",
+            "fontFamily": "ZCOOL XiaoWei",
+            "fontSize": 26,
+            "color": "#BC6248",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12,
+            "bold": true
+          }
+        },
+        {
+          "elementId": "p4-21",
+          "elementType": "text",
+          "bounds": [
+            561,
+            426,
+            344,
+            45
+          ],
+          "content": {
+            "text": "选定日期，确认试办范围",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 21,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p4-22",
+          "elementType": "text",
+          "bounds": [
+            40,
+            477,
+            720,
+            26
+          ],
+          "content": {
+            "text": "概念方案，不构成已完成活动的证明",
+            "fontFamily": "Noto Sans SC",
+            "fontSize": 15,
+            "color": "#2B3530",
+            "align": [
+              "left",
+              "middle"
+            ],
+            "wrap": false,
+            "lineHeight": 1.12
+          }
+        },
+        {
+          "elementId": "p4-23",
+          "elementType": "shape",
+          "bounds": [
+            32,
+            506,
+            896,
+            1
+          ],
+          "shapeName": "rect",
+          "fill": {
+            "type": "solid",
+            "color": "#BC6248"
+          }
+        }
+      ],
+      "animations": []
+    }
+  ]
+}

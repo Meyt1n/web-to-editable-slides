@@ -1,0 +1,11 @@
+Use case: productivity-visual. Create ONE complete 16:9 presentation reference slide.
+This is a design reference for later rebuilding with native editable text, shapes, tables and images.
+Shared art direction: 暖白纸色#F7F2E8、炭黑#2B3530、陶土橙#BC6248、苔绿#72896B；杂志编辑风，短中文衬线标题配清楚黑体正文，少量手绘线条；保持同样的页边距、标题基线与角落标签。版式随内容变化，避免所有内容变成圆角卡片。
+Audience: 社区组织者与志愿者. Purpose: 向社区组织者介绍一场虚构的修补工作坊方案，供讨论试办
+Slide 1: 修补日
+Exact content (use these facts only; do not add claims or data):
+["把旧物再用起来", "社区旧物修复工作坊", "概念方案 · 供试办讨论"]
+Page composition and imagery: 封面。左侧55%为清楚的中文标题与副标题，修补日大标题左对齐；右侧40%是一幅温暖的编辑插画：旧木凳、布料、针线、螺丝刀和小盆栽组合，平面纸拼贴与轻铅笔质感，不出现人物或品牌。底部一条细陶土橙线收住画面。留白多，主次清楚。
+Typography: clear Chinese hierarchy, generous readable body text; reserve short expressive type for headings.
+Keep spelling and reading order correct. No extra logos, watermarks, fake statistics or unrelated decoration.
+One slide only. Do not draw a contact sheet, monitor frame, PowerPoint UI, page number label or 3D perspective.

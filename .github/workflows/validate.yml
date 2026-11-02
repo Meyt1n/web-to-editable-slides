@@ -23,3 +23,6 @@ jobs:
       - run: python scripts/build_gallery.py --output-dir output/gallery
       - run: python scripts/review_design_plan.py output/gallery/design-plan.json
       - run: python scripts/check_pptx.py output/gallery/design-gallery.pptx --require-fade
+      - run: python scripts/auto_deck.py status examples/auto-workshop/project
+      - run: python scripts/auto_deck.py compile examples/auto-workshop/project --output-dir output/auto-workshop
+      - run: python scripts/check_pptx.py output/auto-workshop/deck.pptx --require-fade

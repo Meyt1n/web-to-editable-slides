@@ -16,6 +16,7 @@
 | Ma Shan Zheng、Long Cang、Noto Sans SC完整变量字体 | Google Fonts固定提交，详见`assets/fonts/catalog.json` | 多字体角色与新主题正文 | SIL OFL 1.1，完整许可随`assets/fonts/`提供，不适用MIT |
 | 原创无字背景：封面水墨、正文水墨、浅色宣纸 | 内置imagegen按独立提示词生成，逐图来源与哈希见`assets/backgrounds/catalog.json` | 按页型选择的背景分层小样 | 在可许可的权利范围内按仓库MIT提供，不表示独占权；未将用户参考PPT图片用于生成或公开分发 |
 | 拾光书屋5张参考页与独立空间配图 | 宿主内置imagegen生成 | 虚构空间提案与逐页还原试跑 | 同其他自生成概念示例，不是建成场地或运营成果 |
+| 修补日参考页与2张透明拼贴素材 | 宿主内置imagegen生成，提示词、输入角色与哈希在`examples/auto-workshop/project/` | 智能体自动设计、纠偏、原生重建与离线重放 | 自生成虚构活动方案；在可许可的权利范围内按仓库MIT提供，不表示独占权，不是实际活动证明 |
 
 字体原始项目：https://github.com/adobe-fonts/source-han-sans 。示例使用的字体已做子集和名称调整，原始版权及OFL信息保留。OFL字体可与本仓库共同分发，但不能改为本仓库的MIT许可。
 

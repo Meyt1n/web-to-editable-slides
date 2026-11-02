@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-02",
+  "mode": "host-agent autonomous design/imagegen/visual analysis/native export",
+  "pages": 4,
+  "imagegen_reference_calls": 5,
+  "imagegen_asset_calls": 2,
+  "retry": {
+    "page": 2,
+    "reason": "first image added large collage subjects, revised to clean process"
+  },
+  "external_wasm_backend_used": false,
+  "tests_passed": 71,
+  "native_editability": [
+    {
+      "id": 1,
+      "native_objects": 6,
+      "raster_objects": [
+        {
+          "elementId": "p1-6",
+          "reason": "imagegen依据本页参考局部分离的复杂木纹与纸拼贴插画，作为独立图片可移动裁切，内部笔触与物件不能分别编辑",
+          "file": "media/cover-collage.png"
+        }
+      ],
+      "reference": "references/01-v01.png"
+    },
+    {
+      "id": 2,
+      "native_objects": 30,
+      "raster_objects": [],
+      "reference": "references/02-v02.png"
+    },
+    {
+      "id": 3,
+      "native_objects": 9,
+      "raster_objects": [],
+      "reference": "references/03-v01.png"
+    },
+    {
+      "id": 4,
+      "native_objects": 22,
+      "raster_objects": [
+        {
+          "elementId": "p4-3",
+          "reason": "imagegen依据本页参考局部分离的复杂木纹与纸拼贴插画，作为独立图片可移动裁切，内部笔触与物件不能分别编辑",
+          "file": "media/table-collage.png"
+        }
+      ],
+      "reference": "references/04-v01.png"
+    }
+  ],
+  "powerpoint": {
+    "version": "16.0",
+    "overflow_candidates": 0,
+    "rendered": true,
+    "animation_video_reviewed": true,
+    "live_click_pause_verified": false
+  },
+  "findings": [
+    "保留左侧大标题与右侧独立拼贴、下划线和底部细线。站酷小薇加粗近似生图衬线字，笔画不完全一致；木凳素材局部重新分离，构图存在微差。无文字溢出候选。",
+    "四步横排、节点、曲线、关键词与说明均为原生对象。说明按语义换行并顶部对齐，避免单字孤行；去除了非预期主题阴影。四个点击组播放依次展开。",
+    "三列十二单元格为真正的原生表格，时间与内容正确且可读。右上纸片和叶纹做原生几何近似，保留表头、条纹行与阅读顺序。未发现遮挡或溢出。",
+    "左侧独立木桌素材、原生圈线、右侧三组行动和底部下一步保持对应关系。图标用编号近似，纸纹简化。两张图片内部不可分别编辑，已在报告披露。"
+  ],
+  "font_binary_limit": [
+    "Embedded font binary is unverified: ppt/fonts/font1.fntdata; EOT compressed payload cannot be verified by this checker",
+    "Embedded font binary is unverified: ppt/fonts/font2.fntdata; EOT compressed payload cannot be verified by this checker",
+    "Embedded font binary is unverified: ppt/fonts/font3.fntdata; EOT compressed payload cannot be verified by this checker"
+  ],
+  "compatibility": {
+    "PowerPoint Windows 16.0": "rendered and video reviewed",
+    "WPS": "not tested",
+    "Keynote": "not tested",
+    "LibreOffice": "not tested"
+  },
+  "scope": "Model visual comparisons and structure checks; no pixel similarity score or general cross-player guarantee",
+  "structural_stress_test": {
+    "pages": 30,
+    "objects": 520,
+    "editable_text_boxes": 256,
+    "editable_table_cells": 84,
+    "seconds": 3.33,
+    "pptx_bytes": 4862719,
+    "structure_ok": true,
+    "errors": [],
+    "scope": "Single-machine structural stress test repeating four layout specimens; not 30 unique page designs, visual QA or a cross-player benchmark"
+  },
+  "independent_forward_test": {
+    "scenario": "一页虚构社区读书会招募，明亮简洁，原生时间/环节表格，无页内动画",
+    "stage": "complete",
+    "imagegen_calls": 1,
+    "user_handoff_needed": false,
+    "native_objects": 30,
+    "raster_objects": 0,
+    "editable_text_boxes": 12,
+    "editable_table_cells": 10,
+    "powerpoint_rendered": true,
+    "overflow_candidates": 0,
+    "observed_and_addressed": [
+      "默认Python过旧：增加doctor预检与3.10+门槛，在写任务前检查",
+      "JSON哈希语义变化：文档说明规范化哈希，提供qa-skeleton自动填充，保留pending状态直到实际看图"
+    ],
+    "scope": "独立智能体实际执行；不是其他播放器兼容证明"
+  }
+}
