@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 from io import BytesIO
 import json
 from pathlib import Path
+import re
 import shutil
 
 from fontTools import subset
@@ -12,6 +14,24 @@ from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
 
 CATALOG=Path(__file__).resolve().parents[1]/'assets/fonts/catalog.json'
+
+
+def name_subset(font, family, source_sha256, supported, axes):
+    """Give each glyph/axis set its own face identity for Office/GDI caches."""
+    identity=json.dumps([source_sha256,sorted(supported),axes],sort_keys=True,separators=(',',':'))
+    token=hashlib.sha256(identity.encode('utf8')).hexdigest()[:10]
+    # Windows legacy family names must remain short; all names here are ASCII.
+    base=re.sub('[^A-Za-z0-9]','',family)[:12]
+    actual=f'Deck {base} {token}'
+    names=font['name'];style=names.getDebugName(2) or 'Regular'
+    postscript=f'Deck-{base}-{token}-{re.sub("[^A-Za-z0-9]","",style)}'[:63]
+    values={1:actual,3:f'Deck;{token};{postscript}',4:f'{actual} {style}',6:postscript,16:actual,21:actual}
+    for record in names.names:
+        if record.nameID in values:record.string=values[record.nameID].encode(record.getEncoding())
+    for name_id,value in values.items():
+        names.setName(value,name_id,3,1,0x409)
+        names.setName(value,name_id,1,0,0)
+    return actual,token
 
 
 def prepare(requests: list, output: Path, catalog_path: Path = CATALOG) -> dict:
@@ -42,16 +62,19 @@ def prepare(requests: list, output: Path, catalog_path: Path = CATALOG) -> dict:
             elif 'weight' in request and request['weight']!=font['OS/2'].usWeightClass:
                 raise ValueError(f'{family}: this static font has no requested weight')
             options=subset.Options();options.name_IDs=['*'];options.name_legacy=True;options.name_languages=['*']
-            # Keep supported spaces/tabs too, so Latin word spacing uses this font's metrics.
-            supported={ord(c) for c in text if ord(c) in font.getBestCmap()}
+            # Keep spaces and basic Latin metrics even in Chinese-only headings.
+            # GDI/Office may otherwise substitute the face during Latin-name lookup.
+            compatibility=' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,-'
+            supported={ord(c) for c in text+compatibility if ord(c) in font.getBestCmap()}
             worker=subset.Subsetter(options=options);worker.populate(unicodes=supported);worker.subset(font)
             if axes:font=instantiateVariableFont(font,axes,inplace=True,optimize=True,updateFontNames=True)
-            actual=font['name'].getDebugName(1)
+            original=font['name'].getDebugName(1)
+            actual,subset_id=name_subset(font,family,item['sha256'],supported,axes)
             flags=font['OS/2'].fsType
             if flags & (2|0x200) or (flags & 4 and not flags & 8):
                 raise ValueError(f'{family}: embedding flags do not allow editable outline embedding')
             buffer=BytesIO();font.save(buffer)
-            built.append((item,dict(requested_family=family,family=actual,axes=axes,
+            built.append((item,dict(requested_family=family,family=actual,original_family=original,subset_id=subset_id,axes=axes,
                 characters=len(chars),source_sha256=item['sha256']),buffer.getvalue()))
         finally:font.close()
     output.mkdir(parents=True)

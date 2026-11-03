@@ -16,7 +16,7 @@ from fontTools.ttLib import TTFont
 
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'scripts'))
 from auto_deck import initialize,record_image,status,compile_project,finish,write,digest,qa_skeleton
-from native_renderer import build,validate
+from native_renderer import build,validate,validate_chart_style
 from check_pptx import inspect
 from prepare_fonts import prepare
 from doctor import diagnose
@@ -93,6 +93,23 @@ class AutomationTests(unittest.TestCase):
             self.assertTrue(output.slides[0].shapes[2].has_table);self.assertTrue(output.slides[0].shapes[3].has_chart)
             self.assertFalse(output.slides[0].shapes[1].shadow.inherit)
             self.assertTrue((root/'build/template/one.png').is_file())
+
+    def test_native_chart_retains_data_scales_point_colors_and_labels(self):
+        with TemporaryDirectory() as tmp:
+            root=Path(tmp);src=root/'src';src.mkdir();scene=fixture(src)
+            scene['pages'][0]['elements'].append(dict(elementId='groups',elementType='chart',bounds=[40,140,600,300],fontFamily='Noto Sans SC',legend=False,
+                data=dict(cols=['国家','值'],rows=[['美国',7.2],['中国',12.05]]),series=[dict(type='bar',name='有效项目数',encode=dict(x='国家',y='值'),fill='#315ECC')],dataSource=dict(status='verified',label='test fixture'),
+                style=dict(background='#FFFCF6',minimum=0,maximum=15,majorUnit=3,dataLabels=True,numberFormat='0.00',textColor='#24354B',gridColor='#B9CCD8',fontSize=13,pointColors=['#315ECC','#D9674D'])))
+            write(src/'scene.json',scene);deck=build(src/'scene.json',root/'build')
+            c=Presentation(deck).slides[0].shapes[1].chart
+            self.assertEqual(list(c.series[0].values),[7.2,12.05])
+            self.assertEqual((c.value_axis.minimum_scale,c.value_axis.maximum_scale,c.value_axis.major_unit),(0,15,3))
+            self.assertTrue(c.plots[0].has_data_labels);self.assertEqual(c.plots[0].data_labels.number_format,'0.00')
+            self.assertFalse(c.has_title)
+            self.assertEqual(str(c.series[0].points[1].format.fill.fore_color.rgb),'D9674D')
+            self.assertEqual(c.font.name,c.category_axis.tick_labels.font.name)
+            for bad in [dict(minimum=15,maximum=0),dict(pointColors=['#315ECC']),dict(dataLabels='yes'),dict(unknown=True)]:
+                with self.assertRaises(ValueError):validate_chart_style(dict(scene['pages'][0]['elements'][-1],style=bad))
 
     def test_unsupported_features_fail_before_creating_output(self):
         with TemporaryDirectory() as tmp:

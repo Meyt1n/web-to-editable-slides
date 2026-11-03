@@ -37,11 +37,15 @@ python scripts/native_renderer.py task/scene.json --output-dir output/deck-01
 | line | 折线与连接线 | `points`是`"0,0 100,4 200,0"`形式，配bounds/viewBox/border；复杂箭头可用独立原生路径 |
 | image | PNG/JPEG，cover/contain，保留透明PNG | 每张图必须写`raster_reason`，披露内部不可分别编辑的内容；不允许全图透明度 |
 | table | 原生表格，矩形单元格，列/行比例、逐格字体/填充/对齐 | 不支持合并、旋转、全表透明度；columnWidths、rowHeights均为正且和为1 |
-| chart | 原生柱形、折线、散点，同种系列 | 需真实数据或明确示例数据，不从图片编造；暂不支持混合/复杂统计图 |
+| chart | 原生柱形、折线、散点，同种系列；坐标轴范围、数值标签、底色与配色 | 需真实数据或明确示例数据，不从图片编造；暂不支持混合/复杂统计图 |
 
 场景沿用PPTD元素字段：`elementId/elementType/bounds`。形状用`fill:{type:'solid',color:'#...'}`、`border:{style:'solid',color:'#...',width:1}`；custom另有`path`和`viewBox`。表格用`rows`二维对象，单元格沿用文本字段并可有`fill`。图片另有`src/fit/raster_reason`；`raster_reason`是本工具的来源说明字段。
 
 图表用`data:{cols:['x','y'],rows:[['A',2],['B',3]]}`、`series:[{type:'bar',name:'示意',encode:{x:'x',y:'y'},fill:'#72896B'}]`。另写`dataSource:{status:'demo',label:'仅作演示'}`或有来源说明的`verified`。图中也应放可见的来源/示例说明，元数据不能代替面向读者的说明。
+
+图表可加`style:{background:'#FFFCF6',textColor:'#24354B',gridColor:'#B9CCD8',minimum:0,maximum:15,majorUnit:3,numberFormat:'0',labelFormat:'0.00',dataLabels:true,fontSize:13,pointColors:['#315ECC','#D9674D']}`。`numberFormat`控制纵轴，`labelFormat`控制数值标签；比例数据用0–1及`0%`，不要把0–100误配成百分比格式。`pointColors`仅用于单系列柱形图，颜色数必须等于数据行数；多系列用各系列的`fill`。两个单位不同的指标应分图并分别设置尺度。
+
+`style`是本仓库原生编译器的场景扩展，准确复现以`scene.json`和本编译器为准；其他PPTD编辑器对扩展样式的显示需另行核对，不从PPTX导图推断编辑器表现。
 
 ## 动画与可编辑性
 

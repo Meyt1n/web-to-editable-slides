@@ -38,6 +38,22 @@ class ArtDirectionTests(unittest.TestCase):
                 prepare([{'family':'Barlow Condensed','text':'中文'}],folder)
             self.assertFalse(folder.exists())
 
+    def test_subset_face_identity_is_stable_and_separates_glyph_and_axis_sets(self):
+        with TemporaryDirectory() as tmp:
+            reports=[]
+            for i,(text,weight) in enumerate([('正文ABC12',400),('文正CBA21',400),('中国ABC12',400),('正文ABC12',500)]):
+                folder=Path(tmp)/str(i)
+                item=prepare([dict(family='Noto Sans SC',text=text,weight=weight)],folder)['fonts'][0]
+                with TTFont(folder/item['file']) as font:
+                    self.assertEqual(font['name'].getDebugName(1),item['family'])
+                    self.assertEqual(font['name'].getDebugName(16),item['family'])
+                    self.assertIn(item['subset_id'],font['name'].getDebugName(6))
+                    self.assertTrue(all(ord(c) in font.getBestCmap() for c in text))
+                    self.assertLessEqual(len(item['family']),31)
+                reports.append(item)
+            self.assertEqual(reports[0]['family'],reports[1]['family'])
+            self.assertEqual(len({reports[i]['family'] for i in [0,2,3]}),3)
+
     def test_malformed_family_is_a_validation_error(self):
         with TemporaryDirectory() as tmp:
             with self.assertRaises(ValueError):prepare([{'family':[],'text':'A'}],Path(tmp)/'fonts')

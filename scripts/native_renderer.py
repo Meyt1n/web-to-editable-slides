@@ -23,7 +23,7 @@ from PIL import Image
 from pptx import Presentation
 from pptx.chart.data import CategoryChartData,XyChartData
 from pptx.dml.color import RGBColor
-from pptx.enum.chart import XL_CHART_TYPE
+from pptx.enum.chart import XL_CHART_TYPE,XL_DATA_LABEL_POSITION,XL_LEGEND_POSITION
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import MSO_ANCHOR,PP_ALIGN
 from pptx.oxml.xmlchemy import OxmlElement
@@ -119,6 +119,67 @@ def chart_data(element):
     return kind,data
 
 
+def validate_chart_style(element):
+    style=element.get('style',{})
+    allowed={'background','textColor','gridColor','minimum','maximum','majorUnit','numberFormat','labelFormat','dataLabels','fontSize','pointColors'}
+    if not isinstance(style,dict) or set(style)-allowed:raise ValueError('Unsupported native chart style fields')
+    for key in ['background','textColor','gridColor']:
+        if key in style:color(style[key])
+    for key in ['minimum','maximum','majorUnit','fontSize']:
+        if key in style:number(style[key],key in ['majorUnit','fontSize'])
+    if 'minimum' in style and 'maximum' in style and style['minimum']>=style['maximum']:raise ValueError('Chart minimum must be smaller than maximum')
+    for key in ['numberFormat','labelFormat']:
+        if key in style and (not isinstance(style[key],str) or not style[key].strip()):raise ValueError('Chart number formats must be non-empty strings')
+    if 'dataLabels' in style and type(style['dataLabels']) is not bool:raise ValueError('Chart dataLabels must be boolean')
+    if 'pointColors' in style:
+        colors=style['pointColors']
+        if not isinstance(colors,list) or len(colors)!=len(element['data']['rows']):raise ValueError('Chart pointColors must match data rows')
+        if len(element['series'])!=1 or element['series'][0]['type']!='bar':raise ValueError('Point colors are supported on single-series bar charts')
+        for value in colors:color(value)
+
+
+def format_chart(chart,element,family):
+    style=element.get('style',{})
+    chart.has_title=False
+    chart.font.name=family;chart.font.size=Pt(style.get('fontSize',14))
+    if 'textColor' in style:chart.font.color.rgb=color(style['textColor'])
+    if chart.has_legend:
+        chart.legend.position=XL_LEGEND_POSITION.BOTTOM
+        chart.legend.include_in_layout=False
+    for axis in [chart.category_axis,chart.value_axis]:
+        axis.tick_labels.font.name=family;axis.tick_labels.font.size=Pt(style.get('fontSize',14))
+        if 'textColor' in style:axis.tick_labels.font.color.rgb=color(style['textColor'])
+        if 'gridColor' in style:axis.format.line.color.rgb=color(style['gridColor'])
+    value_axis=chart.value_axis
+    for key,property_name in [('minimum','minimum_scale'),('maximum','maximum_scale'),('majorUnit','major_unit')]:
+        if key in style:setattr(value_axis,property_name,style[key])
+    if 'numberFormat' in style:
+        value_axis.tick_labels.number_format=style['numberFormat'];value_axis.tick_labels.number_format_is_linked=False
+    if 'gridColor' in style:
+        value_axis.has_major_gridlines=True
+        value_axis.major_gridlines.format.line.color.rgb=color(style['gridColor'])
+        value_axis.major_gridlines.format.line.width=Pt(.5)
+    if 'background' in style:
+        props=chart._chartSpace.find('{http://schemas.openxmlformats.org/drawingml/2006/chart}spPr')
+        if props is None:
+            props=node('c:spPr')
+            chart._chartSpace.insert_element_before(props,'c:txPr','c:externalData','c:printSettings','c:userShapes','c:extLst')
+        for child in list(props):
+            if child.tag.endswith(('}solidFill','}noFill','}ln')):props.remove(child)
+        node('a:srgbClr',node('a:solidFill',props),val=style['background'][1:])
+        node('a:noFill',node('a:ln',props))
+    if style.get('dataLabels'):
+        plot=chart.plots[0];plot.has_data_labels=True;labels=plot.data_labels
+        labels.show_value=True;labels.show_legend_key=False;labels.show_category_name=False;labels.show_series_name=False
+        if element['series'][0]['type']=='bar':labels.position=XL_DATA_LABEL_POSITION.OUTSIDE_END
+        labels.font.name=family;labels.font.size=Pt(style.get('fontSize',14))
+        if 'textColor' in style:labels.font.color.rgb=color(style['textColor'])
+        labels.number_format=style.get('labelFormat',style.get('numberFormat','0.##'));labels.number_format_is_linked=False
+    if 'pointColors' in style:
+        for point,fill in zip(chart.series[0].points,style['pointColors']):
+            point.format.fill.solid();point.format.fill.fore_color.rgb=color(fill);point.format.line.fill.background()
+
+
 def validate(scene,root):
     if not isinstance(scene,dict) or scene.get('version')!=1:raise ValueError('Scene version must be 1')
     if set(scene)-{'version','title','size','template_file','pages','font_weights'}:raise ValueError('Unsupported scene fields')
@@ -152,7 +213,7 @@ def validate(scene,root):
             supported={'elementId','elementType','bounds','opacity'}|{
                 'text':{'content'},'shape':{'shapeName','fill','border','path','viewBox'},
                 'line':{'points','viewBox','border'},'image':{'src','fit','raster_reason'},
-                'table':{'rows','columnWidths','rowHeights'},'chart':{'data','series','fontFamily','legend','dataSource'}
+                'table':{'rows','columnWidths','rowHeights'},'chart':{'data','series','fontFamily','legend','dataSource','style'}
             }[e['elementType']]
             if set(e)-supported:raise ValueError('Unsupported element fields: '+', '.join(sorted(set(e)-supported)))
             box=e.get('bounds')
@@ -191,7 +252,7 @@ def validate(scene,root):
             for fill in ([e['fill']] if 'fill' in e else [])+[cell['fill'] for cell in contents if 'fill' in cell]:
                 if fill.get('type') not in ['solid','none']:raise ValueError('Unsupported fill; choose a capable backend or adapt explicitly')
                 if fill.get('type')=='solid':color(fill['color'])
-            if e['elementType']=='chart':chart_data(e)
+            if e['elementType']=='chart':chart_data(e);validate_chart_style(e)
         seen=set()
         for animation in page.get('animations',[]):
             if animation['elementId'] not in ids or animation['elementId'] in seen:raise ValueError('Entrance animations require unique existing targets')
@@ -311,10 +372,10 @@ def build(scene_file:Path,output:Path)->Path:
                 kind_chart,data=chart_data(e)
                 shape=slide.shapes.add_chart({'bar':XL_CHART_TYPE.COLUMN_CLUSTERED,'line':XL_CHART_TYPE.LINE,'scatter':XL_CHART_TYPE.XY_SCATTER}[kind_chart],*args,data)
                 chart=shape.chart;chart.has_legend=bool(e.get('legend',len(e['series'])>1))
-                chart.font.name=aliases.get(e.get('fontFamily','Noto Sans SC'),e.get('fontFamily','Noto Sans SC'));chart.font.size=Pt(14)
                 for series,cfg in zip(chart.series,e['series']):
                     if cfg.get('fill'):
                         series.format.fill.solid();series.format.fill.fore_color.rgb=color(cfg['fill'])
+                format_chart(chart,e,aliases.get(e.get('fontFamily','Noto Sans SC'),e.get('fontFamily','Noto Sans SC')))
             # python-pptx preset shapes otherwise inherit theme effects (often a shadow).
             if kind not in ['table','chart']:shape.shadow.inherit=False
             shape.name=e['elementId'];ids[e['elementId']]=shape.shape_id
