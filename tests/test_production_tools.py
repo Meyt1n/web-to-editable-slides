@@ -84,5 +84,27 @@ class ProductionToolsTests(unittest.TestCase):
             with self.assertRaises(OSError):compare(pairs,folder/'review')
             self.assertFalse((folder/'review').exists())
 
+    def test_comparison_uses_the_reference_canvas_instead_of_forcing_widescreen(self):
+        with TemporaryDirectory() as tmp:
+            folder=Path(tmp)
+            Image.new('RGB',(160,120),'white').save(folder/'reference.png')
+            Image.new('RGB',(320,240),'blue').save(folder/'render.png')
+            pairs=folder/'pairs.json';pairs.write_text(json.dumps([dict(id=1,reference='reference.png',rendered='render.png')]),encoding='utf8')
+            compare(pairs,folder/'review',320)
+            with Image.open(folder/'review/01-comparison.png') as image:self.assertEqual(image.size,(664,280))
+
+    def test_comparison_applies_the_declared_crop_and_page_frame_without_editing_source(self):
+        with TemporaryDirectory() as tmp:
+            folder=Path(tmp);reference=Image.new('RGB',(80,80),'black');reference.paste('blue',(0,10,80,70));reference.save(folder/'ref.png')
+            original=(folder/'ref.png').read_bytes();Image.new('RGB',(320,180),'blue').save(folder/'render.png')
+            pairs=folder/'pairs.json';pairs.write_text(json.dumps([dict(id=1,reference='ref.png',rendered='render.png',reference_crop=[0,0.125,1,0.75],reference_frame=[0.125,0,0.75,1],canvas_size=[320,180])]),encoding='utf8')
+            result=compare(pairs,folder/'review',320)
+            self.assertFalse(result['pairs'][0]['aspect_ratio_mismatch'])
+            self.assertEqual(result['pairs'][0]['original_reference_size'],[80,80])
+            with Image.open(folder/'review/01-comparison.png') as image:
+                self.assertEqual(image.getpixel((0,50)),(211,214,206))
+                self.assertEqual(image.getpixel((50,50)),(0,0,255))
+            self.assertEqual((folder/'ref.png').read_bytes(),original)
+
 
 if __name__=='__main__':unittest.main()

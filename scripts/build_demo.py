@@ -113,7 +113,7 @@ def write_project(prs, specs, output, basename, font_files, title, body_font=FON
         font_b64=base64.b64encode((output/relative).read_bytes()).decode()
         css=f'@font-face{{font-family:"{family}";font-style:normal;font-weight:400;src:url(data:font/ttf;base64,{font_b64})format("truetype");}}'
         custom.append(dict(family=family,src='data:text/css;base64,'+base64.b64encode(css.encode()).decode()))
-    manifest=dict(version='v2',title=title,size=[960,540],customFonts=custom,pages=paths)
+    manifest=dict(version='v2',title=title,size=[prs.slide_width.pt,prs.slide_height.pt],customFonts=custom,pages=paths)
     (output/(basename+'.pptd')).write_text(yaml.safe_dump(manifest,allow_unicode=True,sort_keys=False,width=180),encoding='utf-8')
     result=output/(basename+'.pptx');prs.save(result)
     themed=output/'.theme-fonts.pptx'

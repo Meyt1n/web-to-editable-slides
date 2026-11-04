@@ -8,6 +8,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageOps
 from template_pack import inside
+from check_reference_layout import reference_box
 
 
 def compare(pairs_file: Path, output: Path, width: int = 800) -> dict:
@@ -23,14 +24,28 @@ def compare(pairs_file: Path, output: Path, width: int = 800) -> dict:
         if not isinstance(pair,dict) or type(pair.get('id')) is not int or pair['id']<1 or pair['id'] in seen:
             raise ValueError('Each pair needs a unique positive integer id')
         seen.add(pair['id'])
-        sources.append((pair['id'],inside(pairs_file.resolve().parent,pair.get('reference')),
+        sources.append((pair,inside(pairs_file.resolve().parent,pair.get('reference')),
                         inside(pairs_file.resolve().parent,pair.get('rendered'))))
     # Decode everything before writing, so a missing page cannot yield a partial "review".
     panels=[]; report={'pairs':[],'scope':'Side-by-side visual review only; no automatic fidelity score'}
-    for sid,ref,render in sources:
+    for pair,ref,render in sources:
+        sid=pair['id']
         with Image.open(ref) as im: left=im.convert('RGB')
         with Image.open(render) as im: right=im.convert('RGB')
-        height=round(width*9/16)
+        original_size=list(left.size)
+        if 'reference_crop' in pair:
+            x,y,w,h=reference_box(pair['reference_crop'],normalized=True);iw,ih=left.size
+            left=left.crop((round(x*iw),round(y*ih),round((x+w)*iw),round((y+h)*ih)))
+            if min(left.size)<1:raise ValueError('Reference crop is smaller than one pixel')
+        if 'reference_frame' in pair:
+            x,y,w,h=reference_box(pair['reference_frame'],normalized=True)
+            canvas=pair.get('canvas_size')
+            if not isinstance(canvas,list) or len(canvas)!=2 or any(type(v) not in (int,float) or not 1<=v<=7680 for v in canvas):raise ValueError('Reference frame needs a finite canvas_size between 1 and 7680')
+            cw,ch=[round(v) for v in canvas];fw,fh=max(1,round(w*cw)),max(1,round(h*ch))
+            projected=Image.new('RGB',(cw,ch),'#D3D6CE')
+            projected.paste(ImageOps.contain(left,(fw,fh),method=Image.Resampling.LANCZOS),(round(x*cw),round(y*ch)))
+            left=projected
+        height=round(width*left.height/left.width)
         sheet=Image.new('RGB',(2*width+24,height+40),'#E6E7E1')
         draw=ImageDraw.Draw(sheet)
         draw.text((8,10),f'P{sid:02} REFERENCE',fill='#233F35')
@@ -41,6 +56,7 @@ def compare(pairs_file: Path, output: Path, width: int = 800) -> dict:
         panels.append((sid,sheet))
         report['pairs'].append({'id':sid,'file':f'{sid:02}-comparison.png',
             'reference_size':list(left.size),'rendered_size':list(right.size),
+            'original_reference_size':original_size,
             'aspect_ratio_mismatch':abs(left.width/left.height-right.width/right.height)>.015,
             'reference_sha256':hashlib.sha256(ref.read_bytes()).hexdigest(),
             'rendered_sha256':hashlib.sha256(render.read_bytes()).hexdigest()})

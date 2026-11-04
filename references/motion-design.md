@@ -30,7 +30,7 @@
 
 这些函数返回可直接写入`scene.pages[i].animations`的列表，不需要使用者自行写配置。ID列表由Codex根据实际元素选定；流程线、标注、旧/新状态须提前独立建模。不要从整页截图中虚构可独立编辑的对象。
 
-默认现场点击；上述编排函数中支持`autoplay=True`的版本用于自动播放。`focus_pulse`改用`trigger='afterPrevious'`衔接，不额外引入一次点击。普通短汇报可以从少量点击组起步，教学推导按知识点安排，数量不设统一门禁。
+现场讲解默认点击；明确自动播放时选择上述编排函数中支持`autoplay=True`的版本，阅读稿按用途保持静态。`focus_pulse`改用`trigger='afterPrevious'`衔接，不额外引入一次点击。普通短汇报可以从少量点击组起步，教学推导按知识点安排，数量不设统一门禁。
 
 ```python
 from motion_presets import process_flow, focus_pulse

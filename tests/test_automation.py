@@ -153,7 +153,8 @@ class AutomationTests(unittest.TestCase):
             import shutil
             shutil.copytree(scaffold/'template',project/'template')
             state=json.loads((project/'workflow.json').read_text('utf8'));ref=state['pages'][0]['reference'];scene['pages'][0]['reference']=ref['file']
-            write(project/'scene.json',scene);write(project/'reference-review.json',{'1':dict(reference_sha256=ref['sha256'],observations='实际测试用参考图，无内容，验证依赖状态')})
+            write(project/'scene.json',scene);write(project/'reference-review.json',{'1':dict(reference_sha256=ref['sha256'],observations='实际测试用参考图，无内容，验证依赖状态',
+                regions=[dict(id='title',kind='text',bounds=[40/960,40/540,600/960,60/540],elementIds=['title'])])})
             output=root/'build';compile_project(project,output)
             self.assertEqual(status(project)['stage'],'rendering')
             (output/'rendered').mkdir();Image.new('RGB',(160,90),'white').save(output/'rendered/01.png')
@@ -173,9 +174,16 @@ class AutomationTests(unittest.TestCase):
                     edited.writestr(item,data)
             qa.update(pptx='edited.pptx',pptx_sha256=digest(output/'edited.pptx'));write(output/'visual-qa.json',qa)
             with self.assertRaisesRegex(ValueError,'Animation preservation failed'):finish(project,output)
+            moved=Presentation(output/'deck.pptx');moved.slides[0].shapes[0].left+=914400;moved.save(output/'moved.pptx')
+            qa.update(pptx='moved.pptx',pptx_sha256=digest(output/'moved.pptx'));write(output/'visual-qa.json',qa)
+            with self.assertRaisesRegex(ValueError,'Final reference layout mismatch'):finish(project,output)
             qa.update(pptx='deck.pptx',pptx_sha256=digest(output/'deck.pptx'));write(output/'visual-qa.json',qa);finish(project,output)
             self.assertTrue(json.loads((output/'motion-preservation.json').read_text('utf8'))['ok'])
+            self.assertTrue(json.loads((output/'reference-layout-report.json').read_text('utf8'))['ok'])
             self.assertEqual(status(project)['stage'],'complete')
+            review=json.loads((project/'reference-review.json').read_text('utf8'));review['1']['observations']='Changed layout observations';write(project/'reference-review.json',review)
+            self.assertEqual(status(project)['stage'],'ready_to_compile')
+            with self.assertRaisesRegex(ValueError,'older reference layout review'):finish(project,output)
             scene['title']='changed';write(project/'scene.json',scene);self.assertEqual(status(project)['stage'],'ready_to_compile')
 
     def test_font_preparation_keeps_supported_word_spacing(self):

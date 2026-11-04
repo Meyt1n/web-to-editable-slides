@@ -1,4 +1,4 @@
 interface:
   display_name: "Codex自动设计可编辑PPT"
-  short_description: "由Codex提问和设计，调用内置imagegen，自己看图重建并验收可编辑PPT"
-  default_prompt: "使用 $web-to-editable-slides，在当前Codex中根据我的主题与资料自动制作PPT。必要时集中提问；由你设计逐页提示词、调用内置imagegen、自己看图提取模板，并在活跃工作区用仓库原生后端重建和验收，交付PPTX、完整源工程与预览。"
+  short_description: "开工前集中沟通，忠于参考图排版，自主生图补位并重建可编辑PPT"
+  default_prompt: "使用 $web-to-editable-slides 自动制作PPT，开工前集中补齐关键问题并推荐方案；有参考图时保留原布局，自建模板，文字原生重建，图片用内置imagegen按原槽位生成相似素材，按用途设计动画并检查实际PPTX，交付PPTX、完整源工程与预览。"

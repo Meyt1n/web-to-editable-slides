@@ -28,6 +28,8 @@ python scripts/native_renderer.py task/scene.json --output-dir output/deck-01
 
 模板使用现有`template_pack.py`规范，保存在专门的`template/`目录，资源自包含；页面必须引用已声明的页型，画布尺寸一致。资源用相对路径，图片放`media/`，参考图放`references/`，`media/fonts/`留给准备工具。当前字体从仓库6款完整字库中按全部实际文案准备；可用`font_weights`指定每家族的静态字重。输出字体子集、OFL、font-map以及原模板快照。
 
+画布不强制16:9：`size`应沿参考比例或采用用户明确的输出要求，PPTX与PPTD均保留该尺寸。有逐页参考时，按[参考区域约束](reference-fidelity.md#记录区域并检查实际pptx)标注文字、图片、表格和图表的位置及类型；`auto_deck`的新忠实任务会在编译前后及交付时校验，直接调用本编译器时可另运行`check_reference_layout.py`。图片内部的主体、文字断行与视觉相似仍需实际看图。
+
 ## 已实现的元素
 
 | 类型 | 当前支持 | 主要边界 |
