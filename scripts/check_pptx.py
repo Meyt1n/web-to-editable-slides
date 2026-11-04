@@ -1,4 +1,4 @@
-"""Inspect native objects, resources, embedded fonts and root-level slide fades."""
+"""Inspect native objects, resources, embedded fonts and slide transition slots."""
 from __future__ import annotations
 
 import argparse
@@ -15,7 +15,9 @@ from fontTools.ttLib import TTCollection, TTFont, TTLibError
 
 NS = {'p': 'http://schemas.openxmlformats.org/presentationml/2006/main',
       'a': 'http://schemas.openxmlformats.org/drawingml/2006/main',
-      'r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'}
+      'r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+      'mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006',
+      'p14': 'http://schemas.microsoft.com/office/powerpoint/2010/main'}
 
 
 def font_info(name: str, data: bytes) -> dict:
@@ -83,6 +85,48 @@ def animation_summary(root) -> dict:
             'missing_targets':sorted(str(target) for target in targets-ids)}
 
 
+def transition_summary(root) -> dict:
+    """Count MC choices as alternatives in one slide slot, never as two transitions."""
+    p='{'+NS['p']+'}';mc='{'+NS['mc']+'}'
+    all_transitions=root.findall('.//p:transition',NS)
+    result=dict(present=bool(all_transitions),valid=True,container='none',type=None,
+                duration_ms=None,alternatives=[])
+    if not all_transitions:return result
+    containers=[child for child in root if child.tag==p+'transition' or
+                child.tag==mc+'AlternateContent' and child.findall('.//p:transition',NS)]
+    if len(containers)!=1:
+        result['valid']=False;return result
+    container=containers[0];children=list(root);index=children.index(container)
+    before=[child.tag for child in children[:index]];after=[child.tag for child in children[index+1:]]
+    valid=(p+'cSld' in before and p+'cSld' not in after and p+'clrMapOvr' not in after and
+           p+'timing' not in before and p+'extLst' not in before)
+    branches=[]
+    if container.tag==p+'transition':
+        result['container']='direct';branches=[('direct',None,container)]
+    else:
+        result['container']='alternate'
+        nodes=list(container)
+        choices=nodes[:-1] if nodes and nodes[-1].tag==mc+'Fallback' else nodes
+        valid &= (bool(choices) and all(child.tag==mc+'Choice' and child.get('Requires','').strip() for child in choices))
+        for child in nodes:
+            if len(child)!=1 or child[0].tag!=p+'transition':valid=False;continue
+            branches.append(('fallback' if child.tag==mc+'Fallback' else 'choice',child.get('Requires'),child[0]))
+    accounted=[branch[2] for branch in branches]
+    valid &= len(accounted)==len(all_transitions) and set(accounted)==set(all_transitions)
+    for role,requires,transition in branches:
+        effects=[child for child in transition if child.tag!=p+'extLst']
+        duration=transition.get('{'+NS['p14']+'}dur')
+        result['alternatives'].append(dict(role=role,requires=requires,
+            type=effects[0].tag.split('}')[-1] if effects else 'unspecified',
+            effect_namespace=effects[0].tag.split('}')[0].lstrip('{') if effects else None,
+            options=dict(effects[0].attrib) if effects else {},speed=transition.get('spd'),
+            duration_ms=int(duration) if duration and duration.isdigit() else None))
+    result['valid']=bool(valid)
+    if result['alternatives']:
+        primary=result['alternatives'][0];result.update(type=primary['type'],duration_ms=primary['duration_ms'])
+    return result
+
+
 def inspect(path: Path, require_fade: bool = False, require_fonts: bool = False) -> dict:
     report = {'slides': [], 'fonts': [], 'font_families': [], 'external_relationships': [], 'errors': [], 'warnings': []}
     try:
@@ -107,31 +151,21 @@ def inspect(path: Path, require_fade: bool = False, require_fonts: bool = False)
                               any(node.text and node.text.strip() for node in shape.findall('.//a:t', NS))]
                 text_cells = [cell for cell in root.findall('.//a:tbl/a:tr/a:tc', NS)
                               if any(node.text and node.text.strip() for node in cell.findall('.//a:t', NS))]
-                transitions = root.findall('p:transition', NS)
-                nested_transitions = root.findall('.//p:transition', NS)
-                tags = [node.tag.split('}')[-1] for node in root]
-                valid_order = False
-                if len(transitions) == 1:
-                    index = tags.index('transition')
-                    valid_order = index > tags.index('cSld')
-                    if 'clrMapOvr' in tags:
-                        valid_order &= index > tags.index('clrMapOvr')
-                    for later in ['timing', 'extLst']:
-                        if later in tags:
-                            valid_order &= index < tags.index(later)
-                fade = len(transitions) == 1 and transitions[0].find('p:fade', NS) is not None and valid_order
+                transition=transition_summary(root)
+                fade=(transition['valid'] and transition['container']=='direct' and transition['type']=='fade' and
+                      transition['alternatives'][0]['effect_namespace']==NS['p'])
                 item = {'index': i, 'part': part, 'editable_text_boxes': len(text_boxes),
                         'editable_table_cells': len(text_cells),
                         'shapes': len(root.findall('.//p:sp', NS)),
                         'pictures': len(root.findall('.//p:pic', NS)),
                         'tables': len(root.findall('.//a:tbl', NS)), 'valid_root_fade': fade,
-                        'animations':animation_summary(root)}
+                        'transition':transition,'animations':animation_summary(root)}
                 report['slides'].append(item)
                 if item['animations']['missing_targets']:
                     report['errors'].append(f'Slide {i}: animations reference missing shape ids: '+', '.join(item['animations']['missing_targets']))
                 if not text_boxes and not text_cells and item['pictures']:
                     report['warnings'].append(f'Slide {i}: image page without native text; review whether intentional')
-                if nested_transitions and (len(nested_transitions) != 1 or not valid_order):
+                if transition['present'] and not transition['valid']:
                     report['errors'].append(f'Slide {i}: transition is nested, duplicated or in invalid order')
                 if require_fade and not fade:
                     report['errors'].append(f'Slide {i}: a valid root-level fade is required')

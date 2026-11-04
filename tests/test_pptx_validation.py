@@ -13,7 +13,7 @@ from fontTools.pens.ttGlyphPen import TTGlyphPen
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from check_pptx import NS, font_info, inspect
+from check_pptx import NS, font_info, inspect,transition_summary
 
 PKG_NS = 'http://schemas.openxmlformats.org/package/2006/relationships'
 REL_BASE = NS['r'] + '/'
@@ -166,6 +166,49 @@ class PptxValidationTests(unittest.TestCase):
         result = inspect(self.path)
         self.assertFalse(result['ok'])
         self.assertTrue(any('duplicate relationship Id' in error for error in result['errors']))
+
+    def test_morph_alternate_content_is_one_transition_and_not_a_root_fade(self):
+        self.write_deck(text='Fixture')
+        alternate=ET.fromstring('''<mc:AlternateContent
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"
+          xmlns:p14="http://schemas.microsoft.com/office/powerpoint/2010/main"
+          xmlns:p159="http://schemas.microsoft.com/office/powerpoint/2015/09/main">
+          <mc:Choice Requires="p159"><p:transition p14:dur="900"><p159:morph option="byObject"/></p:transition></mc:Choice>
+          <mc:Fallback><p:transition><p:fade/></p:transition></mc:Fallback>
+        </mc:AlternateContent>''')
+        with ZipFile(self.path) as archive:parts={n:archive.read(n) for n in archive.namelist()}
+        name='ppt/slides/slide1.xml';root=ET.fromstring(parts[name]);root.append(alternate)
+        root.append(ET.Element('{'+NS['p']+'}timing'));parts[name]=ET.tostring(root)
+        with ZipFile(self.path,'w') as archive:
+            for n,data in parts.items():archive.writestr(n,data)
+        result=inspect(self.path);self.assertTrue(result['ok'],result['errors'])
+        transition=result['slides'][0]['transition']
+        self.assertEqual((transition['type'],transition['duration_ms']),('morph',900))
+        self.assertEqual(transition['alternatives'][1]['type'],'fade')
+        self.assertFalse(result['slides'][0]['valid_root_fade'])
+        self.assertFalse(inspect(self.path,require_fade=True)['ok'])
+        alternate.remove(alternate[-1])
+        self.assertTrue(transition_summary(root)['valid'])  # MC fallback is optional.
+
+    def test_transition_alternatives_do_not_legalize_nesting_duplicates_or_bad_order(self):
+        p='{'+NS['p']+'}';mc='{'+NS['mc']+'}'
+        def root_with_alternate():
+            root=ET.Element(p+'sld');ET.SubElement(root,p+'cSld')
+            alternate=ET.SubElement(root,mc+'AlternateContent')
+            choice=ET.SubElement(alternate,mc+'Choice',Requires='extension')
+            ET.SubElement(ET.SubElement(choice,p+'transition'),p+'fade')
+            fallback=ET.SubElement(alternate,mc+'Fallback')
+            ET.SubElement(ET.SubElement(fallback,p+'transition'),p+'fade')
+            return root,alternate
+        for mutation in ['nested','duplicate','late','empty-choice','duplicate-fallback']:
+            root,alternate=root_with_alternate()
+            if mutation=='nested':root.remove(alternate);root[0].append(alternate)
+            elif mutation=='duplicate':ET.SubElement(root,p+'transition')
+            elif mutation=='late':root.insert(1,ET.Element(p+'timing'))
+            elif mutation=='empty-choice':alternate[0].clear()
+            else:alternate.append(ET.Element(mc+'Fallback'))
+            with self.subTest(mutation=mutation):self.assertFalse(transition_summary(root)['valid'])
 
 
 if __name__ == '__main__':

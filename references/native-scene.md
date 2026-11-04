@@ -51,6 +51,8 @@ python scripts/native_renderer.py task/scene.json --output-dir output/deck-01
 
 所有页默认根级fade切换。页内支持`appear/fade-in/wipe-in`入口动画，触发为`onClick/withPrevious/afterPrevious`，支持正时长与非负延迟。可直接使用`motion_presets.py`。表格/图表整体入口、强调、退出、运动路径等超出此后端范围；选择其他可用后端或记录设计近似，不静默删动画。
 
+`handwriting_groups`为已拆分的词、短语或笔画生成有先后次序的擦入，自动安排词长时长和短停顿，每个知识点用一次点击。它不负责拆图、识字或恢复字体，也不沿完整曲线路径追踪笔尖；详见[手写讲稿风](handwriting.md)。当前后端仍输出fade切换，能够识别输入稿的Morph不等于已经支持生成Morph。
+
 `editability-report.json`逐页列出原生对象数量和位图边界；自由曲线在PPT中是可编辑路径，复杂木纹、照片和插画内部仍是位图。本工具拒绝未实现的元素字段/效果，避免“生成成功”却丢失关键内容。原生对象数量不等于可编辑像素比例，不宣传完全无损转换。
 
 字体二进制嵌入和实际PPTX导图仍使用可用播放器：Windows可运行`embed_fonts_windows.ps1`和`render_pptx_windows.ps1 -FontMap ...`；无Office时仍可离线生成PPTX与PPTD，但不能把结构检查当成字形或视觉验收。PPTD编辑器是可选工具，导出不依赖它。
