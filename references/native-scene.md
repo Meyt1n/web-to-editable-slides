@@ -49,7 +49,22 @@ python scripts/native_renderer.py task/scene.json --output-dir output/deck-01
 
 ## 动画与可编辑性
 
-所有页默认根级fade切换。页内支持`appear/fade-in/wipe-in`入口动画，触发为`onClick/withPrevious/afterPrevious`，支持正时长与非负延迟。可直接使用`motion_presets.py`。表格/图表整体入口、强调、退出、运动路径等超出此后端范围；选择其他可用后端或记录设计近似，不静默删动画。
+所有页默认根级fade切换。页内支持下列8种原生效果；可用`motion_presets.py`编排，见[按内容选动画](motion-design.md)。
+
+| 效果 | 原生行为 | 可选参数 |
+|---|---|---|
+| `appear` | 显示对象；`durationMs`可作为该步停留时长 | 无 |
+| `fade-in/fade-out` | 淡入/淡出，退出后隐藏 | 无 |
+| `wipe-in/wipe-out` | 擦入/擦出，退出后隐藏 | `direction: up/down/left/right`，默认right，沿用OOXML wipe过滤器含义 |
+| `fly-in` | 对x/y位置做插值，从画布边缘进入 | `direction`表示起始边，up上、down下、left左、right右；默认left |
+| `zoom-in` | 宽高从0插值到对象原始尺寸 | 无 |
+| `pulse` | 短暂放大后复位；已显示对象的强调 | `scale`是大于1的比例，默认1.08 |
+
+动画字段为`elementId/effect/trigger/durationMs/delayMs`，另按效果支持`direction/scale`。不支持的字段和组合报错。时长必须为有限正数，延迟为有限非负数，均四舍五入到毫秒；`pulse`的`durationMs`包含放大及复位两半，规范化到至少2ms的偶数。触发为`onClick/withPrevious/afterPrevious`：新点击开始一组；withPrevious相对前一动画的起点延迟，afterPrevious相对前一动画的终点延迟，均非整组起点。表格/图表整体动画、复杂运动路径及其他效果超出本后端范围；图表上的独立文字与标注仍可动画。
+
+同一`elementId`可依次入场、强调、退出及再次入场。首次入场前隐藏；首个动画是强调/退出的对象视为起初可见。已显示时不能再次入场，隐藏时不能强调或退出，同组内同一对象的动画不能相互重叠。每次动画有独立构建标识，避免编辑器在另存时丢掉后续效果。`check_motion.py`可比较原始与另存PPTX的目标、效果、点击组和时序；自动流程有动画时会在`finish`执行并保留报告。
+
+导出的PPTD保留这些动画参数，但其他PPTD编辑器/导出器未必实现本编译器的全部效果和`scale`等参数；本地PPTX的播放验证不能作为其他编辑器动画预览的验证。
 
 `handwriting_groups`为已拆分的词、短语或笔画生成有先后次序的擦入，自动安排词长时长和短停顿，每个知识点用一次点击。它不负责拆图、识字或恢复字体，也不沿完整曲线路径追踪笔尖；详见[手写讲稿风](handwriting.md)。当前后端仍输出fade切换，能够识别输入稿的Morph不等于已经支持生成Morph。
 

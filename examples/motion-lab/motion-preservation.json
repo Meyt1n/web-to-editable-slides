@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "errors": [],
+  "slides": [
+    {
+      "index": 1,
+      "ok": true,
+      "before_effects": 10,
+      "after_effects": 10
+    },
+    {
+      "index": 2,
+      "ok": true,
+      "before_effects": 11,
+      "after_effects": 11
+    },
+    {
+      "index": 3,
+      "ok": true,
+      "before_effects": 5,
+      "after_effects": 5
+    },
+    {
+      "index": 4,
+      "ok": true,
+      "before_effects": 3,
+      "after_effects": 3
+    },
+    {
+      "index": 5,
+      "ok": true,
+      "before_effects": 2,
+      "after_effects": 2
+    },
+    {
+      "index": 6,
+      "ok": true,
+      "before_effects": 10,
+      "after_effects": 10
+    }
+  ],
+  "before_sha256": "591b3efe1f88824e3479d1439c3feaab79c34efc6fbb345b6ada85bfcd2e6721",
+  "after_sha256": "264cd576c054619ed59294bc1ea7b606e3f2065b2afeea2bcb83d62ffa3929b7",
+  "scope": "Explicit preset rows, named targets, behavior types, native scale/interpolation parameters, click groups and millisecond timing; not rendered motion or cross-player compatibility"
+}

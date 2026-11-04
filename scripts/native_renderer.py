@@ -31,6 +31,7 @@ from pptx.util import Pt
 
 from build_demo import write_project
 from check_pptx import inspect
+from native_motion import add_timing,animation_plan
 from prepare_fonts import prepare
 from template_pack import inside,load_template
 
@@ -253,53 +254,8 @@ def validate(scene,root):
                 if fill.get('type') not in ['solid','none']:raise ValueError('Unsupported fill; choose a capable backend or adapt explicitly')
                 if fill.get('type')=='solid':color(fill['color'])
             if e['elementType']=='chart':chart_data(e);validate_chart_style(e)
-        seen=set()
-        for animation in page.get('animations',[]):
-            if animation['elementId'] not in ids or animation['elementId'] in seen:raise ValueError('Entrance animations require unique existing targets')
-            seen.add(animation['elementId'])
-            if next(e for e in page['elements'] if e['elementId']==animation['elementId'])['elementType'] in ['table','chart']:raise ValueError('Native table/chart entrance animations are not supported')
-            if animation['effect'] not in ['fade-in','wipe-in','appear']:raise ValueError('Native renderer supports appear/fade-in/wipe-in entrance animations')
-            if animation.get('trigger','onClick') not in ['onClick','afterPrevious','withPrevious']:raise ValueError('Unsupported animation trigger')
-            if animation.get('direction','right') not in ['up','down','left','right']:raise ValueError('Unsupported animation direction')
-            number(animation.get('durationMs',600),True)
-            if number(animation.get('delayMs',0))<0:raise ValueError('Animation delay must be nonnegative')
-            if any(k in animation for k in ['repeat','path','easing','amount','color']):raise ValueError('Unsupported animation parameter')
+        animation_plan(page.get('animations',[]),{e['elementId']:e['elementType'] for e in page['elements']})
     return template
-
-
-def add_timing(slide,animations,shape_ids):
-    if not animations:return
-    timing=node('p:timing');slide._element.append(timing);counter=iter(range(1,100000))
-    def time(parent,**attrs):return node('p:cTn',parent,id=next(counter),**attrs)
-    def condition(parent,delay):node('p:cond',node('p:stCondLst',parent),delay=delay)
-    root=time(node('p:par',node('p:tnLst',timing)),dur='indefinite',restart='never',nodeType='tmRoot')
-    seq=node('p:seq',node('p:childTnLst',root),concurrent='1',nextAc='seek')
-    main=time(seq,dur='indefinite',nodeType='mainSeq');main_children=node('p:childTnLst',main)
-    groups=[]
-    for a in animations:
-        if not groups or a.get('trigger','onClick')=='onClick':groups.append([])
-        groups[-1].append(a)
-    builds=node('p:bldLst',timing)
-    for group_id,group in enumerate(groups):
-        outer=time(node('p:par',main_children),fill='hold');condition(outer,'indefinite' if group[0].get('trigger','onClick')=='onClick' else '0')
-        inner=time(node('p:par',node('p:childTnLst',outer)),fill='hold');condition(inner,0);children=node('p:childTnLst',inner)
-        previous_start=previous_duration=0
-        for i,a in enumerate(group):
-            trigger=a.get('trigger','onClick');duration=a.get('durationMs',600)
-            start=a.get('delayMs',0)+(previous_start+(previous_duration if trigger=='afterPrevious' else 0) if i else 0)
-            effect=a['effect'];wipe=effect=='wipe-in';direction=a.get('direction','right')
-            effect_time=time(node('p:par',children),presetID=22 if wipe else 10 if effect=='fade-in' else 1,presetClass='entr',presetSubtype={'down':4,'left':8,'up':1,'right':2}[direction] if wipe else 0,fill='hold',grpId=group_id,nodeType={'onClick':'clickEffect','withPrevious':'withEffect','afterPrevious':'afterEffect'}[trigger])
-            condition(effect_time,start);actions=node('p:childTnLst',effect_time)
-            visibility=node('p:set',actions);behavior=node('p:cBhvr',visibility);condition(time(behavior,dur=1,fill='hold'),0)
-            shape_id=shape_ids[a['elementId']];node('p:spTgt',node('p:tgtEl',behavior),spid=shape_id)
-            node('p:attrName',node('p:attrNameLst',behavior)).text='style.visibility';node('p:strVal',node('p:to',visibility),val='visible')
-            if effect!='appear':
-                behavior=node('p:cBhvr',node('p:animEffect',actions,transition='in',filter=f'wipe({direction})' if wipe else 'fade'))
-                time(behavior,dur=round(duration));node('p:spTgt',node('p:tgtEl',behavior),spid=shape_id)
-            node('p:bldP',builds,spid=shape_id,grpId=group_id,animBg=1)
-            previous_start=start;previous_duration=duration
-    for name,event in [('prevCondLst','onPrev'),('nextCondLst','onNext')]:
-        node('p:sldTgt',node('p:tgtEl',node('p:cond',node('p:'+name,seq),evt=event,delay=0)))
 
 
 def build(scene_file:Path,output:Path)->Path:

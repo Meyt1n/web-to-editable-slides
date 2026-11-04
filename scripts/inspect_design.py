@@ -19,6 +19,23 @@ def timing_groups(root) -> list[dict]:
     if timing is None:return []
     parents={child:parent for parent in timing.iter() for child in parent}
     names={node.get('id'):node.get('name') for node in root.findall('.//p:cNvPr',NS)}
+    def offset(node,stop,skip=None):
+        start=0
+        while node is not None and node is not stop:
+            if node.tag=='{'+NS['p']+'}seq':return None
+            if node.tag=='{'+NS['p']+'}cTn' and node is not skip:
+                conditions=node.findall('p:stCondLst/p:cond',NS)
+                if len(conditions)>1:return None
+                for condition in conditions:
+                    delay=condition.get('delay','0')
+                    if condition.get('evt') or len(condition) or not delay.isdigit():return None
+                    start+=int(delay)
+            node=parents.get(node)
+        return start
+    def reversal(clock):
+        if any(key in clock.attrib for key in ['repeatCount','repeatDur','spd']):return None
+        value=clock.get('autoRev','0')
+        return 2 if value in ['1','true'] else 1 if value in ['0','false'] else None
     groups=timing.findall('.//p:cTn[@nodeType="mainSeq"]/p:childTnLst/p:par',NS)
     result=[]
     for index,group in enumerate(groups,1):
@@ -27,27 +44,34 @@ def timing_groups(root) -> list[dict]:
         trigger='onClick' if clicks else 'automatic' if any(c.get('evt')=='onBegin' or
             c.get('delay')=='0' and not c.get('evt') for c in conditions) else 'unresolved'
         effects=[]
-        for effect in group.findall('.//p:animEffect',NS):
-            behavior=effect.find('p:cBhvr/p:cTn',NS);target=effect.find('p:cBhvr/p:tgtEl/p:spTgt',NS)
-            duration=behavior.get('dur','') if behavior is not None else ''
-            start=0;resolved=True;ancestor=parents.get(effect)
-            while ancestor is not None and ancestor is not group:
-                if ancestor.tag=='{'+NS['p']+'}seq':resolved=False
-                if ancestor.tag=='{'+NS['p']+'}cTn' and ancestor is not clock:
-                    cond=ancestor.findall('p:stCondLst/p:cond',NS)
-                    if len(cond)>1:resolved=False
-                    for item in cond:
-                        delay=item.get('delay','0')
-                        if item.get('evt') or len(item) or not delay.isdigit():resolved=False
-                        else:start+=int(delay)
-                ancestor=parents.get(ancestor)
-            key=target.get('spid') if target is not None else None
-            effects.append(dict(target_id=key,target_name=names.get(key),filter=effect.get('filter'),
-                start_ms=start if resolved else None,duration_ms=int(duration) if duration.isdigit() else None))
+        # A native fly/zoom/pulse has no animEffect filter: inspect the preset row.
+        rows=group.findall('.//p:cTn[@presetClass]',NS) or group.findall('.//p:animEffect',NS)
+        for row in rows:
+            filters=row.findall('.//p:animEffect',NS) if row.tag!='{'+NS['p']+'}animEffect' else [row]
+            targets={target.get('spid') for target in row.findall('.//p:spTgt',NS)}
+            key=next(iter(targets)) if len(targets)==1 else None
+            ends=[]
+            for behavior in row.findall('.//p:cBhvr/p:cTn',NS):
+                duration=behavior.get('dur','');delay=offset(behavior,row);factor=reversal(behavior)
+                ends.append(delay+int(duration)*factor if duration.isdigit() and delay is not None and factor is not None else None)
+            factor=reversal(row)
+            duration=max(ends)*factor if ends and None not in ends and factor is not None else None
+            if row.get('dur','').isdigit() and factor is not None:duration=int(row.get('dur'))*factor
+            effects.append(dict(target_id=key,target_name=names.get(key),
+                filter=filters[0].get('filter') if len(filters)==1 else None,
+                transition=filters[0].get('transition') if len(filters)==1 else None,
+                preset_class=row.get('presetClass'),preset_id=row.get('presetID'),preset_subtype=row.get('presetSubtype'),
+                auto_reverse=row.get('autoRev','0') in ['1','true'],
+                parameters=dict(scale=[dict(n.attrib) for n in row.findall('.//p:animScale/p:by',NS)],
+                    interpolation=[dict(attributes=[n.text for n in anim.findall('p:cBhvr/p:attrNameLst/p:attrName',NS)],
+                        values=[dict(time=tav.get('tm'),value=dict(tav[0][0].attrib)) for tav in anim.findall('p:tavLst/p:tav',NS) if len(tav) and len(tav[0])])
+                        for anim in row.findall('.//p:anim',NS)]),
+                behavior_types=sorted({parents[b].tag.split('}')[-1] for b in row.findall('.//p:cBhvr',NS)}),
+                start_ms=offset(row,group,clock),duration_ms=duration))
         complete=bool(effects) and all(e['start_ms'] is not None and e['duration_ms'] is not None for e in effects)
         result.append(dict(index=index,trigger=trigger,effects=effects,
             duration_ms_estimate=max(e['start_ms']+e['duration_ms'] for e in effects) if complete else None,
-            timing_scope='Explicit parallel delays relative to this group; excludes click pauses. Event/sequence timing is left unresolved.'))
+            timing_scope='Explicit parallel delays and simple auto-reverse relative to this group; excludes click pauses. Event/sequence/repeat timing is left unresolved.'))
     return result
 
 

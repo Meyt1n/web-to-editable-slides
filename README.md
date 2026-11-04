@@ -80,10 +80,12 @@ flowchart LR
 | 字体搭配 | 6款 OFL 字库、5组角色搭配；按实际文案检查缺字、生成子集并冻结变量字重 |
 | 背景设计 | 水墨、暖纸、技术网格三种分层配方；3张原创无字背景，附提示词、适用页型与正文安全区 |
 | 模板复用 | 提取配色、字体、网格、组件和页型，在共同设计规则内变化布局 |
-| 讲解动画 | 标题擦入、知识点分组、问答分次揭示、逐词与分笔画擦入；默认页切换为 fade |
+| 讲解动画 | 错峰入场、流程推进、左右对比、证据揭示、重点强调、状态替换及逐词/分笔画；8种原生元素效果，默认页切换为 fade |
 | 检查与恢复 | 环境预检、依赖哈希、提示词快照、逐页对照、动画时序与兼容切换分支检查、完成凭据 |
 
 参考：[字体、背景与动画](references/art-direction.md) · [手写制作与动画](references/handwriting.md) · [版式库](references/layout-library.md) · [模板提取](references/template-extraction.md) · [逐页还原](references/reference-fidelity.md)
+
+动画选型与公开源码研究见[动画设计](references/motion-design.md)，六页可运行样本见[动画小样](examples/motion-lab/README.md)。PowerPoint嵌字或另存后，自动流程会比较动画目标、效果、点击组和时序，避免文件能打开却丢失动画。
 
 ## 实际效果
 

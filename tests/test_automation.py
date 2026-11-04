@@ -9,6 +9,7 @@ from unittest.mock import patch
 from types import SimpleNamespace
 import subprocess
 from zipfile import ZipFile
+from xml.etree import ElementTree as ET
 
 from PIL import Image
 from pptx import Presentation
@@ -147,6 +148,8 @@ class AutomationTests(unittest.TestCase):
             with self.assertRaises(ValueError):compile_project(project,root/'build')
             image=root/'ref.png';Image.new('RGB',(160,90),'white').save(image);record_image(project,1,image)
             scaffold=root/'scaffold';scaffold.mkdir();scene=fixture(scaffold)
+            scene['pages'][0]['animations']=[dict(elementId='title',effect='fade-in',durationMs=200),
+                dict(elementId='title',effect='pulse',trigger='afterPrevious',durationMs=600)]
             import shutil
             shutil.copytree(scaffold/'template',project/'template')
             state=json.loads((project/'workflow.json').read_text('utf8'));ref=state['pages'][0]['reference'];scene['pages'][0]['reference']=ref['file']
@@ -161,7 +164,17 @@ class AutomationTests(unittest.TestCase):
             qa=dict(pptx='deck.pptx',pptx_sha256='stale',scene_sha256=digest(project/'scene.json'),renderer='unit fixture; not a visual quality assertion',pages=[dict(id=1,rendered='test-render.png',rendered_sha256=digest(output/'test-render.png'),reference_sha256=ref['sha256'],result='pass',findings='unit fixture')])
             write(output/'visual-qa.json',qa)
             with self.assertRaises(ValueError):finish(project,output)
-            qa['pptx_sha256']=digest(output/'deck.pptx');write(output/'visual-qa.json',qa);finish(project,output)
+            with ZipFile(output/'deck.pptx') as original,ZipFile(output/'edited.pptx','w') as edited:
+                for item in original.infolist():
+                    data=original.read(item.filename)
+                    if item.filename=='ppt/slides/slide1.xml':
+                        xml=ET.fromstring(data);xml.remove(xml.find('{http://schemas.openxmlformats.org/presentationml/2006/main}timing'))
+                        data=ET.tostring(xml,encoding='utf-8')
+                    edited.writestr(item,data)
+            qa.update(pptx='edited.pptx',pptx_sha256=digest(output/'edited.pptx'));write(output/'visual-qa.json',qa)
+            with self.assertRaisesRegex(ValueError,'Animation preservation failed'):finish(project,output)
+            qa.update(pptx='deck.pptx',pptx_sha256=digest(output/'deck.pptx'));write(output/'visual-qa.json',qa);finish(project,output)
+            self.assertTrue(json.loads((output/'motion-preservation.json').read_text('utf8'))['ok'])
             self.assertEqual(status(project)['stage'],'complete')
             scene['title']='changed';write(project/'scene.json',scene);self.assertEqual(status(project)['stage'],'ready_to_compile')
 

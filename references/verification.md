@@ -37,6 +37,8 @@ python scripts/check_pptx.py path/to/deck.pptx --output output/report.json
 
 每页`animations`报告现在记录实际时序、触发和时长，并拒绝指向已删除对象的动画。静态导图只显示终态，不能验证出现次序；用PowerPoint播放或`render_animation_windows.ps1`导出动态预览，再核对问答点击组。背景与动画的组合方法见[设计表达](art-direction.md)。
 
+需要完整编排信息时用`inspect_design.py`读取点击组与显式时序，包括没有`animEffect`过滤器的飞入、缩放与放大复位。静态导图也不等于含退出动画的最终播放状态。对原生稿执行嵌字或另存后，运行`check_motion.py 原始.pptx 另存.pptx --output motion-preservation.json`；自动流程`finish`已接入比对。点击组、目标、效果或时序改变时先修复，再交付；比对不证明视觉效果或跨软件兼容。具体方法与一次被PowerPoint吞掉强调动画的修复见[动画选型](motion-design.md#必须检查运动过程)。
+
 ## 常见导出问题与窄修复
 
 | 现象 | 处理 |

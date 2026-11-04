@@ -164,6 +164,12 @@ def finish(project,build_dir):
         if item.get('result')!='pass' or not isinstance(item.get('findings'),str) or not item['findings'].strip():raise ValueError('Every page needs an explicit visual-review result and findings')
     if not isinstance(qa.get('renderer'),str) or not qa['renderer'].strip():raise ValueError('Record the actual renderer')
     receipt={'scene_sha256':digest(project/'scene.json'),'pptx_sha256':digest(pptx),'pages':len(ids),'renderer':qa['renderer'],'visual_qa_sha256':digest(build_dir/'visual-qa.json'),'assertion_scope':'Model visual comparison; hash and PPTX structure checks are deterministic'}
+    if any(page.get('animations') for page in scene['pages']):
+        from check_motion import compare_motion
+        motion=compare_motion(build_dir/'deck.pptx',pptx)
+        if not motion['ok']:raise ValueError('Animation preservation failed: '+'; '.join(motion['errors']))
+        write(build_dir/'motion-preservation.json',motion)
+        receipt['motion_preservation_sha256']=digest(build_dir/'motion-preservation.json')
     write(project/'completion.json',receipt);write(build_dir/'completion.json',receipt)
     return {'stage':'complete','receipt':receipt}
 

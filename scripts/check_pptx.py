@@ -73,7 +73,7 @@ def relationship_target(owner_dir: str, relation: ET.Element) -> str:
 
 def animation_summary(root) -> dict:
     timing=root.find('p:timing',NS)
-    if timing is None:return {'present':False,'effects':{},'triggers':{},'duration_ms':[], 'missing_targets':[]}
+    if timing is None:return {'present':False,'effects':{},'preset_classes':{},'behaviors':{},'triggers':{},'duration_ms':[], 'missing_targets':[]}
     ids={node.get('id') for node in root.findall('.//p:cNvPr',NS)}
     targets={node.get('spid') for node in timing.findall('.//p:spTgt',NS)+timing.findall('.//p:bldP',NS)}
     triggers=Counter(node.get('nodeType') for node in timing.findall('.//p:cTn',NS)
@@ -81,6 +81,8 @@ def animation_summary(root) -> dict:
     durations={int(node.get('dur')) for node in timing.findall('.//p:cBhvr/p:cTn',NS)
                if node.get('dur','').isdigit() and int(node.get('dur'))>1}
     return {'present':True,'effects':dict(Counter(node.get('filter','unknown') for node in timing.findall('.//p:animEffect',NS))),
+            'preset_classes':dict(Counter(node.get('presetClass') for node in timing.findall('.//p:cTn[@presetClass]',NS))),
+            'behaviors':dict(Counter(node.tag.split('}')[-1] for node in timing.iter() if node.find('p:cBhvr',NS) is not None)),
             'triggers':dict(triggers),'duration_ms':sorted(durations),
             'missing_targets':sorted(str(target) for target in targets-ids)}
 

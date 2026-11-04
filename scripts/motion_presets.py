@@ -1,4 +1,4 @@
-"""PPTD entrance groups for lessons; callers choose targets and verify exported playback."""
+"""Content-driven motion recipes; callers select real objects and verify playback."""
 from __future__ import annotations
 
 import math
@@ -71,3 +71,90 @@ def handwriting_groups(groups: list[list[dict]], *, autoplay: bool = False, gap_
                 durationMs=duration,delayMs=450 if autoplay and group_index and not i else previous_gap))
             previous_gap=milliseconds(unit.get('gapAfterMs',gap))
     return result
+
+
+def _unique_groups(groups):
+    seen=set()
+    if not isinstance(groups,list) or not groups:raise ValueError('Provide non-empty semantic groups')
+    for group in groups:
+        if not isinstance(group,list) or not group:raise ValueError('Each group needs element ids')
+        for key in group:
+            if not isinstance(key,str) or not key.strip() or key in seen:raise ValueError('Recipe targets must be non-empty and unique')
+            seen.add(key)
+
+
+def staggered_reveal(element_ids: list[str], *, effect='fade-in', autoplay=False,
+                     duration_ms=450, stagger_ms=100, direction=None) -> list[dict]:
+    """One click (or automatic start), with overlapping entrances in reading order."""
+    _unique_groups([element_ids])
+    if type(autoplay) is not bool:raise ValueError('autoplay must be boolean')
+    if effect not in ['appear','fade-in','wipe-in','fly-in','zoom-in']:raise ValueError('Choose an entrance effect')
+    for value in [duration_ms,stagger_ms]:
+        if type(value) not in (int,float) or not math.isfinite(value) or value<0:raise ValueError('Recipe timing must be finite and nonnegative')
+    duration,stagger=round(duration_ms),round(stagger_ms)
+    if duration<1:raise ValueError('Recipe duration must round to at least 1 ms')
+    if direction is not None and (effect not in ['wipe-in','fly-in'] or direction not in ['up','down','left','right']):raise ValueError('Direction applies only to wipes and fly-ins')
+    result=[]
+    for i,key in enumerate(element_ids):
+        row=dict(elementId=key,effect=effect,durationMs=duration,
+                 trigger='withPrevious' if i else 'afterPrevious' if autoplay else 'onClick',delayMs=stagger if i else 0)
+        if direction is not None:row['direction']=direction
+        result.append(row)
+    return result
+
+
+def process_flow(steps: list[list[str]], connectors: list[str], *, autoplay=False, effect='fade-in', direction=None) -> list[dict]:
+    """Each step gets a click; draw its incoming connector before revealing it."""
+    if not isinstance(connectors,list) or not isinstance(steps,list) or len(connectors)!=len(steps)-1:
+        raise ValueError('A process needs exactly one connector between adjacent steps')
+    _unique_groups(steps+([connectors] if connectors else []))
+    result=[]
+    for i,step in enumerate(steps):
+        cues=staggered_reveal(step,effect=effect,direction=direction,autoplay=autoplay,stagger_ms=70)
+        if i:
+            result.append(dict(elementId=connectors[i-1],effect='wipe-in',direction='left',
+                trigger='afterPrevious' if autoplay else 'onClick',durationMs=280,delayMs=400 if autoplay else 0))
+            cues[0].update(trigger='afterPrevious',delayMs=40)
+        result.extend(cues)
+    return result
+
+
+def compare_then_decide(left_ids: list[str], right_ids: list[str], verdict_ids: list[str], *, autoplay=False) -> list[dict]:
+    """Reveal the two alternatives from opposite sides, then the decision."""
+    _unique_groups([left_ids,right_ids,verdict_ids])
+    result=[]
+    for index,(ids,direction) in enumerate([(left_ids,'left'),(right_ids,'right'),(verdict_ids,None)]):
+        cues=staggered_reveal(ids,effect='fly-in' if direction else 'zoom-in',direction=direction,autoplay=autoplay)
+        if autoplay and index:cues[0]['delayMs']=450
+        result.extend(cues)
+    return result
+
+
+def evidence_reveal(claim_ids: list[str], evidence_ids: list[str], takeaway_ids: list[str], *, autoplay=False) -> list[dict]:
+    """Keep the claim, evidence and interpretation on three distinct beats."""
+    _unique_groups([claim_ids,evidence_ids,takeaway_ids])
+    result=[]
+    for index,ids in enumerate([claim_ids,evidence_ids,takeaway_ids]):
+        cues=staggered_reveal(ids,autoplay=autoplay,duration_ms=400,stagger_ms=90)
+        if autoplay and index:cues[0]['delayMs']=500
+        result.extend(cues)
+    return result
+
+
+def focus_pulse(element_id: str, *, trigger='onClick', duration_ms=600, scale=1.08) -> list[dict]:
+    """Briefly enlarge an already visible object and return to its original size."""
+    _unique_groups([[element_id]])
+    if trigger not in ['onClick','withPrevious','afterPrevious']:raise ValueError('Unsupported focus trigger')
+    if type(duration_ms) not in (int,float) or not math.isfinite(duration_ms) or duration_ms<2:raise ValueError('Pulse needs a finite total duration of at least 2 ms')
+    if type(scale) not in (int,float) or not math.isfinite(scale) or scale<=1:raise ValueError('Pulse scale must be greater than 1')
+    return [dict(elementId=element_id,effect='pulse',trigger=trigger,durationMs=2*round(duration_ms/2),delayMs=0,scale=scale)]
+
+
+def replace_state(old_ids: list[str], new_ids: list[str], *, autoplay=False) -> list[dict]:
+    """One click clears the old editable layer, then reveals the replacement."""
+    _unique_groups([old_ids,new_ids])
+    old=staggered_reveal(old_ids,autoplay=autoplay,duration_ms=300,stagger_ms=0)
+    for row in old:row['effect']='fade-out'
+    new=staggered_reveal(new_ids,duration_ms=450,stagger_ms=80)
+    new[0].update(trigger='afterPrevious',delayMs=60)
+    return old+new

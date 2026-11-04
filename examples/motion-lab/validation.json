@@ -1,0 +1,65 @@
+{
+  "tested_date": "2026-11-04",
+  "purpose": "Original native animation compiler specimens; not an imagegen workflow run",
+  "tests": {
+    "command": "python -m unittest discover -s tests -q",
+    "passed": 88
+  },
+  "powerpoint": {
+    "version": "16.0",
+    "static_render": true,
+    "video_requested_fps": 30,
+    "video_actual_fps": 30.3,
+    "video_duration_seconds": 17.95,
+    "static_images_match_reviewed_images": true,
+    "overflow_candidates": 0,
+    "supplied_font_files": 2
+  },
+  "objects": {
+    "pages": 6,
+    "native_objects": 77,
+    "editable_text_boxes": 56,
+    "native_charts": 1,
+    "raster_objects": 0
+  },
+  "animation": {
+    "effects": 41,
+    "click_groups": 15,
+    "roundtrip_preserved": true,
+    "additional_lifecycle_probe_effects": 12,
+    "additional_probe_preserved": true
+  },
+  "font_scope": "Two PowerPoint-written compressed EOT parts; payload unverified by checker. Appearance checked with supplied session fonts; no other-player guarantee.",
+  "playback_review": [
+    "staggered reading order",
+    "connector before next node",
+    "opposite-edge fly-ins",
+    "zoom from zero size",
+    "pulse enlarges then restores original size",
+    "old state disappears before replacement",
+    "ordered word/shaft/arrowhead/underline wipes"
+  ],
+  "not_verified": [
+    "manual live click pause behavior",
+    "other PPTD editor animation preview",
+    "WPS",
+    "Keynote",
+    "LibreOffice"
+  ],
+  "structure_ok": true,
+  "structure_errors": [],
+  "files": {
+    "motion-lab.pptx": {
+      "bytes": 107211,
+      "sha256": "264cd576c054619ed59294bc1ea7b606e3f2065b2afeea2bcb83d62ffa3929b7"
+    },
+    "preview.jpg": {
+      "bytes": 128235,
+      "sha256": "42c42f6af3a896cbe8aa959f8fd08ec41ce623ceb14733ed2ed279d5ffaf5b9c"
+    },
+    "playback.gif": {
+      "bytes": 1559768,
+      "sha256": "1502b034b760bd0f3720e279b131c61639d32a410830d0dd4b402f9de6b28cb5"
+    }
+  }
+}
