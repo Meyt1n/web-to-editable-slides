@@ -41,7 +41,7 @@ template/
 
 项目可使用其他等价结构。无框编辑风不需要为了格式强加卡片；无位图的模板也不需要调用imagegen。
 
-已选风格可以直接复用对应模板包。多套独立背景、透明图标等可放在 `resources.images` 的命名槽位，随模板一起校验和打包。灰紫学术像素的现成页型见[启衡模板](qiheng-pixel.md)。
+已选风格可以直接复用对应模板包。多套独立背景、透明图标等可放在 `resources.images` 的命名槽位。在技能自带模板里，`catalog_font: true` 引用 `assets/fonts/catalog.json` 中的字库，`template_pack.py prepare` 将字体、许可和图像写入项目内的相对路径。现成页型见[旧纸剪贴簿](fieldwork-scrapbook.md)与[启衡模板](qiheng-pixel.md)。
 
 有图像需求时，给imagegen代表图与明确约束，生成同风格的无字背景、必要装饰或独立主体；标题、正文、编号和简单结构仍在PPT里原生构建。避免把带字参考页直接铺成模板背景。
 

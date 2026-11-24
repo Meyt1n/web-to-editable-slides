@@ -115,7 +115,7 @@ class AutomationTests(unittest.TestCase):
     def test_unsupported_features_fail_before_creating_output(self):
         with TemporaryDirectory() as tmp:
             root=Path(tmp);src=root/'src';src.mkdir();base=fixture(src)
-            for i,change in enumerate([{'rotation':12},{'bounds':[950,40,600,60]},{'shadow':{}},{'elementType':'unknown'}]):
+            for i,change in enumerate([{'rotation':360},{'bounds':[950,40,600,60]},{'shadow':{}},{'elementType':'unknown'}]):
                 scene=copy.deepcopy(base);scene['pages'][0]['elements'][0].update(change);write(src/'scene.json',scene)
                 with self.assertRaises(ValueError):build(src/'scene.json',root/f'bad-{i}')
                 self.assertFalse((root/f'bad-{i}').exists())

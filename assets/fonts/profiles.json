@@ -9,6 +9,23 @@
     "background_recipe": "warm-paper",
     "note": "手写感用于短句或批注，避免长段正文。"
   },
+  "fieldwork-scrapbook": {
+    "roles": {
+      "display": "Ma Shan Zheng",
+      "heading": "Ma Shan Zheng",
+      "section": "Ma Shan Zheng",
+      "body": "Noto Serif SC",
+      "caption": "Long Cang",
+      "numeric": "Barlow Condensed"
+    },
+    "font_weights": {"Noto Serif SC": 600},
+    "template": "fieldwork-scrapbook",
+    "optional_system_faces": {
+      "cover": "华文行楷",
+      "closing": "华文新魏"
+    },
+    "note": "毛笔区分主副标题，正文用宋体，龙藏用于短图注，Barlow用于纯数字或西文。华文字体按已有授权与目标机可用性选用。"
+  },
   "editorial": {
     "roles": {"heading": "ZCOOL XiaoWei", "body": "Noto Sans SC", "numeric": "Barlow Condensed"},
     "background_recipe": "warm-paper",

@@ -1,0 +1,20 @@
+{
+  "style_source": "用户定稿《从家庭作坊到产业升级》，以最终演示导图及 PPTX 中的原生字体为依据",
+  "assets": [
+    {
+      "file": "media/paper-backdrop.png",
+      "sha256": "5c3c54c064649c893515448f8b9cd556638617f05525b8ed4a6fde70c1567c28",
+      "method": "imagegen",
+      "reference_role": "原制作任务的第 4 页参考图。用作纸纹、下沿远景和配色参考",
+      "prompt": "Use case: precise-object-edit. Asset type: clean reusable no-text PowerPoint background, 16:9, ideally 2048x1152. Take the supplied slide as reference. Remove ALL foreground elements: every Chinese character and numeral, the red underline, all paper cards and torn paper panels, all photographs and photo frames and tape, all icons, shoe sketches, thread spools, diagrams, arrows. Keep ONLY the full-page softly embossed warm pale peach antique paper texture and the narrow panoramic sepia water-town/river and distant modern skyline across the lowest 12 percent of the image, and the dark muted cinnabar red torn fabric/paper wave along the absolute bottom, like the supplied image. The entire upper 86 percent must be uninterrupted softly mottled pale antique paper, low contrast suitable for dark text. Match the original texture, warm color and quiet aesthetic closely. No letters, no words, no writing, no watermark, no border. This is only a background, not a complete redesigned slide."
+    },
+    {
+      "file": "media/cover-landscape.png",
+      "sha256": "8087e08ab9c84cdeaead7fd49b2246ac15cf6817e8b16bf0813f61f0924e0a49",
+      "method": "imagegen",
+      "reference_role": "原制作任务的封面参考图。用作暖纸、湖景和红布的视觉参考",
+      "prompt": "Use case: precise-object-edit. Asset type: no-text slide background, 1672x941 wide 16:9. From reference keep only warm distressed cream parchment background with the bottom lake panorama, old white waterside houses and lotus on the lower left, distant modern Xiongan buildings lower right, lake boat, reeds and broad red torn fabric strip across bottom. Remove EVERY foreground Chinese text including top course heading, huge red title, black subtitle, byline and school line. Remove red brush strokes. Remove ALL THREE photo frames, their internal photos, tape, shadows, all paper labels; reconstruct smooth parchment in their places. Keep bottom scenery in same locations. The center upper 65 percent must be continuous clean antique parchment. No frames no text no letters no words no watermarks. A reusable background only."
+    }
+  ],
+  "scope": "本地模板复用。无字装饰底图为生成素材，实拍证据使用各项目自己的原始图。外部公开分发前单独核对参考使用范围。"
+}

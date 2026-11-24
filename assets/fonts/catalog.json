@@ -102,6 +102,21 @@
       "default_weight": 400
     },
     {
+      "family": "Noto Serif SC",
+      "file": "NotoSerifSC[wght].ttf",
+      "license": "SIL OFL 1.1",
+      "license_file": "notoserifsc-OFL.txt",
+      "source": "https://github.com/google/fonts/blob/e7db6ca603fd4862010383ff17ffd6cc4ffac1c0/ofl/notoserifsc/NotoSerifSC%5Bwght%5D.ttf",
+      "source_commit": "e7db6ca603fd4862010383ff17ffd6cc4ffac1c0",
+      "source_blob": "eab063faf229160a52d3760f5555150e4eb9e5bf",
+      "sha256": "050080d9255a86808f2945bffac582b31ef32bc36411ce29563b4961670c66f9",
+      "roles": ["body", "heading"],
+      "coverage": "full upstream font",
+      "glyph_count": 30928,
+      "axes": {"wght": [200.0, 200.0, 900.0]},
+      "default_weight": 400
+    },
+    {
       "family": "Qiheng Pixel 12",
       "file": "../templates/qiheng-pixel/media/fonts/QihengPixel12-Regular.ttf",
       "license": "SIL OFL 1.1",

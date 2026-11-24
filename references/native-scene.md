@@ -43,6 +43,8 @@ python scripts/native_renderer.py task/scene.json --output-dir output/deck-01
 
 场景沿用PPTD元素字段：`elementId/elementType/bounds`。形状用`fill:{type:'solid',color:'#...'}`、`border:{style:'solid',color:'#...',width:1}`；custom另有`path`和`viewBox`。表格用`rows`二维对象，单元格沿用文本字段并可有`fill`。图片另有`src/fit/raster_reason`；`raster_reason`是本工具的来源说明字段。
 
+文字、形状和图片可设置 `rotation`，单位为顺时针度数，`bounds` 为旋转前的边界。给矩形设置 `picturePlaceholder: true` 可生成 PowerPoint 原生图片占位框，同页版式保存匹配索引和几何。画框、投影和胶带使用独立形状。PPTD 保留相框与空矩形，插图占位功能随 PPTX 交付。实际示例见[旧纸剪贴簿](fieldwork-scrapbook.md)。
+
 图表用`data:{cols:['x','y'],rows:[['A',2],['B',3]]}`、`series:[{type:'bar',name:'示意',encode:{x:'x',y:'y'},fill:'#72896B'}]`。另写`dataSource:{status:'demo',label:'仅作演示'}`或有来源说明的`verified`。图中也应放可见的来源/示例说明，元数据不能代替面向读者的说明。
 
 图表可加`style:{background:'#FFFCF6',textColor:'#24354B',gridColor:'#B9CCD8',minimum:0,maximum:15,majorUnit:3,numberFormat:'0',labelFormat:'0.00',dataLabels:true,fontSize:13,pointColors:['#315ECC','#D9674D']}`。`numberFormat`控制纵轴，`labelFormat`控制数值标签；比例数据用0–1及`0%`，不要把0–100误配成百分比格式。`pointColors`仅用于单系列柱形图，颜色数必须等于数据行数；多系列用各系列的`fill`。两个单位不同的指标应分图并分别设置尺度。

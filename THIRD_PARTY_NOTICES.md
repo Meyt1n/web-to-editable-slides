@@ -16,6 +16,8 @@
 | Ma Shan Zheng、Long Cang、Noto Sans SC完整变量字体 | Google Fonts固定提交，详见`assets/fonts/catalog.json` | 多字体角色与新主题正文 | SIL OFL 1.1，完整许可随`assets/fonts/`提供，不适用MIT |
 | Qiheng Pixel 12 | [Fusion Pixel Font 2026.11.10](https://github.com/TakWolf/fusion-pixel-font/releases/tag/2026.11.10) 简中比例字库的改名版本 | 灰紫学术像素模板的短标签，字形完整保留 | SIL OFL 1.1，主字体与上游组合字库许可见 `assets/templates/qiheng-pixel/media/fonts/QihengPixel12-OFL.txt` |
 | 启衡式像素底图与透明图标 | 用户项目制作中用内置 ImageGen 生成，来源与提示词见 `assets/templates/qiheng-pixel/sources.json` | 本地模板复用与中性样页 | 在用户授权范围内复用，外部公开分发另行取得授权 |
+| Noto Serif SC 完整变量字体 | Google Fonts 固定提交，字库哈希与位置见 `assets/fonts/catalog.json` | 旧纸剪贴簿正文 | SIL OFL 1.1，随附 `assets/fonts/notoserifsc-OFL.txt` |
+| 旧纸剪贴簿背景 | 内置 ImageGen 根据参考页生成的无字底图，来源见 `assets/templates/fieldwork-scrapbook/sources.json` | 本地模板复用与通用样片 | 素材为装饰。公开分发另行核对参考使用范围 |
 | 原创无字背景：封面水墨、正文水墨、浅色宣纸 | 内置imagegen按独立提示词生成，逐图来源与哈希见`assets/backgrounds/catalog.json` | 按页型选择的背景分层小样 | 在可许可的权利范围内按仓库MIT提供，不表示独占权；未将用户参考PPT图片用于生成或公开分发 |
 | 拾光书屋5张参考页与独立空间配图 | 宿主内置imagegen生成 | 虚构空间提案与逐页还原试跑 | 同其他自生成概念示例，不是建成场地或运营成果 |
 | 修补日参考页与2张透明拼贴素材 | 宿主内置imagegen生成，提示词、输入角色与哈希在`examples/auto-workshop/project/` | 智能体自动设计、纠偏、原生重建与离线重放 | 自生成虚构活动方案；在可许可的权利范围内按仓库MIT提供，不表示独占权，不是实际活动证明 |

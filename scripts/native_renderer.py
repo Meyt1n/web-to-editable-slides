@@ -26,8 +26,10 @@ from pptx.dml.color import RGBColor
 from pptx.enum.chart import XL_CHART_TYPE,XL_DATA_LABEL_POSITION,XL_LEGEND_POSITION
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import MSO_ANCHOR,PP_ALIGN
+from pptx.opc.constants import CONTENT_TYPE as CT, RELATIONSHIP_TYPE as RT
 from pptx.oxml.ns import qn
 from pptx.oxml.xmlchemy import OxmlElement
+from pptx.parts.slide import SlideLayoutPart
 from pptx.util import Pt
 
 from build_demo import write_project
@@ -97,6 +99,41 @@ def custom_geometry(shape,element):
         for point in points:
             if point is None:raise ValueError('Implicit quadratic closing points are unsupported')
             node('a:pt',cmd,x=round(number(point[0])*1000),y=round(number(point[1])*1000))
+
+
+def add_picture_layout(slide):
+    """Give each photo slot a matching layout placeholder for insertion and reset."""
+    old_layout = slide.slide_layout
+    master = old_layout.slide_master
+    layout = copy.deepcopy(old_layout._element)
+    layout.cSld.set('name', f'Photo slots {slide.slide_id}')
+    tree = layout.cSld.spTree
+    for child in list(tree):
+        if child.tag not in {qn('p:nvGrpSpPr'), qn('p:grpSpPr')}:
+            tree.remove(child)
+    package = slide.part.package
+    part = SlideLayoutPart(package.next_partname('/ppt/slideLayouts/slideLayout%d.xml'), CT.PML_SLIDE_LAYOUT, package, layout)
+    part.relate_to(master.part, RT.SLIDE_MASTER)
+    master_relationship = master.part.relate_to(part, RT.SLIDE_LAYOUT)
+    layout_ids = master._element.find(qn('p:sldLayoutIdLst'))
+    next_id = max(int(entry.get('id')) for entry in layout_ids) + 1
+    node('p:sldLayoutId', layout_ids, id=next_id).set(qn('r:id'), master_relationship)
+    slide.part.drop_rel(slide.part.rels._get_matching(RT.SLIDE_LAYOUT, old_layout.part))
+    slide.part.relate_to(part, RT.SLIDE_LAYOUT)
+    return tree
+
+
+def set_picture_placeholder(shape, layout_tree):
+    props = shape._element.nvSpPr
+    node('p:ph', props.nvPr, type='pic', idx=shape.shape_id)
+    node('a:spLocks', props.cNvSpPr, noGrp=1)
+    layout_tree.append(copy.deepcopy(shape._element))
+
+
+def add_fade(slide):
+    transition = node('p:transition', spd='med')
+    node('p:fade', transition)
+    slide._element.insert_element_before(transition, 'p:timing', 'p:extLst')
 
 
 def chart_data(element):
@@ -213,8 +250,8 @@ def validate(scene,root):
             ids.add(key)
             if e.get('elementType') not in ['text','shape','line','image','table','chart']:raise ValueError('Unsupported element type')
             supported={'elementId','elementType','bounds','opacity'}|{
-                'text':{'content'},'shape':{'shapeName','fill','border','path','viewBox'},
-                'line':{'points','viewBox','border'},'image':{'src','fit','raster_reason'},
+                'text':{'content','rotation'},'shape':{'shapeName','fill','border','path','viewBox','rotation','picturePlaceholder'},
+                'line':{'points','viewBox','border'},'image':{'src','fit','raster_reason','rotation'},
                 'table':{'rows','columnWidths','rowHeights'},'chart':{'data','series','fontFamily','legend','dataSource','style'}
             }[e['elementType']]
             if set(e)-supported:raise ValueError('Unsupported element fields: '+', '.join(sorted(set(e)-supported)))
@@ -222,7 +259,11 @@ def validate(scene,root):
             if not isinstance(box,list) or len(box)!=4:raise ValueError('Element bounds are [x,y,width,height]')
             x,y,w,h=[number(v) for v in box]
             if min(x,y)<0 or min(w,h)<=0 or x+w>size[0]+.1 or y+h>size[1]+.1:raise ValueError('Element is outside the canvas: '+key)
-            if any(k in e for k in ['shadow','flipH','flipV','rotation']):raise ValueError('Unsupported transform/shadow; use a capable backend or adapt explicitly')
+            if 'rotation' in e and abs(number(e['rotation'])) >= 360:
+                raise ValueError('Rotation must be between -360 and 360 degrees')
+            if 'picturePlaceholder' in e and (type(e['picturePlaceholder']) is not bool or
+                    e['picturePlaceholder'] and e.get('shapeName','rect') != 'rect'):
+                raise ValueError('A picture placeholder must be a rectangular shape')
             opacity=number(e.get('opacity',1))
             if not 0<=opacity<=1:raise ValueError('Opacity must be in [0,1]')
             if e['elementType'] in ['image','table','chart'] and opacity!=1:raise ValueError('Whole image/table/chart opacity is unsupported')
@@ -290,7 +331,7 @@ def build(scene_file:Path,output:Path)->Path:
     for page in scene['pages']:
         slide=prs.slides.add_slide(prs.slide_layouts[6]);solid(slide.background.fill,page.get('background',{'type':'solid','color':'#FFFFFF'}))
         if 'notes' in page:slide.notes_slide.notes_text_frame.text=page['notes']
-        ids={};rasters=[]
+        ids={};rasters=[];placeholders=[];picture_layout=None
         if page.get('reference'):
             source=inside(root,page['reference']);target=output/page['reference'];target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,target)
         for e in page['elements']:
@@ -349,10 +390,21 @@ def build(scene_file:Path,output:Path)->Path:
             # python-pptx preset shapes otherwise inherit theme effects (often a shadow).
             if kind not in ['table','chart']:shape.shadow.inherit=False
             shape.name=e['elementId'];ids[e['elementId']]=shape.shape_id
-        transition=node('p:transition',spd='med');node('p:fade',transition);slide._element.insert_element_before(transition,'p:timing','p:extLst')
+            if 'rotation' in e:
+                shape.rotation=e['rotation']
+            if e.get('picturePlaceholder'):
+                if picture_layout is None:
+                    picture_layout = add_picture_layout(slide)
+                set_picture_placeholder(shape, picture_layout)
+                placeholders.append(e['elementId'])
+        add_fade(slide)
         add_timing(slide,page.get('animations',[]),ids)
-        specs.append({k:copy.deepcopy(page[k]) for k in ['pageType','background','elements','animations','notes'] if k in page})
-        report.append({'id':page['id'],'native_objects':len(page['elements'])-len(rasters),'raster_objects':rasters,'reference':page.get('reference')})
+        spec = {k:copy.deepcopy(page[k]) for k in ['pageType','background','elements','animations','notes'] if k in page}
+        for element in spec['elements']:
+            element.pop('picturePlaceholder', None)
+        specs.append(spec)
+        report.append({'id':page['id'],'native_objects':len(page['elements'])-len(rasters),'raster_objects':rasters,
+                       'picture_placeholders':placeholders,'reference':page.get('reference')})
     body_family=template['typography'].get('body',{}).get('family')
     fallback_family=next(iter(mapping),next(iter(aliases)))
     body_font=aliases.get('Noto Sans SC',aliases.get(body_family,fallback_family))

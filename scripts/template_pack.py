@@ -11,6 +11,9 @@ import shutil
 from pathlib import Path
 
 
+FONT_CATALOG = Path(__file__).resolve().parents[1] / 'assets/fonts/catalog.json'
+
+
 def inside(root:Path,relative:str)->Path:
     if not isinstance(relative,str) or not relative or Path(relative).is_absolute() or re.match(r'^[A-Za-z]:',relative):
         raise ValueError('Template resource paths must be relative')
@@ -18,6 +21,20 @@ def inside(root:Path,relative:str)->Path:
     if not path.is_relative_to(root.resolve()):
         raise ValueError('Template resource escapes its directory')
     return path
+
+
+def catalog_font_files(families):
+    entries = {item['family']: item for item in json.loads(FONT_CATALOG.read_text('utf-8-sig'))['fonts']}
+    assets = FONT_CATALOG.parent.parent
+    files = {}
+    for family in families:
+        if family not in entries:
+            raise ValueError(f'Unknown bundled font: {family}')
+        paths = [(FONT_CATALOG.parent / entries[family][field]).resolve() for field in ('file', 'license_file')]
+        if any(not path.is_relative_to(assets) or not path.is_file() for path in paths):
+            raise ValueError(f'Bundled font file or license is missing or outside assets: {family}')
+        files[family] = paths
+    return files
 
 
 def validate_template(data:dict,root:Path|None=None)->dict:
@@ -53,11 +70,19 @@ def validate_template(data:dict,root:Path|None=None)->dict:
             not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',key) for key in images):
         raise ValueError('Template images must use lowercase asset names separated by hyphens')
     paths.extend(images.values())
+    catalog_families = []
     for family,settings in fonts.items():
         if not isinstance(family,str) or not family.strip() or not isinstance(settings,dict):
             raise ValueError('Font resources must map non-empty family names to objects')
         if 'system_font' in settings and type(settings['system_font']) is not bool:
             raise ValueError(f'Font {family}: system_font must be true or false')
+        if 'catalog_font' in settings and type(settings['catalog_font']) is not bool:
+            raise ValueError(f'Font {family}: catalog_font must be true or false')
+        if settings.get('catalog_font') is True:
+            if settings.get('system_font') or 'file' in settings or 'license_file' in settings:
+                raise ValueError(f'Font {family}: use one font source')
+            catalog_families.append(family)
+            continue
         if settings.get('system_font') is True:
             if 'file' in settings or 'license_file' in settings:
                 raise ValueError(f'Font {family}: system fonts cannot also declare redistributed files')
@@ -65,6 +90,8 @@ def validate_template(data:dict,root:Path|None=None)->dict:
         if not settings.get('file') or not settings.get('license_file'):
             raise ValueError('Redistributed fonts require both file and license_file')
         paths.extend([settings['file'],settings['license_file']])
+    if catalog_families:
+        catalog_font_files(catalog_families)
     references=data.get('references',[])
     if not isinstance(references,list) or not references or any(not isinstance(r,dict) or
             not isinstance(r.get('id'),str) or not r['id'].strip() or not r.get('file') for r in references):
@@ -134,10 +161,15 @@ def prepare(observations:Path,source_dir:Path,output:Path,force:bool=False)->Pat
     if data['resources'].get('background'):
         sources.append(data['resources']['background'])
     sources.extend(data['resources'].get('images',{}).values())
-    for settings in data['resources']['fonts'].values():
-        if not settings.get('system_font'):
+    fonts = data['resources']['fonts']
+    catalog_families = [family for family, settings in fonts.items() if settings.get('catalog_font')]
+    catalog_files = catalog_font_files(catalog_families) if catalog_families else {}
+    for settings in fonts.values():
+        if not settings.get('system_font') and not settings.get('catalog_font'):
             sources.extend([settings['file'],settings['license_file']])
-    if any(inside(source_dir,relative).is_relative_to(output) for relative in sources):
+    source_paths = [inside(source_dir, relative) for relative in sources]
+    source_paths.extend(path for pair in catalog_files.values() for path in pair)
+    if any(path.is_relative_to(output) for path in source_paths):
         raise ValueError('Output must not contain source resources, even with --force')
     for index,reference in enumerate(data['references'],1):
         origin=inside(source_dir,reference['file'])
@@ -156,10 +188,14 @@ def prepare(observations:Path,source_dir:Path,output:Path,force:bool=False)->Pat
         (output/relative).parent.mkdir(parents=True,exist_ok=True)
         shutil.copy2(origin,output/relative)
         data['resources']['images'][key]=relative
-    for index,settings in enumerate(data['resources']['fonts'].values(),1):
+    for index,(family,settings) in enumerate(fonts.items(),1):
         if settings.get('system_font') is True:continue
-        for field in ['file','license_file']:
-            origin=inside(source_dir,settings[field])
+        paths = catalog_files.get(family)
+        if paths:
+            settings.pop('catalog_font')
+        else:
+            paths = [inside(source_dir, settings[field]) for field in ('file', 'license_file')]
+        for field,origin in zip(('file', 'license_file'), paths):
             suffix=origin.suffix.lower() if field=='file' else '-license'+origin.suffix.lower()
             relative=f'media/fonts/font-{index}'+suffix
             (output/relative).parent.mkdir(parents=True,exist_ok=True)

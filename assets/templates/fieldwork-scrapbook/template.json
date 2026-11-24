@@ -1,0 +1,187 @@
+{
+  "schema_version": "1.0",
+  "id": "fieldwork-scrapbook",
+  "version": "1.0.0",
+  "title": "旧纸剪贴簿 · 访谈与社会实践",
+  "canvas": [960, 540],
+  "palette": {
+    "base": "#F6DFC0",
+    "heading": "#840E08",
+    "brush": "#A52B1F",
+    "ink": "#32180B",
+    "sepia": "#75421F",
+    "panel": "#FFEFD6",
+    "accent-paper": "#F5D5A4",
+    "paper-edge": "#FFFAE7",
+    "frame": "#FFF5DF",
+    "empty-photo": "#E6DDD0",
+    "photo-edge": "#CEBDA6",
+    "tape": "#D7AA69",
+    "shadow": "#9B6A43",
+    "puncture": "#D9BA92"
+  },
+  "typography": {
+    "display": {"family": "Ma Shan Zheng", "size": 64, "color": "heading", "bold": true},
+    "closing": {"family": "Ma Shan Zheng", "size": 94, "color": "heading", "bold": true},
+    "heading": {"family": "Ma Shan Zheng", "size": 40, "color": "heading", "bold": true},
+    "section": {"family": "Ma Shan Zheng", "size": 23, "color": "frame", "bold": true},
+    "body": {"family": "Noto Serif SC", "size": 17, "color": "ink", "lineHeight": 1.18},
+    "caption": {"family": "Long Cang", "size": 16, "color": "heading"},
+    "numeric": {"family": "Barlow Condensed", "size": 36, "color": "heading", "bold": true}
+  },
+  "font_weights": {"Noto Serif SC": 600},
+  "optional_system_faces": {
+    "display": {"family": "STXingkai", "label": "华文行楷", "observed_size": 60},
+    "closing": {"family": "STXinwei", "label": "华文新魏", "observed_size": 124.59}
+  },
+  "resources": {
+    "background": "media/paper-backdrop.png",
+    "images": {"cover-landscape": "media/cover-landscape.png"},
+    "fonts": {
+      "Ma Shan Zheng": {"catalog_font": true},
+      "Noto Serif SC": {"catalog_font": true},
+      "Long Cang": {"catalog_font": true},
+      "Barlow Condensed": {"catalog_font": true},
+      "STXingkai": {"system_font": true},
+      "STXinwei": {"system_font": true}
+    }
+  },
+  "grid": {
+    "margins": [24, 14, 24, 51],
+    "column-gap": 16,
+    "headline": [24, 8, 895, 51],
+    "headline-rule": [24, 58, 608, 6],
+    "question": [24, 73, 912, 48],
+    "finding": [24, 438, 912, 47],
+    "footer-landscape-top": 480
+  },
+  "components": {
+    "torn-paper": {"fill": "panel", "edge": "paper-edge", "edge-width": 0.75, "jitter": 2.5},
+    "brush-strip": {"fill": "brush", "jitter": 2.8, "label-inset": 7},
+    "instant-photo": {
+      "fill": "frame",
+      "inset": [7, 7, 7, 11],
+      "empty-fill": "empty-photo",
+      "empty-edge": "photo-edge",
+      "tape-fill": "tape",
+      "tape-opacity": 0.64,
+      "tape-rotation": -16,
+      "default-rotation": -2.5,
+      "fit": "cover",
+      "layer-order": ["shadow", "paper", "picture", "tape", "caption"]
+    },
+    "notebook": {"fill": "panel", "puncture-fill": "puncture", "puncture-diameter": 8, "puncture-step": 23},
+    "timeline": {"color": "brush", "line-width": 1.5, "node-size": 10},
+    "stamp": {"stroke": "heading", "stroke-width": 1.5, "rotation": -7}
+  },
+  "layouts": {
+    "cover": {
+      "description": "中央毛笔标题，上方课程或活动抬头，左右三张照片，底部留出身份信息",
+      "slots": {
+        "eyebrow": [225, 24, 505, 56],
+        "headline": [220, 118, 520, 124],
+        "rule": [300, 236, 360, 13],
+        "subtitle": [228, 275, 505, 58],
+        "credit": [280, 422, 400, 50],
+        "photos": [[25, 89, 190, 272], [751, 29, 183, 136], [751, 210, 183, 190]]
+      },
+      "photo_rotations": [-5, 4, 5]
+    },
+    "origin": {
+      "description": "左侧交代缘起与提问，右侧用三张错位相框交代走访方法",
+      "slots": {
+        "notes": [24, 90, 461, 338],
+        "photos": [[506, 88, 252, 113], [538, 191, 250, 114], [503, 297, 274, 118]],
+        "captions": [[780, 102, 155, 62], [804, 217, 131, 59], [792, 329, 143, 61]]
+      },
+      "photo_rotations": [-5, 3, -3]
+    },
+    "interview": {
+      "description": "横向提问条，左侧一张主证据，右侧带打孔纸边的四步回答",
+      "slots": {
+        "photos": [[36, 149, 455, 248]],
+        "caption": [105, 381, 313, 37],
+        "answer": [517, 138, 419, 280],
+        "timeline": [542, 198, 26, 192],
+        "rows": [[582, 193, 335, 42], [582, 240, 335, 42], [582, 287, 335, 42], [582, 334, 335, 42]]
+      },
+      "photo_rotations": [-2]
+    },
+    "process": {
+      "description": "左侧三张过程照片配短标签，右侧三阶段说明并用箭头串起",
+      "slots": {
+        "photos": [[26, 142, 278, 89], [35, 233, 282, 90], [26, 325, 278, 88]],
+        "captions": [[330, 155, 142, 55], [336, 248, 136, 55], [327, 339, 145, 55]],
+        "answer": [493, 136, 443, 286],
+        "rows": [[524, 185, 386, 55], [524, 255, 386, 55], [524, 326, 386, 55]]
+      },
+      "photo_rotations": [-3, -1, -3]
+    },
+    "comparison": {
+      "description": "左侧两张同类照片纵向对照，右侧分列列出前后要点，标题旁为年份章",
+      "slots": {
+        "headline": [24, 8, 690, 51],
+        "stamp": [742, 17, 128, 47],
+        "photos": [[43, 142, 352, 126], [43, 283, 352, 127]],
+        "answer": [421, 136, 515, 286],
+        "columns": [[443, 186, 228, 211], [688, 186, 224, 211]]
+      },
+      "photo_rotations": [-3, -2]
+    },
+    "change-details": {
+      "description": "左侧一大两小照片，右侧按工艺、质量等类别展开四行要点",
+      "slots": {
+        "photos": [[32, 146, 313, 248], [366, 149, 155, 112], [366, 281, 155, 111]],
+        "answer": [542, 137, 394, 283],
+        "rows": [[570, 187, 346, 47], [570, 239, 346, 47], [570, 291, 346, 47], [570, 343, 346, 47]]
+      },
+      "photo_rotations": [-2, 3, 2]
+    },
+    "field-visit": {
+      "description": "上部三张现场证据，下部左右分放现场观察和资料案例",
+      "slots": {
+        "photos": [[28, 96, 288, 169], [337, 96, 286, 169], [644, 96, 288, 169]],
+        "captions": [[43, 258, 255, 28], [353, 258, 255, 28], [659, 258, 255, 28]],
+        "observation": [24, 303, 334, 120],
+        "case": [375, 303, 561, 120]
+      },
+      "photo_rotations": [-1.5, 0, 1.5]
+    },
+    "takeaways": {
+      "description": "三张等宽观点纸卡，上方短标题和解释，下方对应一张照片",
+      "slots": {
+        "cards": [[24, 91, 293, 323], [333, 91, 294, 323], [643, 91, 293, 323]],
+        "photos": [[45, 250, 251, 142], [355, 250, 251, 142], [665, 250, 251, 142]],
+        "keywords": [[54, 435, 226, 38], [369, 435, 226, 38], [683, 435, 226, 38]]
+      },
+      "photo_rotations": [-3, -2, 2]
+    },
+    "closing": {
+      "description": "中央大字、短结语和可选的一条引语，左右各留两张回顾照片",
+      "slots": {
+        "eyebrow": [245, 26, 470, 37],
+        "headline": [248, 93, 464, 116],
+        "rule": [318, 212, 324, 11],
+        "summary": [246, 245, 468, 91],
+        "quote": [245, 352, 470, 80],
+        "credit": [290, 443, 380, 30],
+        "photos": [[24, 96, 189, 134], [33, 259, 184, 128], [758, 109, 178, 128], [752, 274, 183, 122]]
+      },
+      "photo_rotations": [-5, 3, 4, -3]
+    }
+  },
+  "references": [
+    {
+      "id": "generic-layout-preview",
+      "file": "references/preview.jpg",
+      "role": "通用样片",
+      "observation": "依据实际访谈稿抽取9种版式。样片使用通用说明和空相框，原稿的访谈内容和个人照片留在本地原项目"
+    }
+  ],
+  "variation_rules": [
+    "页型按内容选用，页数和照片数量服从任务",
+    "有指定参考页时优先保持该页图文关系，调整标题宽度时避开年份章和相框",
+    "封面与结尾可增加边缘风景，正文区保持浅底，复杂插画作为独立素材",
+    "由用户后加照片时保留空相框；已有现场证据时按许可放入相框"
+  ]
+}

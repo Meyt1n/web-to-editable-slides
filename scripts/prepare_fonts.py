@@ -67,6 +67,12 @@ def prepare(requests: list, output: Path, catalog_path: Path = CATALOG) -> dict:
             compatibility=' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,-'
             supported={ord(c) for c in text+compatibility if ord(c) in font.getBestCmap()}
             worker=subset.Subsetter(options=options);worker.populate(unicodes=supported);worker.subset(font)
+            if any(0x3400 <= point <= 0x9FFF for point in chars):
+                # Glyph subsetting may clear the GB2312 bit, which affects Office's CJK lookup.
+                os2 = font['OS/2']
+                simplified_chinese = 1 << 18
+                if getattr(os2, 'ulCodePageRange1', 0) & simplified_chinese == 0 and os2.version >= 1:
+                    os2.ulCodePageRange1 |= simplified_chinese
             if axes:font=instantiateVariableFont(font,axes,inplace=True,optimize=True,updateFontNames=True)
             original=font['name'].getDebugName(1)
             actual,subset_id=name_subset(font,family,item['sha256'],supported,axes)

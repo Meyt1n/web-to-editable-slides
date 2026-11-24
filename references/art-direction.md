@@ -28,7 +28,7 @@ python scripts/inspect_design.py reference.pptx --output output/design-analysis.
 
 这些是可迁移的关系，不把深绿、特定字体或固定时长当作所有主题的默认值。参考稿含位移等复合通道；新素材库先提供已验证的淡入和擦入，需要复合效果时另做实际播放检查。
 
-## 七款实际字体与五组搭配
+## 字体库与角色搭配
 
 字体文件、完整OFL许可、固定来源提交和SHA-256在`assets/fonts/`与`catalog.json`；搭配方案在`profiles.json`。
 
@@ -39,10 +39,11 @@ python scripts/inspect_design.py reference.pptx --output output/design-analysis.
 | ZCOOL XiaoWei（站酷小薇） | 人文、编辑风标题 | 正文较密时搭配黑体 |
 | ZCOOL KuaiLe（站酷快乐） | 亲和、儿童、生活类短标题 | 避免用于严肃长段内容 |
 | Noto Sans SC | 中文正文、清晰标题 | 仓库是完整上游变量字体，输出时冻结所需字重 |
+| Noto Serif SC | 访谈引文和旧纸风正文 | 旧纸剪贴簿取 600 字重，长文保持清楚的行距 |
 | Barlow Condensed | 数字、步骤编号、短英文 | 不包含中文，不能用作中文正文 |
 | Qiheng Pixel 12 | 灰紫学术像素模板的页签、短标签和栏目名 | 点阵小字优先保留给简短标签，长段正文和密集表格用黑体 |
 
-五组通用方案收录于 `profiles.json`。每套稿保持标题、正文、数字的分工，比较字体的图册可展示不同组合。像素风需单独查看[启衡模板的搭配、字号和配套字体](qiheng-pixel.md#画面与字体)。既有 `Reading Text SC` 和项目级 Noto 子集继续服务原示例，新文案应按字形覆盖重建子集。
+搭配方案收录于 `profiles.json`，每套稿保持标题、正文、数字的分工。旧纸风的毛笔、宋体、手写注释和年份章搭配见[旧纸剪贴簿](fieldwork-scrapbook.md)。像素风见[启衡模板](qiheng-pixel.md#画面与字体)。新文案按字形覆盖重建子集。
 
 按实际分配的文字准备字体，而不是把整套中文都交给数字字体：
 
