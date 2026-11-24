@@ -26,13 +26,14 @@ from pptx.dml.color import RGBColor
 from pptx.enum.chart import XL_CHART_TYPE,XL_DATA_LABEL_POSITION,XL_LEGEND_POSITION
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import MSO_ANCHOR,PP_ALIGN
+from pptx.oxml.ns import qn
 from pptx.oxml.xmlchemy import OxmlElement
 from pptx.util import Pt
 
 from build_demo import write_project
 from check_pptx import inspect
 from native_motion import add_timing,animation_plan
-from prepare_fonts import prepare
+from prepare_fonts import CATALOG, prepare
 from template_pack import inside,load_template
 
 
@@ -57,7 +58,7 @@ def solid(fill,cfg,opacity=1):
     if cfg is None or cfg.get('type')=='none':fill.background();return
     if cfg.get('type')!='solid':raise ValueError('Native renderer supports solid fills only')
     fill.solid();fill.fore_color.rgb=color(cfg['color'])
-    if opacity!=1:node('a:alpha',fill.fore_color._xClr,val=round(opacity*100000))
+    if opacity!=1:node('a:alpha',fill._xPr.find(qn('a:solidFill'))[0],val=round(opacity*100000))
 
 
 def format_text(frame,content):
@@ -271,9 +272,17 @@ def build(scene_file:Path,output:Path)->Path:
                 family=content.get('fontFamily','Noto Sans SC');content['fontFamily']=family;fonts[family]+=content.get('text','')
             if e['elementType']=='chart':fonts[e.get('fontFamily','Noto Sans SC')]+=json.dumps(e['data'],ensure_ascii=False)+''.join(s.get('name','') for s in e['series'])+'0123456789.-% '
     if not fonts:raise ValueError('A scene needs native text or native chart labels')
-    pack=prepare([dict(family=f,text=t,**({'weight':scene['font_weights'][f]} if f in scene.get('font_weights',{}) else {})) for f,t in fonts.items()],output/'media/fonts')
-    aliases={f['requested_family']:f['family'] for f in pack['fonts']}
-    mapping={f:'media/fonts/'+p for f,p in pack['font_map'].items()}
+    catalog_families={item['family'] for item in json.loads(CATALOG.read_text('utf-8-sig'))['fonts']}
+    template_fonts=template['resources']['fonts']
+    local_fonts={family for family in fonts if family not in catalog_families
+                 and template_fonts.get(family,{}).get('system_font') is True}
+    weights=scene.get('font_weights',{})
+    requests=[dict(family=family,text=value,**({'weight':weights[family]} if family in weights else {}))
+              for family,value in fonts.items() if family not in local_fonts]
+    pack=prepare(requests,output/'media/fonts') if requests else {'fonts':[],'font_map':{}}
+    aliases={family:family for family in local_fonts}
+    aliases.update({font['requested_family']:font['family'] for font in pack['fonts']})
+    mapping={family:'media/fonts/'+path for family,path in pack['font_map'].items()}
     (output/'pages').mkdir();(output/'references').mkdir()
     shutil.copytree(inside(root,scene['template_file']).parent,output/'template')
     prs=Presentation();prs.slide_width=Pt(scene.get('size',[960,540])[0]);prs.slide_height=Pt(scene.get('size',[960,540])[1]);prs.core_properties.title=scene['title'];prs.core_properties.author='';prs.core_properties.last_modified_by=''
@@ -301,8 +310,8 @@ def build(scene_file:Path,output:Path)->Path:
                 solid(shape.fill,e.get('fill') if kind!='line' else None,e.get('opacity',1))
                 border=e.get('border')
                 if border:
-                    shape.line.color.rgb=color(border['color']);shape.line.width=Pt(number(border.get('width',1),True))
-                    if e.get('opacity',1)!=1:node('a:alpha',shape.line.color._xClr,val=round(e['opacity']*100000))
+                    solid(shape.line.fill,{'type':'solid','color':border['color']},e.get('opacity',1))
+                    shape.line.width=Pt(number(border.get('width',1),True))
                 else:shape.line.fill.background()
             elif kind=='image':
                 source=inside(root,e['src']);dest=inside(output,e['src']);dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,dest)
@@ -323,7 +332,12 @@ def build(scene_file:Path,output:Path)->Path:
                 for i,ratio in enumerate(e['rowHeights']):table.rows[i].height=Pt(h*ratio)
                 for r,row in enumerate(e['rows']):
                     for c,cell in enumerate(row):
-                        cell['fontFamily']=aliases[cell['fontFamily']];target=table.cell(r,c);solid(target.fill,cell.get('fill',{'type':'solid','color':'#FFFFFF'}));format_text(target.text_frame,dict(cell,text=cell.get('text','')))
+                        cell['fontFamily']=aliases[cell['fontFamily']]
+                        target=table.cell(r,c)
+                        anchor=cell.get('align',['left','middle'])[1]
+                        target.vertical_anchor={'top':MSO_ANCHOR.TOP,'middle':MSO_ANCHOR.MIDDLE,'bottom':MSO_ANCHOR.BOTTOM}[anchor]
+                        solid(target.fill,cell.get('fill',{'type':'solid','color':'#FFFFFF'}))
+                        format_text(target.text_frame,dict(cell,text=cell.get('text','')))
             else:
                 kind_chart,data=chart_data(e)
                 shape=slide.shapes.add_chart({'bar':XL_CHART_TYPE.COLUMN_CLUSTERED,'line':XL_CHART_TYPE.LINE,'scatter':XL_CHART_TYPE.XY_SCATTER}[kind_chart],*args,data)
@@ -339,7 +353,10 @@ def build(scene_file:Path,output:Path)->Path:
         add_timing(slide,page.get('animations',[]),ids)
         specs.append({k:copy.deepcopy(page[k]) for k in ['pageType','background','elements','animations','notes'] if k in page})
         report.append({'id':page['id'],'native_objects':len(page['elements'])-len(rasters),'raster_objects':rasters,'reference':page.get('reference')})
-    deck=write_project(prs,specs,output,'deck',mapping,scene['title'],body_font=aliases.get('Noto Sans SC',next(iter(mapping))))
+    body_family=template['typography'].get('body',{}).get('family')
+    fallback_family=next(iter(mapping),next(iter(aliases)))
+    body_font=aliases.get('Noto Sans SC',aliases.get(body_family,fallback_family))
+    deck=write_project(prs,specs,output,'deck',mapping,scene['title'],body_font=body_font)
     for name,data in [('font-map.json',mapping),('scene.json',source_scene),('editability-report.json',report),('structure-report.json',inspect(deck,require_fade=True))]:
         (output/name).write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     if not inspect(deck,require_fade=True)['ok']:raise ValueError('Export failed structure validation; inspect structure-report.json')

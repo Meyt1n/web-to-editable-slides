@@ -100,6 +100,18 @@
       },
       "source_family": "Noto Sans SC Thin",
       "default_weight": 400
+    },
+    {
+      "family": "Qiheng Pixel 12",
+      "file": "../templates/qiheng-pixel/media/fonts/QihengPixel12-Regular.ttf",
+      "license": "SIL OFL 1.1",
+      "license_file": "../templates/qiheng-pixel/media/fonts/QihengPixel12-OFL.txt",
+      "source": "https://github.com/TakWolf/fusion-pixel-font/releases/tag/2026.11.10",
+      "source_family": "Fusion Pixel 12px Prop zh-Hans",
+      "upstream_sha256": "7e93fedda2c55bb37badb2262aaf43b08e3cb5976a0e3de2d90986ce59fe902e",
+      "sha256": "bbe1bd087780c87f88e663d43f0b532b9c09b6e21e08c8153aa19dcf2548f4db",
+      "roles": ["label", "accent"],
+      "coverage": "full upstream Simplified Chinese proportional glyph set"
     }
   ]
 }

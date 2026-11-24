@@ -1,6 +1,6 @@
 ---
 name: web-to-editable-slides
-description: "在Codex中自动设计并制作可编辑PPT：开工集中提问与推荐，自写提示词并调用内置imagegen；有参考图时保留原排版、自建模板、局部生图补位、文字原生重建，并按用途设计动画和验收。"
+description: "在 Codex 中设计和编辑 PPT，按参考保留排版，使用内置 ImageGen 生成独立素材，原生重建文字与图表。支持启衡式灰紫学术像素模板、实测汇报与图片放映版。"
 ---
 
 # 自动设计 → imagegen参考图 → 可编辑PPT
@@ -23,6 +23,8 @@ description: "在Codex中自动设计并制作可编辑PPT：开工集中提问�
 - 有逐页图片：先清点顺序与版本，使用`auto_deck.py record-reference`登记用户选定图，再按[逐页还原](references/reference-fidelity.md)记录图文区域；imagegen用于区域内的独立配图，整页参考保留。
 - 已有PPT：优先编辑最新版本，原件另存；章节页、补充页等局部请求不扩成整套重做。
 - 用户给PPT让你学习风格：先实开导图，再用`scripts/inspect_design.py`区分原生字体、图片字、背景图层、页切换和元素动画；提取方法与参数，不把学习请求当成改写原文件或发布其素材的授权。
+- 用户明确要启衡 AIOS 风格、灰紫学术像素风，或沿用这套模板时，读[启衡式灰紫像素模板与实测汇报](references/qiheng-pixel.md)。直接从已有页型、无字底图和字体角色继续。有对应参考页时沿用其骨架。
+- 用户明确要图片版 PPT、每页一张图或用整页图解决字体兼容时，走[图片放映版](references/verification.md#图片放映版)。从指定的最新原稿渲染并另存一个 PPTX。
 
 ## 交接资料
 
@@ -42,7 +44,7 @@ description: "在Codex中自动设计并制作可编辑PPT：开工集中提问�
 
 ## 字体、背景与讲解节奏
 
-读[字体库、分层背景与动画](references/art-direction.md)选择适合本题的表达。仓库提供6款完整字库和5组搭配；`prepare_fonts.py`按实际分配文案检查缺字、生成子集并把变量字体转成静态字重。不要把透明书法PNG误认成可编辑字体，也不为“字体丰富”同时混用所有字库。
+读[字体库、分层背景与动画](references/art-direction.md)选择适合本题的表达。仓库提供多种完整字库与字体搭配。`prepare_fonts.py`按实际分配文案检查缺字、生成子集并把变量字体转成静态字重。不要把透明书法PNG误认成可编辑字体，也不为“字体丰富”同时混用所有字库。
 
 背景先设计底色、边缘氛围、低对比装饰和正文留白区。按封面、正文、问答等页型从`assets/backgrounds/catalog.json`选素材，保持同一套底色与装饰语法，正文页降低氛围密度；`backgrounds.copy_asset`把图、提示词和来源一起放进工程。复杂山水、材质可用imagegen生成无字图，标题、正文及简单装饰继续原生搭建。动画按内容关系编排点击组，`motion_presets.py`提供标题擦入、知识点分组和问答两次点击；保持背景稳定，分别验证静态终态、动画对象引用和实际播放。五页可运行小样见[设计能力小样](examples/style-lab/README.md)。
 

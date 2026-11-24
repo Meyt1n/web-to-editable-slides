@@ -48,6 +48,11 @@ def validate_template(data:dict,root:Path|None=None)->dict:
     paths=[]
     background=resources.get('background')
     if background is not None:paths.append(background)
+    images=resources.get('images',{})
+    if not isinstance(images,dict) or any(not isinstance(key,str) or
+            not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',key) for key in images):
+        raise ValueError('Template images must use lowercase asset names separated by hyphens')
+    paths.extend(images.values())
     for family,settings in fonts.items():
         if not isinstance(family,str) or not family.strip() or not isinstance(settings,dict):
             raise ValueError('Font resources must map non-empty family names to objects')
@@ -128,6 +133,7 @@ def prepare(observations:Path,source_dir:Path,output:Path,force:bool=False)->Pat
     sources=[r['file'] for r in data['references']]
     if data['resources'].get('background'):
         sources.append(data['resources']['background'])
+    sources.extend(data['resources'].get('images',{}).values())
     for settings in data['resources']['fonts'].values():
         if not settings.get('system_font'):
             sources.extend([settings['file'],settings['license_file']])
@@ -144,6 +150,12 @@ def prepare(observations:Path,source_dir:Path,output:Path,force:bool=False)->Pat
         origin=inside(source_dir,background);relative='media/background'+origin.suffix.lower()
         (output/relative).parent.mkdir(parents=True,exist_ok=True)
         shutil.copy2(origin,output/relative);data['resources']['background']=relative
+    for key,filename in data['resources'].get('images',{}).items():
+        origin=inside(source_dir,filename)
+        relative=f'media/images/{key}{origin.suffix.lower()}'
+        (output/relative).parent.mkdir(parents=True,exist_ok=True)
+        shutil.copy2(origin,output/relative)
+        data['resources']['images'][key]=relative
     for index,settings in enumerate(data['resources']['fonts'].values(),1):
         if settings.get('system_font') is True:continue
         for field in ['file','license_file']:

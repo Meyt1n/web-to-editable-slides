@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0",
+  "id": "qiheng-pixel",
+  "version": "1.0.0",
+  "title": "启衡式灰紫学术像素模板",
+  "canvas": [960, 540],
+  "palette": {
+    "base": "#2F2C67",
+    "header-shade": "#252A58",
+    "footer-shade": "#242650",
+    "divider": "#A5BCE0",
+    "light": "#FBF8FF",
+    "paper": "#F1ECF7",
+    "inset": "#FAF6FD",
+    "status": "#E3D9EE",
+    "edge": "#A99ABC",
+    "ink": "#29253E",
+    "muted": "#574D6D",
+    "purple-accent": "#8C74BA",
+    "highlight": "#DCEDE8",
+    "highlight-ink": "#527F73",
+    "tradeoff": "#F2E5D9",
+    "table-header": "#D8CAE8",
+    "table-highlight-header": "#C9E2DA",
+    "table-alternate": "#EAE2F2"
+  },
+  "resources": {
+    "background": "media/body-backdrop.png",
+    "images": {
+      "sunset-backdrop": "media/sunset-backdrop.png",
+      "latency": "media/latency.png",
+      "checkpoint": "media/checkpoint.png",
+      "spreadsheet": "media/spreadsheet.png"
+    },
+    "fonts": {
+      "STXingkai": {"system_font": true},
+      "Cambria": {"system_font": true},
+      "Microsoft YaHei": {"system_font": true},
+      "Qiheng Pixel 12": {
+        "file": "media/fonts/QihengPixel12-Regular.ttf",
+        "license_file": "media/fonts/QihengPixel12-OFL.txt"
+      }
+    }
+  },
+  "typography": {
+    "cover-title": {"family": "STXingkai", "size": 60, "color": "light"},
+    "heading": {"family": "STXingkai", "size": 34, "color": "light"},
+    "heading-latin": {"family": "Cambria", "size": 31.6, "bold": true, "color": "light"},
+    "label": {"family": "Qiheng Pixel 12", "size": 16, "color": "ink"},
+    "subheading": {"family": "Microsoft YaHei", "size": 18, "bold": true, "color": "ink"},
+    "body": {"family": "Microsoft YaHei", "size": 16, "color": "ink"},
+    "table": {"family": "Microsoft YaHei", "size": 14, "color": "ink"},
+    "conclusion": {"family": "Microsoft YaHei", "size": 15.5, "bold": true, "color": "ink"},
+    "caption": {"family": "Microsoft YaHei", "size": 12, "color": "muted"},
+    "metric": {"family": "Cambria", "size": 29, "bold": true, "color": "ink"}
+  },
+  "portable_fonts": {
+    "STXingkai": "Ma Shan Zheng",
+    "Cambria": "Noto Sans SC",
+    "Microsoft YaHei": "Noto Sans SC"
+  },
+  "grid": {
+    "margins": [32, 28, 32, 27],
+    "body-top": 112,
+    "body-bottom": 449,
+    "column-gap": 15
+  },
+  "components": {
+    "header": {
+      "brand": [32, 8, 297, 24],
+      "heading": [28, 38, 900, 46],
+      "shade": [0, 0, 960, 91],
+      "shade-opacity": 0.32,
+      "rule": [28, 88, 901, 3],
+      "tag": [799, 10, 130, 26]
+    },
+    "footer": {
+      "shade": [0, 506, 960, 34],
+      "shade-opacity": 0.23,
+      "rule": [33, 512, 895, 0.72],
+      "source": [33, 516, 822, 18]
+    },
+    "card": {"fill": "paper", "edge": "edge", "edge-width": 1, "step": 3, "inset": 3},
+    "inner-border": {"edge": "light", "edge-width": 0.85, "step": 1.8},
+    "chip": {"fill": "status", "edge": "edge", "edge-width": 0.8, "step": 1.7},
+    "kpi": {"fill": "highlight", "edge": "edge", "edge-width": 0.8, "step": 1.7},
+    "conclusion": {
+      "bounds": [32, 463, 896, 36],
+      "text": [62, 467, 851, 28],
+      "marker": [43, 476, 10, 10],
+      "fill": "status"
+    }
+  },
+  "layouts": {
+    "cover": {
+      "description": "像素日落背景，主标题与副标题在左，原生分层卡片在右",
+      "slots": {
+        "title": [39, 83, 534, 104],
+        "subtitle": [41, 195, 506, 54],
+        "info": [42, 343, 510, 90],
+        "layers": [[618, 106, 284, 68], [618, 190, 284, 68], [618, 274, 284, 68]]
+      }
+    },
+    "architecture": {
+      "description": "左侧分层，右侧设计决策或原型界面",
+      "slots": {
+        "layers": [32, 112, 573, 337],
+        "decisions": [620, 112, 308, 337],
+        "rows": [[47, 158, 543, 58], [47, 228, 543, 58], [47, 298, 543, 58], [47, 368, 543, 58]]
+      }
+    },
+    "paper": {
+      "description": "原论文图版配一个阅读重点和出处",
+      "slots": {
+        "figure": [32, 112, 574, 337],
+        "figure-image": [46, 153, 546, 268],
+        "reading-notes": [621, 112, 307, 337]
+      }
+    },
+    "evidence": {
+      "description": "左侧可编辑的指标和数据，右侧对应的原始实机截图，下方一句结论",
+      "slots": {
+        "data": [32, 112, 434, 337],
+        "evidence": [481, 112, 447, 337],
+        "kpi": [46, 158, 406, 72],
+        "table": [46, 252, 406, 164],
+        "screenshot": [494, 158, 421, 263],
+        "caption": [492, 423, 424, 22]
+      }
+    },
+    "comparison": {
+      "description": "同口径基线与新方案对照，收益、代价和适用范围",
+      "slots": {
+        "baseline": [32, 112, 434, 337],
+        "candidate": [481, 112, 447, 337],
+        "baseline-metrics": [46, 158, 406, 258],
+        "comparison-table": [494, 158, 421, 171],
+        "tradeoffs": [[494, 345, 204, 72], [710, 345, 205, 72]]
+      }
+    },
+    "closing": {
+      "description": "像素日落背景，短结论、致谢和讨论",
+      "slots": {
+        "highlights": [[32, 112, 284, 90], [338, 112, 284, 90], [644, 112, 284, 90]],
+        "thanks": [120, 232, 720, 103],
+        "discussion": [84, 354, 792, 61]
+      }
+    }
+  },
+  "references": [
+    {
+      "id": "style-preview",
+      "file": "references/preview.jpg",
+      "role": "由模板渲染的示例总览",
+      "observation": "用户确认的灰紫色阶梯卡、毛笔标题与像素日落 / 电路背景。样页使用占位文字和示例数值。"
+    }
+  ],
+  "adaptations": [
+    "原版 16:9 画布与独立背景图层直接复用。模板样页用通用文字与示例值重建",
+    "标题、数字、卡片与表格保持原生编辑。原版所用系统字体由本机提供"
+  ],
+  "variation_rules": [
+    "明确选用此风格时复用皮肤。有对应参考页时保留其内容骨架",
+    "章节、标签与短标题可以用点阵。密集正文和实测表用常规黑体",
+    "实验页尽量聚焦一个问题。保留计时口径、样本数和对应证据"
+  ]
+}

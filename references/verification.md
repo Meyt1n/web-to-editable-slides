@@ -51,6 +51,18 @@ python scripts/check_pptx.py path/to/deck.pptx --output output/report.json
 | 数字或大标题越框 | 看真实字体渲染结果，扩大框或降低字号，再重新导图 |
 | 页面改过但源工程是旧稿 | 以用户最新文件为准，只在新副本中改；避免旧源重建覆盖用户修改 |
 
+## 图片放映版
+
+用户需要整页图片放映时，先确认指定原稿和已保存的最新版。让能正确显示原字体的播放器导出整页无损 PNG。标准 16:9 演示可用 2560 × 1440，根据投影和文件大小选分辨率。检查宽屏页序、文字、标注、真实截图和原画幅。已有字体映射时在渲染前加载，缺字应先处理再固化。
+
+```powershell
+.\scripts\render_pptx_windows.ps1 -InputPptx '原稿.pptx' -OutputDir 'output/原稿导图' -Width 2560 -FontMap 'font-map.json'
+python scripts/make_picture_deck.py '原稿.pptx' --rendered-dir 'output/原稿导图' --output '原稿_图片版.pptx'
+.\scripts\render_pptx_windows.ps1 -InputPptx '原稿_图片版.pptx' -OutputDir 'output/图片版复查' -Width 2560
+```
+
+源字体已齐全时第一条可省略 `-FontMap`。脚本按原顺序放入等比例的 PNG，每页一个铺满画布的图片对象。保留隐藏页标记与简单淡入淡出，元素动画、超链接和可编辑文字转为静态画面。检查文件内部嵌图和再次导图的表现。保留可编辑原件，另存并交付用户所需的图片版。
+
 ## 交付记录
 
 写明实际执行了什么：结构检查、源工程预览、PowerPoint/LibreOffice实开、字体是否嵌入、未验证的平台。自动文本高度检查是候选提示，不代替肉眼判断。不要把演示数据和生成图写成实测证据。

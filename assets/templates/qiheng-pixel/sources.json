@@ -1,0 +1,68 @@
+{
+  "visuals": [
+    {
+      "file": "media/sunset-backdrop.png",
+      "sha256": "144dd46ea0aa16f1e2e0df76cb63da2d7b2ab4a5f1e43f0e00e7bd8fbd5b3fca",
+      "pixels": [
+        1672,
+        941
+      ],
+      "origin": "《启衡 AIOS》最终可编辑稿的独立背景图层",
+      "method": "内置 ImageGen",
+      "prompt": "Use case: productivity-visual. Create one widescreen 16:9 full-bleed pixel desktop wallpaper for an original retro operating system research presentation. Exact hard-edged 8-bit art on a low resolution 320x180 grid magnified nearest neighbor. The setting is a luminous lavender-blue twilight sky over stepped indigo and dusty-violet mountain ranges. On the lower right, place one soft warm peach sun made of square pixel steps just above a ridge; place it around 84 percent of the width and 77 percent of the height so it can survive cropping. Small restrained star pixels and 2–3 flat bands of atmosphere. Keep left two-thirds and upper half calm, flat, fairly dark-medium indigo for white title text. Foreground ridges fill only the lowest fifth. Sophisticated palette of slate midnight blue, mauve-gray, a few periwinkle patches and the one warm peach sun. Pixel graphic similar to a 1980s original desktop backdrop. True hard pixel outlines and visible square steps, no smooth gradients, no atmospheric bloom, no drop shadows, no text, no logos, no desktop controls, no interface mock-up."
+    },
+    {
+      "file": "media/body-backdrop.png",
+      "sha256": "0c36c33eaa95c087b003de92ec5006eec3c8de30f81b78be8c31b173efa47628",
+      "pixels": [
+        1672,
+        941
+      ],
+      "origin": "《启衡 AIOS》最终可编辑稿的独立背景图层",
+      "method": "内置 ImageGen",
+      "prompt": "Use case: productivity-visual. Design a single widescreen 16:9 desktop wallpaper, for an original vintage pixel operating system called Qiheng. Create authentic hard 8-bit pixel art on a 320 by 180 logical grid, clearly enlarged nearest-neighbor. Main palette luminous twilight indigo, dusty blue-violet, and periwinkle; flat dark-medium ink blue on the upper left for white slide headings, mid desaturated slate blue-purple down the rest of the page. A few clearly visible orthogonal staircase pixel circuit paths and pale lavender square studs trace the right edge and top-right corner. A restrained distant stepped pixel mountain silhouette slides along the bottom 9 percent, with a few slate-violet bands and pixel stars. Broad calm empty central area, abstract and architectural, with no bright subject near where slide content goes. Keep top left simple and readable. Horizontal landscape composition extending full bleed to every edge. Use limited flat color shapes, pixel-step transitions, pixel dither only at the distant horizon, no glow, no smooth gradient, no lens effects, no illustrations centered in the blank area, no lettering, no clocks, no logo, no desktop icons, no UI window. The backdrop should evoke a restrained original nighttime 8-bit system, not black or gray-black."
+    },
+    {
+      "file": "media/latency.png",
+      "sha256": "748950f9c90374ee7dbc8e8fd69a3c8f0b10677d1ddf4cad95f16ea5766dbabe",
+      "pixels": [
+        152,
+        95
+      ],
+      "origin": "《启衡 AIOS》主题插画素材",
+      "method": "内置 ImageGen",
+      "prompt": "Use case: stylized-concept. Generate one compact isolated sprite for a bright gray-lavender research presentation. Strict orthographic 8-bit pixel-art, 24–32 logical pixels enlarged with nearest neighbor, visibly chunky single-color square pixel groups, sharply stepped silhouette, limited 8-color flat palette of smoky plum outlines, dusty lilac, steel blue, jade mint, warm peach and pale cream. One dominant motif, two little accent pixels at most, abutting square pixels, no shading gradients, no photographic rendering, no visible text or characters, no watermarks. Center on genuinely transparent background. Specific motif: a square digital stopwatch without digits, next to two abstract blocky bars of different height and one downward stepped arrow. This represents latency measurement and scheduling comparisons, with no scales or labels."
+    },
+    {
+      "file": "media/checkpoint.png",
+      "sha256": "fc0f9fd125b268304441009d50a55b0fbda38d414c47a82b12354825724361ef",
+      "pixels": [
+        152,
+        141
+      ],
+      "origin": "《启衡 AIOS》主题插画素材",
+      "method": "内置 ImageGen",
+      "prompt": "Use case: stylized-concept. Generate one compact isolated sprite for a bright gray-lavender research presentation. Strict orthographic 8-bit pixel-art, 24–32 logical pixels enlarged with nearest neighbor, visibly chunky single-color square pixel groups, sharply stepped silhouette, limited 8-color flat palette of smoky plum outlines, dusty lilac, steel blue, jade mint, warm peach and pale cream. One dominant motif, two little accent pixels at most, abutting square pixels, no shading gradients, no photographic rendering, no visible text or characters, no watermarks. Center on genuinely transparent background. Specific motif: a violet 3.5-inch floppy disk with a tiny pastel-mint check tile and one blocky return arrow that turns upward. It should suggest saving a checkpoint, restarting, and recovering a result."
+    },
+    {
+      "file": "media/spreadsheet.png",
+      "sha256": "1ba51faed9f40df4c06acf50fc15185bb8daae395d2969574aafcdb5f4234292",
+      "pixels": [
+        152,
+        142
+      ],
+      "origin": "《启衡 AIOS》主题插画素材",
+      "method": "内置 ImageGen",
+      "prompt": "Use case: stylized-concept. Generate one compact isolated sprite for a bright gray-lavender research presentation. Strict orthographic 8-bit pixel-art, 24–32 logical pixels enlarged with nearest neighbor, visibly chunky single-color square pixel groups, sharply stepped silhouette, limited 8-color flat palette of smoky plum outlines, dusty lilac, steel blue, jade mint, warm peach and pale cream. One dominant motif, two little accent pixels at most, abutting square pixels, no shading gradients, no photographic rendering, no visible text or characters, no watermarks. Center on genuinely transparent background. Specific motif: an open little pixel spreadsheet with four square cells and a small three-color block chart, with an offset floppy file tab. Conveys CSV analysis and data output. Use no chart scales or lettering."
+    }
+  ],
+  "pixel_font": {
+    "file": "media/fonts/QihengPixel12-Regular.ttf",
+    "sha256": "bbe1bd087780c87f88e663d43f0b532b9c09b6e21e08c8153aa19dcf2548f4db",
+    "upstream_sha256": "7e93fedda2c55bb37badb2262aaf43b08e3cb5976a0e3de2d90986ce59fe902e",
+    "source": "https://github.com/TakWolf/fusion-pixel-font/releases/tag/2026.11.10",
+    "license_file": "media/fonts/QihengPixel12-OFL.txt",
+    "license": "SIL OFL 1.1",
+    "changes": "保留完整简中比例字形与原网格。改用 Qiheng Pixel 12 家族名，启用可编辑嵌入与简中代码页标识。"
+  }
+}
