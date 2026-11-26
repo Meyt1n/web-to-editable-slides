@@ -32,7 +32,7 @@ Codex 会继续完成提示词、生图、看图、模板提取、重建和检�
 
 做系统设计或课程实测汇报时，可以指定「用启衡 AIOS 的灰紫学术像素风」。模板包含毛笔标题、点阵短标签、阶梯卡片和数据配实机截图的版式。需要跨电脑放映时，也可直接要求每页一张图的 PPT。 [查看启衡式模板](references/qiheng-pixel.md) · [图片版流程](references/verification.md#图片放映版)
 
-做访谈、地方调研或社会实践汇报时，可以指定「用《从家庭作坊到产业升级》的旧纸剪贴簿风，保留相框，照片我自己加」。模板包括毛笔标题、宋体正文、9 种页型和可插图的原生占位框。[查看旧纸模板](references/fieldwork-scrapbook.md) · [样片总览](assets/templates/fieldwork-scrapbook/references/preview.jpg)
+做访谈、地方调研或社会实践汇报时，可以指定「用《从家庭作坊到产业升级》的旧纸剪贴簿风，保留相框，照片我自己加」。[查看模板样例](#旧纸剪贴簿模板样例)
 
 <details>
 <summary>手动安装</summary>
@@ -99,6 +99,16 @@ flowchart LR
 动画选型与公开源码研究见[动画设计](references/motion-design.md)，六页可运行样本见[动画小样](examples/motion-lab/README.md)。PowerPoint嵌字或另存后，自动流程会比较动画目标、效果、点击组和时序，避免文件能打开却丢失动画。
 
 ## 实际效果
+
+### 旧纸剪贴簿模板样例
+
+这套样片沿用《从家庭作坊到产业升级》的旧纸底纹、朱红毛笔标题和撕边纸。9 种页型涵盖封面、访谈问答、前后对比、现场走访和总结。拍立得相框留空，使用时可插入自己的照片。
+
+[![旧纸剪贴簿 PPT 模板的 9 页 PowerPoint 导图，展示访谈时间线、前后对比、走访照片位与结语](assets/templates/fieldwork-scrapbook/references/preview.jpg)](assets/templates/fieldwork-scrapbook/references/preview.jpg)
+
+[模板与字体搭配](references/fieldwork-scrapbook.md) · [生成可编辑样片](references/fieldwork-scrapbook.md#实际套用)
+
+### 更多示例
 
 | 示例 | 展示内容 | 查看 |
 |---|---|---|
