@@ -100,6 +100,14 @@ flowchart LR
 
 ## 实际效果
 
+### 启衡 AIOS 灰紫像素模板样例
+
+以下四页来自《启衡 AIOS》课程汇报，依次为系统架构、答疑调度实测、传统 OS 与 AIOS 的时延对比、未来展望。实测页把可编辑数据表和 QEMU 实机截图放在同一页，页底概括结果。
+
+[![启衡 AIOS PPT 的四张代表页，展示灰紫像素背景、毛笔标题、系统架构和实测图表](examples/qiheng-aios/preview.jpg)](examples/qiheng-aios/preview.jpg)
+
+[模板与字体搭配](references/qiheng-pixel.md) · [六种页型预览](assets/templates/qiheng-pixel/references/preview.jpg) · [生成可编辑样片](references/qiheng-pixel.md#使用模板包)
+
 ### 旧纸剪贴簿模板样例
 
 这套样片沿用《从家庭作坊到产业升级》的旧纸底纹、朱红毛笔标题和撕边纸。9 种页型涵盖封面、访谈问答、前后对比、现场走访和总结。拍立得相框留空，使用时可插入自己的照片。
@@ -119,7 +127,7 @@ flowchart LR
 
 其他示例：[八种原生版式](examples/design-gallery/README.md) · [模板提取与复用](examples/template-extraction/README.md) · [绿芽概念演示](examples/green-sprout/README.md)
 
-这些都是虚构或自生成的公开示例。原始用户资料、私人对话和参考文件的私有拆包内容不包含在素材库中。
+「更多示例」中的项目采用虚构或自行制作的内容。原始用户资料、私人对话和参考文件的私有拆包内容不包含在素材库中。
 
 ## 交付与边界
 
